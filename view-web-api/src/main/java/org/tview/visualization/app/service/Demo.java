@@ -4,8 +4,8 @@ import org.tview.visualization.inter.db.DatabaseOperation;
 import org.tview.visualization.mysql.MysqlDatasourceOperationImpl;
 
 public class Demo {
-    public static void main(String[] args) {
-        DatabaseOperation dbo = new MysqlDatasourceOperationImpl();
-        dbo.print();
-    }
+  public static void main(String[] args) {
+    DatabaseOperation dbo = new MysqlDatasourceOperationImpl();
+    dbo.print();
+  }
 }

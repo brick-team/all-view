@@ -5,6 +5,4 @@ package org.tview.visualization.model.zk;
  *
  * @see org.tview.visualization.model.zk.ZkNodeInfo
  */
-public class ZkNodeCreateParam extends ZkNodeInfo {
-
-}
+public class ZkNodeCreateParam extends ZkNodeInfo {}
