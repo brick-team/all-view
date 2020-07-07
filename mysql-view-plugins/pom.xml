@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zookeeper-view-plugins</artifactId>
+    <artifactId>mysql-view-plugins</artifactId>
 
     <dependencies>
         <dependency>

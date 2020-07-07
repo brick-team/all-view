@@ -9,19 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zookeeper-view-plugins</artifactId>
+    <artifactId>view-model</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>org.tview.visualization</groupId>
-            <artifactId>view-interface</artifactId>
-            <version>xi-hu</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tview.visualization</groupId>
-            <artifactId>view-model</artifactId>
-            <version>xi-hu</version>
-        </dependency>
     </dependencies>
-
 </project>

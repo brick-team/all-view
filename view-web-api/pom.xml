@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
@@ -13,9 +13,40 @@
 
     <dependencies>
         <dependency>
-            <groupId></groupId>
-            <artifactId>springboot</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
+            <artifactId>mysql-view-plugins</artifactId>
+            <version>xi-hu</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.tview.visualization</groupId>
+                    <artifactId>view-interface</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
+            <artifactId>zookeeper-view-plugins</artifactId>
+            <version>xi-hu</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.tview.visualization</groupId>
+                    <artifactId>view-interface</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
+            <artifactId>view-interface</artifactId>
+            <version>xi-hu</version>
         </dependency>
     </dependencies>
 
+
+    <build>
+    </build>
 </project>
