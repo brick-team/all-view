@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>view-interface</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
+            <artifactId>view-model</artifactId>
+            <version>xi-hu</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>
