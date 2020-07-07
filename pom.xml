@@ -9,6 +9,7 @@
         <module>view-model</module>
         <module>zookeeper-view-plugins</module>
         <module>mysql-view-plugins</module>
+      <module>view-common</module>
     </modules>
 
     <groupId>org.tview.visualization</groupId>
