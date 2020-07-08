@@ -18,9 +18,8 @@
             <version>xi-hu</version>
         </dependency>
         <dependency>
-            <groupId>org.tview.visualization</groupId>
-            <artifactId>view-model</artifactId>
-            <version>xi-hu</version>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
         </dependency>
     </dependencies>
 

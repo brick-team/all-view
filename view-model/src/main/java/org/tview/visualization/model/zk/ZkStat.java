@@ -14,6 +14,31 @@ public class ZkStat {
   private int numChildren;
   private long pzxid;
 
+  public ZkStat(
+      long czxid,
+      long mzxid,
+      long ctime,
+      long mtime,
+      int version,
+      int cversion,
+      int aversion,
+      long ephemeralOwner,
+      int dataLength,
+      int numChildren,
+      long pzxid) {
+    this.czxid = czxid;
+    this.mzxid = mzxid;
+    this.ctime = ctime;
+    this.mtime = mtime;
+    this.version = version;
+    this.cversion = cversion;
+    this.aversion = aversion;
+    this.ephemeralOwner = ephemeralOwner;
+    this.dataLength = dataLength;
+    this.numChildren = numChildren;
+    this.pzxid = pzxid;
+  }
+
   public ZkStat() {}
 
   public long getCzxid() {
