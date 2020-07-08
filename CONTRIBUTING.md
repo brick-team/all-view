@@ -29,7 +29,7 @@ First off, thank you for taking the time to contribute! 👍 🎉
 ### Submit a Pull Request
 
 If you want to submit a PR, you need to do the following
-1. Always check out `master` branch and submit pull request it.
+1. Always check out `master` branch and submit pull request against it.
 2. Before submitting, please execute the following command to perform formatter. 
     `mvn googleformatter:format`
 3. If you want fix a bug , you can check out `master` branch and this name is `issues-numb`
