@@ -5,21 +5,13 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 
 import java.sql.SQLException;
 
-/** JdbcTemplate 创建接口 */
-public interface JdbcTemplateCreate {
+public interface JdbcFactory {
   /**
-   * 创建 JdbcTemplate 对象
+   * 创建 JdbcTemplate
    *
    * @param connectionConfig 链接配置
    * @return JdbcTemplate
+   * @throws SQLException sql异常
    */
   JdbcTemplate create(DBConnectionConfig connectionConfig) throws SQLException;
-
-  /**
-   * 生成 jdbc url
-   *
-   * @param connectionConfig 链接配置
-   * @return jdbc url
-   */
-  String genUrl(DBConnectionConfig connectionConfig);
 }

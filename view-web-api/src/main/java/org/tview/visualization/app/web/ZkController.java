@@ -51,7 +51,6 @@ public class ZkController {
   }
 
   /**
-   *
    * @param path
    * @param hostPort
    * @return
@@ -62,6 +61,4 @@ public class ZkController {
       @RequestParam(value = "host_port") String hostPort) {
     return new ResultVO("ok", zkNodeOperation.del(path, hostPort), 200);
   }
-
-
 }

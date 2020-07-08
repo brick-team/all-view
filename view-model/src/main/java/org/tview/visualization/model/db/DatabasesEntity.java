@@ -4,8 +4,7 @@ package org.tview.visualization.model.db;
 public class DatabasesEntity {
   private String name;
 
-  public DatabasesEntity() {
-  }
+  public DatabasesEntity() {}
 
   public DatabasesEntity(String name) {
     this.name = name;

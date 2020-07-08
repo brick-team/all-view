@@ -13,11 +13,11 @@ public class LruCache<K, V> implements CacheInterface<K, V> {
   public LruCache(int size) {
     this.size = size;
     map =
-            new LinkedHashMap<>(size) {
-              @Override
-              protected boolean removeEldestEntry(Entry<K, V> entry) {
-                return size() > size;
-              }
+        new LinkedHashMap<>(size) {
+          @Override
+          protected boolean removeEldestEntry(Entry<K, V> entry) {
+            return size() > size;
+          }
         };
   }
 

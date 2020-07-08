@@ -17,7 +17,7 @@ public interface CacheInterface<K, V> {
   /**
    * 设置缓存
    *
-   * @param key   key
+   * @param key key
    * @param value value
    */
   void put(K key, V value);

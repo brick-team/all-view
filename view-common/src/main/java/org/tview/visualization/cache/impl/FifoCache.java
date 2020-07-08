@@ -13,12 +13,12 @@ public class FifoCache<K, V> implements CacheInterface<K, V> {
   public FifoCache(int size) {
     this.size = size;
     map =
-            new LinkedHashMap<>(size, 1, false) {
-              @Override
-              protected boolean removeEldestEntry(Entry<K, V> entry) {
-                return size() > size;
-              }
-            };
+        new LinkedHashMap<>(size, 1, false) {
+          @Override
+          protected boolean removeEldestEntry(Entry<K, V> entry) {
+            return size() > size;
+          }
+        };
   }
 
   @Override

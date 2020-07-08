@@ -1,22 +1,18 @@
 package org.tview.visualization.mysql.factory;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
+import org.tview.visualization.mysql.cache.JdbcTemplateCache;
 
 import java.sql.SQLException;
 
-class MysqlJdbcTemplateCreateTest {
-  JdbcTemplateCreate mysql = new MysqlJdbcTemplateCreate();
-  DBConnectionConfig config;
-  private static final Logger LOG = LoggerFactory.getLogger(MysqlJdbcTemplateCreateTest.class);
+import static org.junit.jupiter.api.Assertions.*;
 
-  @BeforeEach
-  public void conf() {
+class JdbcTemplateFactoryTest {
+
+  @Test
+  void create() throws SQLException {
     DBConnectionConfig dbConnectionConfig = new DBConnectionConfig();
     dbConnectionConfig.setDbType("mysql");
     dbConnectionConfig.setHost("47.98.225.144");
@@ -25,11 +21,10 @@ class MysqlJdbcTemplateCreateTest {
     dbConnectionConfig.setPassword("a12345");
     dbConnectionConfig.setTimeZone(ServerTimezone.UTC.getValue());
     dbConnectionConfig.setDbName("scrum");
-    config = dbConnectionConfig;
-  }
-
-  @Test
-  public void genUrlTest() throws SQLException {
-    JdbcTemplate jdbcTemplate = mysql.create(config);
+    JdbcTemplateFactory.create(dbConnectionConfig);
+    JdbcTemplateFactory.create(dbConnectionConfig);
+    JdbcTemplateFactory.create(dbConnectionConfig);
+    JdbcTemplateCache cache = JdbcTemplateFactory.getCache();
+    System.out.println();
   }
 }
