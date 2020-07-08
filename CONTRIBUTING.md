@@ -29,14 +29,10 @@ First off, thank you for taking the time to contribute! 👍 🎉
 ### Submit a Pull Request
 
 If you want to submit a PR, you need to do the following
-(如果你需要提交一个PR你需要做如下操作)
-1. Always check out `master` branch and submit pull request against it.
-(总是从master检出分支,并针对它提交PR)
+1. Always check out `master` branch and submit pull request it.
 2. Before submitting, please execute the following command to perform formatter. 
     `mvn googleformatter:format`
-(在提交代码之前请执行如下命令)
 3. If you want fix a bug , you can check out `master` branch and this name is `issues-numb`
-   (如果你想要修复一个bug,你需要检出master分支并命名 issues 的数字编号,进行开发)
 
 
 
