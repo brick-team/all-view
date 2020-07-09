@@ -2,7 +2,8 @@ package org.tview.visualization.model.db;
 
 public enum DBType {
   mysql("mysql");
-  private final String value;
+
+    private final String value;
 
   DBType(String value) {
     this.value = value;

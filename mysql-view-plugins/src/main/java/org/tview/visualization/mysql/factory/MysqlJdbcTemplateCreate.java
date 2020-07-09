@@ -1,6 +1,5 @@
 package org.tview.visualization.mysql.factory;
 
-import com.sun.jdi.PathSearchingVirtualMachine;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.StringUtils;

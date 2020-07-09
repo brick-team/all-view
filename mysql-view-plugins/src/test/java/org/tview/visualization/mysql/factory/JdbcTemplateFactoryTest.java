@@ -3,20 +3,13 @@ package org.tview.visualization.mysql.factory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
-import org.tview.visualization.mysql.cache.JdbcTemplateCache;
 import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
 
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class JdbcTemplateFactoryTest {
   JdbcFactory jdbcFactory;

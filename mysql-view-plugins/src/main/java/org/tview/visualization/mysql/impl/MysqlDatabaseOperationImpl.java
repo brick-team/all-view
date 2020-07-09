@@ -1,5 +1,7 @@
 package org.tview.visualization.mysql.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.inter.db.DatabaseOperation;
@@ -24,7 +26,8 @@ import java.util.stream.Collectors;
 public class MysqlDatabaseOperationImpl implements DatabaseOperation {
   public static final String SHOW_DATABASE = "show databases";
   public static final String SHOW_TABLES = "show tables";
-  JdbcFactory jdbcFactory = new JdbcTemplateFactory();
+    JdbcFactory jdbcFactory = new JdbcTemplateFactory();
+    protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
 
   /**
    * 数据库列表
@@ -100,18 +103,25 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
         Long.parseLong(dbInfoQuery.upTime));
   }
 
-  /**
-   * 创建一个数据库
-   *
-   * @param connectionConfig
-   * @param createDbName
-   */
-  @Override
-  public void createDatabase(DBConnectionConfig connectionConfig, String createDbName)
-      throws SQLException {
-    JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
-    jdbcTemplate.execute("create database " + createDbName);
-  }
+    /**
+     * 创建一个数据库
+     *
+     * @param connectionConfig
+     * @param createDbName
+     */
+    @Override
+    public boolean createDatabase(DBConnectionConfig connectionConfig, String createDbName) {
+
+        try {
+
+            JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
+            jdbcTemplate.execute("create database " + createDbName);
+            return true;
+        } catch (Exception e) {
+            log.error("创建数据库失败,e={}", e);
+            return false;
+        }
+    }
 
   /**
    * 数据库状态

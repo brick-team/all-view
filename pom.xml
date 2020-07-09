@@ -9,7 +9,7 @@
         <module>view-model</module>
         <module>zookeeper-view-plugins</module>
         <module>mysql-view-plugins</module>
-      <module>view-common</module>
+        <module>view-common</module>
     </modules>
 
     <groupId>org.tview.visualization</groupId>
@@ -98,6 +98,7 @@
 
     <build>
         <plugins>
+            <!-- java compile -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -107,6 +108,15 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <!-- google java format plugin-->
             <plugin>
                 <groupId>com.theoryinpractise</groupId>
                 <artifactId>googleformatter-maven-plugin</artifactId>
@@ -129,7 +139,10 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
+
+
     </build>
 
 </project>

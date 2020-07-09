@@ -39,6 +39,8 @@ public interface DatabaseOperation {
    */
   List<ShowStatusEntity> state(DBConnectionConfig connectionConfig) throws SQLException;
 
-  /** 创建一个数据库 */
-  void createDatabase(DBConnectionConfig connectionConfig, String createDbName) throws SQLException;
+  /**
+   * 创建一个数据库
+   */
+  boolean createDatabase(DBConnectionConfig connectionConfig, String createDbName);
 }

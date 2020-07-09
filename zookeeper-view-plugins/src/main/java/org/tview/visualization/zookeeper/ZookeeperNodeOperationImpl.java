@@ -38,6 +38,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
     }
     return zkNodeTrees;
   }
+
   /**
    * 创建 node
    *
@@ -211,14 +212,15 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
     return stat.getEphemeralOwner() > 0 ? "临时节点" : "持久化节点";
   }
 
-  /**
-   * 获取整个zookeeper的节点数据,树结构
-   *
-   * @param hostPort zk的ip+port
-   * @return zk 节点数据结构
-   * @exception Exception zookeeper 客户端异常
-   */
-  public ZkNodeTree tree(String hostPort) throws Exception {
+    /**
+     * 获取整个zookeeper的节点数据,树结构
+     *
+     * @param hostPort zk的ip+port
+     *
+     * @return zk 节点数据结构
+     * @throws Exception zookeeper 客户端异常
+     */
+    public ZkNodeTree tree(String hostPort) throws Exception {
     CuratorFramework curator = startCurator(hostPort);
     ZkNodeTree zkNodeTree = new ZkNodeTree("/", "/", null);
     calcTree(curator, "/", zkNodeTree);
