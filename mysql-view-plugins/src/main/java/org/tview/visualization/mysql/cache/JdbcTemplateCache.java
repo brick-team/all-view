@@ -4,9 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.cache.impl.LruCache;
 import org.tview.visualization.model.db.DBConnectionConfig;
 
-/**
- * JDBC template 的缓存实现
- */
+/** JDBC template 的缓存实现 */
 public class JdbcTemplateCache extends LruCache<DBConnectionConfig, JdbcTemplate> {
   public JdbcTemplateCache(int size) {
     super(size);

@@ -1,18 +1,33 @@
 package org.tview.visualization.mysql.factory;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
+import org.tview.visualization.model.db.mysql.ShowStatusEntity;
 import org.tview.visualization.mysql.cache.JdbcTemplateCache;
+import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JdbcTemplateFactoryTest {
+  JdbcFactory jdbcFactory;
+
+  @BeforeEach
+  void init() {
+    jdbcFactory = new JdbcTemplateFactory();
+  }
 
   @Test
-  void create() throws SQLException {
+  void create() throws Exception {
     DBConnectionConfig dbConnectionConfig = new DBConnectionConfig();
     dbConnectionConfig.setDbType("mysql");
     dbConnectionConfig.setHost("47.98.225.144");
@@ -21,10 +36,19 @@ class JdbcTemplateFactoryTest {
     dbConnectionConfig.setPassword("a12345");
     dbConnectionConfig.setTimeZone(ServerTimezone.UTC.getValue());
     dbConnectionConfig.setDbName("scrum");
-    JdbcTemplateFactory.create(dbConnectionConfig);
-    JdbcTemplateFactory.create(dbConnectionConfig);
-    JdbcTemplateFactory.create(dbConnectionConfig);
-    JdbcTemplateCache cache = JdbcTemplateFactory.getCache();
+    JdbcTemplate jdbcTemplate = jdbcFactory.create(dbConnectionConfig);
+
+    String version = jdbcTemplate.queryForObject("select version() as version ", String.class);
+    List<ShowStatusEntity> query =
+        jdbcTemplate.query("show variables like '%datadir%'", new ShowStatusEntityRowMapper());
+    String da =
+        Optional.of(query)
+            .orElseThrow(() -> new IllegalArgumentException("没有数据库地址"))
+            .get(0)
+            .getValue();
+
+    List<ShowStatusEntity> query1 =
+        jdbcTemplate.query("show variables ;", new ShowStatusEntityRowMapper());
     System.out.println();
   }
 }
