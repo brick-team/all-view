@@ -1,15 +1,23 @@
 package org.tview.visualization.app.web;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.tview.visualization.inter.zk.ZkNodeOperation;
+import org.tview.visualization.inter.zk.ZookeeperStateService;
 import org.tview.visualization.model.res.ResultVO;
 import org.tview.visualization.model.zk.ZkNodeCreateParam;
 import org.tview.visualization.zookeeper.ZookeeperNodeOperationImpl;
+import org.tview.visualization.zookeeper.ZookeeperStateServiceImpl;
 
 @RestController
 @RequestMapping("/zk/node")
 public class ZkController {
-  ZkNodeOperation zkNodeOperation = new ZookeeperNodeOperationImpl();
+    ZkNodeOperation zkNodeOperation = new ZookeeperNodeOperationImpl();
+    ZookeeperStateService zookeeperStateService = new ZookeeperStateServiceImpl();
 
   /**
    * 创建节点
@@ -51,17 +59,19 @@ public class ZkController {
   }
 
   /**
-   *
    * @param path
    * @param hostPort
    * @return
    */
   @GetMapping("/del")
   public ResultVO del(
-      @RequestParam(value = "path") String path,
-      @RequestParam(value = "host_port") String hostPort) {
-    return new ResultVO("ok", zkNodeOperation.del(path, hostPort), 200);
+          @RequestParam(value = "path") String path,
+          @RequestParam(value = "host_port") String hostPort) {
+      return new ResultVO("ok", zkNodeOperation.del(path, hostPort), 200);
   }
 
-
+    @PostMapping("/state")
+    public ResultVO state(@RequestBody String ip, @RequestBody Integer port) throws Exception {
+        return new ResultVO("ok", zookeeperStateService.getState(ip, port), 200);
+    }
 }
