@@ -1,15 +1,16 @@
 package org.tview.visualization.mysql.factory;
 
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
+import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
+import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
-
-import java.util.List;
-import java.util.Optional;
 
 class JdbcTemplateFactoryTest {
   JdbcFactory jdbcFactory;

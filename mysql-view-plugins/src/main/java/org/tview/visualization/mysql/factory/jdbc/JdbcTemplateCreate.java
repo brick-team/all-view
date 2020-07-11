@@ -1,9 +1,8 @@
-package org.tview.visualization.mysql.factory;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.tview.visualization.model.db.DBConnectionConfig;
+package org.tview.visualization.mysql.factory.jdbc;
 
 import java.sql.SQLException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.tview.visualization.model.db.DBConnectionConfig;
 
 /** JdbcTemplate 创建接口 */
 public interface JdbcTemplateCreate {

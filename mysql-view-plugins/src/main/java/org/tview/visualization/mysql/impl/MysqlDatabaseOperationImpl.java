@@ -1,5 +1,10 @@
 package org.tview.visualization.mysql.impl;
 
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,25 +14,22 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.DBInfoEntity;
 import org.tview.visualization.model.db.DatabasesEntity;
 import org.tview.visualization.model.db.TableEntity;
+import org.tview.visualization.model.db.TableStatusEntity;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
-import org.tview.visualization.mysql.factory.JdbcFactory;
-import org.tview.visualization.mysql.factory.JdbcTemplateFactory;
+import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
+import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 import org.tview.visualization.mysql.row.DatabasesRowMapper;
 import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
 import org.tview.visualization.mysql.row.TableNamesRowMapper;
-
-import java.sql.SQLException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import org.tview.visualization.mysql.row.TableStatueRowMapper;
 
 /** mysql 数据库操作 */
 public class MysqlDatabaseOperationImpl implements DatabaseOperation {
+
   public static final String SHOW_DATABASE = "show databases";
   public static final String SHOW_TABLES = "show tables";
-    JdbcFactory jdbcFactory = new JdbcTemplateFactory();
-    protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
+  protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
+  JdbcFactory jdbcFactory = new JdbcTemplateFactory();
 
   /**
    * 数据库列表
@@ -103,25 +105,25 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
         Long.parseLong(dbInfoQuery.upTime));
   }
 
-    /**
-     * 创建一个数据库
-     *
-     * @param connectionConfig
-     * @param createDbName
-     */
-    @Override
-    public boolean createDatabase(DBConnectionConfig connectionConfig, String createDbName) {
+  /**
+   * 创建一个数据库
+   *
+   * @param connectionConfig
+   * @param createDbName
+   */
+  @Override
+  public boolean createDatabase(DBConnectionConfig connectionConfig, String createDbName) {
 
-        try {
+    try {
 
-            JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
-            jdbcTemplate.execute("create database " + createDbName);
-            return true;
-        } catch (Exception e) {
-            log.error("创建数据库失败,e={}", e);
-            return false;
-        }
+      JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
+      jdbcTemplate.execute("create database " + createDbName);
+      return true;
+    } catch (Exception e) {
+      log.error("创建数据库失败,e={}", e);
+      return false;
     }
+  }
 
   /**
    * 数据库状态
@@ -135,8 +137,24 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
     return jdbcTemplate.query("show variables ;", new ShowStatusEntityRowMapper());
   }
 
+  /**
+   * show table status from db_name 查看某个数据库的表状态
+   *
+   * @param connectionConfig
+   * @param dbName
+   * @return
+   */
+  @Override
+  public List<TableStatusEntity> tableInfos(DBConnectionConfig connectionConfig, String dbName)
+      throws SQLException {
+    JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
+    return jdbcTemplate.query(
+        String.format("show table status from %s", dbName), new TableStatueRowMapper());
+  }
+
   /** 数据库信息对象,查询用 */
   private static class DbInfoQuery {
+
     private final JdbcTemplate jdbcTemplate;
     /** 数据库版本 */
     private String version;

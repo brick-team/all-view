@@ -1,9 +1,10 @@
 package org.tview.visualization.model.db;
 
 public enum DBType {
-  mysql("mysql");
+  MYSQL("mysql"),
+  ;
 
-    private final String value;
+  private final String value;
 
   DBType(String value) {
     this.value = value;
@@ -14,9 +15,8 @@ public enum DBType {
       throw new IllegalArgumentException("转换参数异常");
     }
     String smallValue = value.toLowerCase();
-    switch (smallValue) {
-      case "mysql":
-        return mysql;
+    if ("mysql".equals(smallValue)) {
+      return MYSQL;
     }
     return null;
   }

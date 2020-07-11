@@ -1,4 +1,3 @@
 package org.tview.visualization.format;
 
-public class FormatData {
-}
+public class FormatData {}

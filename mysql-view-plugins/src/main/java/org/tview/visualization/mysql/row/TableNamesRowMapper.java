@@ -1,10 +1,9 @@
 package org.tview.visualization.mysql.row;
 
-import org.springframework.jdbc.core.RowMapper;
-import org.tview.visualization.model.db.TableEntity;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+import org.tview.visualization.model.db.TableEntity;
 
 public class TableNamesRowMapper implements RowMapper<TableEntity> {
   private final String filedName;
