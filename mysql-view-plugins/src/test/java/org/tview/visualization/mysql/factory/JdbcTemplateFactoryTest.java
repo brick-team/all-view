@@ -1,10 +1,17 @@
 package org.tview.visualization.mysql.factory;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
@@ -29,20 +36,31 @@ class JdbcTemplateFactoryTest {
     dbConnectionConfig.setUsername("huifer");
     dbConnectionConfig.setPassword("a12345");
     dbConnectionConfig.setTimeZone(ServerTimezone.UTC.getValue());
-    dbConnectionConfig.setDbName("scrum");
+    //    dbConnectionConfig.setDbName("mysql");
     JdbcTemplate jdbcTemplate = jdbcFactory.create(dbConnectionConfig);
 
-    String version = jdbcTemplate.queryForObject("select version() as version ", String.class);
-    List<ShowStatusEntity> query =
-        jdbcTemplate.query("show variables like '%datadir%'", new ShowStatusEntityRowMapper());
-    String da =
-        Optional.of(query)
-            .orElseThrow(() -> new IllegalArgumentException("没有数据库地址"))
-            .get(0)
-            .getValue();
+    File file =
+        new File(
+            "E:\\github\\all-view\\mysql-view-plugins\\src\\main\\resources\\mysql_5_8_collection.txt");
 
-    List<ShowStatusEntity> query1 =
-        jdbcTemplate.query("show variables ;", new ShowStatusEntityRowMapper());
-    System.out.println();
+    InputStreamReader inputReader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+    BufferedReader bf = new BufferedReader(inputReader);
+    // 按行读取字符串
+    String str;
+
+    while ((str = bf.readLine()) != null) {
+      String[] split = str.split(",");
+
+      String yes =
+          String.format(
+              "%s(\"%s\",\"%s\",%s),", split[0], split[0], split[1], split[3].equals("Yes"));
+      System.out.println(yes);
+    }
+    bf.close();
+    inputReader.close();
+  }
+
+  private boolean s(String b) {
+    return b.equals("Yes");
   }
 }
