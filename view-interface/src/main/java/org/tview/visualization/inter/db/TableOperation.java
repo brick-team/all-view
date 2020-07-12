@@ -1,11 +1,13 @@
 package org.tview.visualization.inter.db;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.TableInfoEntity;
 import org.tview.visualization.model.req.PageVO;
+import org.tview.visualization.model.res.MysqlDataTypeRes;
 
 /** 表的操作 */
 public interface TableOperation {
@@ -45,4 +47,11 @@ public interface TableOperation {
 
   /** 删除表 */
   void deleteTable(DBConnectionConfig config, String table) throws SQLException;
+
+  /**
+   * mysql 支持的数据类型
+   *
+   * @return 数据类型
+   */
+  List<MysqlDataTypeRes> mysqlDataType();
 }

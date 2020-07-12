@@ -40,7 +40,11 @@ public interface DatabaseOperation {
   List<ShowStatusEntity> state(DBConnectionConfig connectionConfig) throws SQLException;
 
   /** 创建一个数据库 */
-  boolean createDatabase(DBConnectionConfig connectionConfig, String createDbName);
+  boolean createDatabase(
+      DBConnectionConfig connectionConfig,
+      String createDbName,
+      String charSet,
+      String charCollection);
 
   /**
    * show table status from db_name 查看某个数据库的表状态

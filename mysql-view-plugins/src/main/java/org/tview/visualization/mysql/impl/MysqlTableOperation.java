@@ -2,19 +2,25 @@ package org.tview.visualization.mysql.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.tview.visualization.cache.CacheInterface;
 import org.tview.visualization.inter.db.TableOperation;
+import org.tview.visualization.model.db.CreateTableParams;
+import org.tview.visualization.model.db.CreateTableParams.CreateRowParams;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.TableIndex;
 import org.tview.visualization.model.db.TableInfoEntity;
 import org.tview.visualization.model.db.TableStructure;
+import org.tview.visualization.model.db.mysql.MysqlVarType;
 import org.tview.visualization.model.req.PageVO;
+import org.tview.visualization.model.res.MysqlDataTypeRes;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 import org.tview.visualization.mysql.factory.table.TableStructureCacheFactory;
@@ -36,6 +42,141 @@ public class MysqlTableOperation implements TableOperation {
   JdbcFactory factory = new JdbcTemplateFactory();
   CacheInterface<String, TableInfoEntity> tableStructureCacheFactory =
       new TableStructureCacheFactory();
+
+  public static void main(String[] args) {
+    CreateTableParams c = new CreateTableParams();
+    c.setCharSet("utf8mb4");
+    c.setComment("用户表");
+    c.setEngine("InnoDB");
+    c.setTableName("tttt_uuu");
+    List<CreateRowParams> rowParams = new ArrayList<>();
+    CreateRowParams id =
+        new CreateRowParams("id", "int", 11, 0, false, true, "主键",
+                true, null, false, true);
+    rowParams.add(id);
+
+    CreateRowParams source =
+        new CreateRowParams(
+            "source", "float", 11, 2, false, true, "分数", false, "0.00", true, false);
+    rowParams.add(source);
+    c.setRowParams(rowParams);
+
+    String tableSql = createTableSql(c);
+    System.out.println(tableSql);
+  }
+
+  private static String createTableSql(CreateTableParams createTableParams) {
+    String tableName = createTableParams.getTableName();
+    String dtl = genDtl(createTableParams.getRowParams());
+    String keySql = genKey(createTableParams.getRowParams());
+    String engine = "InnoDB";
+    String charSet = "utf8";
+    String format = "CREATE TABLE `%s` (%s  %s) ENGINE=%s  CHARSET=`%s` COMMENT=\"%s\" ;";
+
+    String substring = keySql.substring(0, keySql.length() - 1);
+    return String.format(
+        format, tableName, dtl, substring, engine, charSet, createTableParams.getComment());
+  }
+
+  private static String genKey(List<CreateRowParams> rowParams) {
+    if (rowParams.stream().filter(CreateRowParams::isPk).collect(Collectors.toList()).size() > 1) {
+      throw new IllegalArgumentException("不允许两个主键");
+    }
+    StringBuffer sb = new StringBuffer(64);
+    for (CreateRowParams rowParam : rowParams) {
+      String sql = "PRIMARY KEY ( `%s` ),";
+      if (!rowParam.isPk() && rowParam.isKey()) {
+        sb.append(String.format("KEY (`%s`),", rowParam.getName()));
+      }
+    }
+    return sb.toString();
+  }
+
+  private static String genDtl(List<CreateRowParams> rowParams) {
+    StringBuffer sb = new StringBuffer(64);
+    for (CreateRowParams rowParam : rowParams) {
+      String dtl =
+          dtl(
+              rowParam.getName(),
+              rowParam.getType(),
+              rowParam.getLength(),
+              rowParam.getScale(),
+              rowParam.isNullable(),
+              rowParam.isKey(),
+              rowParam.getContent(),
+              rowParam.isAutoAdd(),
+              rowParam.getDefaultValue(),
+              rowParam.isUnsigned(),
+              rowParam.isPk());
+      sb.append(dtl);
+    }
+    return sb.toString();
+  }
+
+  private static String dtl(
+      String name,
+      String type,
+      Integer length,
+      Integer scale,
+      boolean nullable,
+      boolean key,
+      String content,
+      boolean autoAdd,
+      String defaultValue,
+      boolean unsigned,
+      boolean pk) {
+
+    String res = "";
+    // 转换类型
+    MysqlVarType mysqlVarType = MysqlVarType.valueOf(type.toUpperCase());
+    if (!mysqlVarType.isMd()) {
+      // 没有小数
+      String format = "`%s`\t %s(%s) ";
+      String sql = String.format(format, name, type, length);
+      sql = sqlGen(nullable, content, autoAdd, defaultValue, unsigned, pk, sql);
+
+      res = sql + ",";
+    } else {
+      String format = "`%s`\t %s(%s,%s) ";
+      String sql = String.format(format, name, type, length, scale);
+      sql = sqlGen(nullable, content, autoAdd, defaultValue, unsigned, pk, sql);
+      res = sql + ",";
+    }
+
+    return res;
+  }
+
+  private static String sqlGen(
+      boolean nullable,
+      String content,
+      boolean autoAdd,
+      String defaultValue,
+      boolean unsigned,
+      boolean pk,
+      String sql) {
+    if (pk) {
+      sql += "primary key ";
+    }
+    if (unsigned && !pk) {
+      sql += "unsigned ";
+    }
+    if (!nullable) {
+      // 不为空
+      sql += " NOT NULL ";
+    }
+    if (autoAdd) {
+      // 自增
+      sql += " AUTO_INCREMENT ";
+    }
+    if (!StringUtils.isEmpty(content)) {
+      // 备注
+      sql += "COMMENT  '" + content + "' ";
+    }
+    if (!StringUtils.isEmpty(defaultValue) && !pk) {
+      sql += "default '" + defaultValue + "' ";
+    }
+    return sql;
+  }
 
   /**
    * 查询表的所有
@@ -214,5 +355,17 @@ public class MysqlTableOperation implements TableOperation {
     JdbcTemplate jdbcTemplate = factory.create(config);
     String sql = String.format("DROP TABLE %s ", table);
     jdbcTemplate.execute(sql);
+  }
+
+  /**
+   * mysql 支持的数据类型
+   *
+   * @return 数据类型
+   */
+  @Override
+  public List<MysqlDataTypeRes> mysqlDataType() {
+    return Arrays.stream(MysqlVarType.values())
+        .map(s -> new MysqlDataTypeRes(s.getName(), s.isMd()))
+        .collect(Collectors.toList());
   }
 }

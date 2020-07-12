@@ -33,7 +33,6 @@ class MysqlDatabaseOperationImplTest {
 
   @Test
   void databases() throws SQLException {
-    databaseOperation.createDatabase(dbConnectionConfig, "zzz");
   }
 
   @Test
