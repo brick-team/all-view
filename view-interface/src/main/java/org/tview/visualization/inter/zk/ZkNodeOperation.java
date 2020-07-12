@@ -30,7 +30,7 @@ public interface ZkNodeOperation {
    *
    * @param hostPort zk的ip+port
    * @return zk 节点数据结构
-   * @exception Exception zookeeper 客户端异常
+   * @throws Exception zookeeper 客户端异常
    */
   ZkNodeTree tree(String hostPort) throws Exception;
 

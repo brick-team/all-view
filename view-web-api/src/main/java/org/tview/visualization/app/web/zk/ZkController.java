@@ -1,4 +1,4 @@
-package org.tview.visualization.app.web;
+package org.tview.visualization.app.web.zk;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

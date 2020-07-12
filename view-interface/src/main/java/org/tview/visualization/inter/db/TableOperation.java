@@ -1,6 +1,11 @@
 package org.tview.visualization.inter.db;
 
-import java.util.List;
+import java.sql.SQLException;
+import java.util.Map;
+import org.tview.visualization.model.db.DBConnectionConfig;
+import org.tview.visualization.model.db.TableDataEntity;
+import org.tview.visualization.model.db.TableInfoEntity;
+import org.tview.visualization.model.req.PageVO;
 
 /** 表的操作 */
 public interface TableOperation {
@@ -8,9 +13,13 @@ public interface TableOperation {
   /**
    * 查询表的所有
    *
+   * @param config 链接配置
+   * @param table 表名字
+   * @param pageVO 分页参数
    * @return
    */
-  List<Object> findAll();
+  TableDataEntity findAll(DBConnectionConfig config, String table, PageVO pageVO)
+      throws SQLException;
 
   /**
    * 表的信息
@@ -22,17 +31,18 @@ public interface TableOperation {
    *
    * @return
    */
-  Object tableInfo();
+  TableInfoEntity tableInfo(DBConnectionConfig config, String table) throws SQLException;
 
   /** 删除一条数据 */
-  void deleteOnceData();
+  void deleteOnceData(DBConnectionConfig config, String table, int id) throws SQLException;
 
   /** 创建一条数据 */
-  void createOnceData();
+  void createOnceData(DBConnectionConfig config, String table, Map<String, Object> data)
+      throws SQLException;
 
   /** 创建数据表 */
-  void createTable();
+  void createTable(DBConnectionConfig config, String table);
 
   /** 删除表 */
-  void deleteTable();
+  void deleteTable(DBConnectionConfig config, String table) throws SQLException;
 }
