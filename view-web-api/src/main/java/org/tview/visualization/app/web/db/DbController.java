@@ -18,12 +18,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/db")
 public class DbController {
-    DatabaseOperation databaseOperation = new MysqlDatabaseOperationImpl();
+  DatabaseOperation databaseOperation = new MysqlDatabaseOperationImpl();
 
-    @PostMapping("/databases")
-    public ResultVO databases(@RequestBody DBConnectionConfig connectionConfig) throws SQLException {
-        List<String> databases = databaseOperation.databases(connectionConfig);
-        return new ResultVO("ok", databases, 200);
+  @PostMapping("/databases")
+  public ResultVO databases(@RequestBody DBConnectionConfig connectionConfig) throws SQLException {
+    List<String> databases = databaseOperation.databases(connectionConfig);
+    return new ResultVO("ok", databases, 200);
   }
 
   @PostMapping("/tables")
@@ -46,6 +46,4 @@ public class DbController {
     return new ResultVO(
         "ok", databaseOperation.createDatabase(connectionConfig, db, charSet, charCollection), 200);
   }
-
-
 }

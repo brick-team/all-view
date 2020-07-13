@@ -4,8 +4,7 @@ public class MysqlDataTypeRes {
   private String name;
   private Boolean md;
 
-  public MysqlDataTypeRes() {
-  }
+  public MysqlDataTypeRes() {}
 
   public MysqlDataTypeRes(String name, Boolean md) {
     this.name = name;

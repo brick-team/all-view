@@ -10,14 +10,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
-    public static final String NOT_DB =
-            "jdbc:mysql://%s:%s/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
-    public static final String HAS_DB =
-            "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
+  public static final String NOT_DB =
+      "jdbc:mysql://%s:%s/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
+  public static final String HAS_DB =
+      "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
 
-    /**
-     * 生成 jdbc url
-     *
+  /**
+   * 生成 jdbc url
+   *
    * @param connectionConfig 链接配置
    * @return jdbc url
    */

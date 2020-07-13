@@ -8,17 +8,15 @@ import org.tview.visualization.model.db.mysql.ShowStatusEntity;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * mysql 数据库操作接口
- */
+/** mysql 数据库操作接口 */
 public interface DatabaseOperation {
 
-    /**
-     * 数据库列表
-     *
-     * @return 数据库名称
-     */
-    List<String> databases(DBConnectionConfig connectionConfig) throws SQLException;
+  /**
+   * 数据库列表
+   *
+   * @return 数据库名称
+   */
+  List<String> databases(DBConnectionConfig connectionConfig) throws SQLException;
 
   /**
    * 某个数据库的表名清单

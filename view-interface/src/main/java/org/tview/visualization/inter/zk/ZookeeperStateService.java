@@ -19,10 +19,9 @@ public interface ZookeeperStateService {
    */
   ZookeeperState srvr(String host, int port) throws Exception;
 
-    Map<String, String> mntr(String host, int port) throws Exception;
+  Map<String, String> mntr(String host, int port) throws Exception;
 
-    Map<String, String> conf(String host, int port) throws Exception;
+  Map<String, String> conf(String host, int port) throws Exception;
 
-    Map<String, String> envi(String host, int port) throws Exception;
-
+  Map<String, String> envi(String host, int port) throws Exception;
 }

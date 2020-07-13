@@ -71,22 +71,27 @@ public class CreateTableParams {
     return rowParams;
   }
 
-  public void setRowParams(
-          List<CreateRowParams> rowParams) {
+  public void setRowParams(List<CreateRowParams> rowParams) {
     this.rowParams = rowParams;
   }
 
   /** 行数据 */
   public static class CreateRowParams {
 
-    public CreateRowParams() {
-    }
+    public CreateRowParams() {}
 
-    public CreateRowParams(String name, String type, Integer length,
-            Integer scale,
-            boolean nullable,
-            boolean key, String content, boolean autoAdd, String defaultValue, boolean unsigned,
-            boolean pk) {
+    public CreateRowParams(
+        String name,
+        String type,
+        Integer length,
+        Integer scale,
+        boolean nullable,
+        boolean key,
+        String content,
+        boolean autoAdd,
+        String defaultValue,
+        boolean unsigned,
+        boolean pk) {
       this.name = name;
       this.type = type;
       this.length = length;

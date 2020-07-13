@@ -12,8 +12,7 @@ public class VueTableEntity {
     this.body = body;
   }
 
-  public VueTableEntity() {
-  }
+  public VueTableEntity() {}
 
   public List<String> getHead() {
     return head;

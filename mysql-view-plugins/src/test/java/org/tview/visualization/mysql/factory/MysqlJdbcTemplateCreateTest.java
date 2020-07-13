@@ -11,13 +11,13 @@ import org.tview.visualization.mysql.factory.jdbc.MysqlJdbcTemplateCreate;
 import java.sql.SQLException;
 
 class MysqlJdbcTemplateCreateTest extends AbsConfig {
-    private static final Logger LOG = LoggerFactory.getLogger(MysqlJdbcTemplateCreateTest.class);
-    JdbcTemplateCreate mysql = new MysqlJdbcTemplateCreate();
+  private static final Logger LOG = LoggerFactory.getLogger(MysqlJdbcTemplateCreateTest.class);
+  JdbcTemplateCreate mysql = new MysqlJdbcTemplateCreate();
 
-    @Test
-    public void genUrlTest() throws SQLException {
-        DBConnectionConfig conf = getConf();
-        conf.setDbName("scrum");
-        JdbcTemplate jdbcTemplate = mysql.create(conf);
-    }
+  @Test
+  public void genUrlTest() throws SQLException {
+    DBConnectionConfig conf = getConf();
+    conf.setDbName("scrum");
+    JdbcTemplate jdbcTemplate = mysql.create(conf);
+  }
 }

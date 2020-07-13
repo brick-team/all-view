@@ -8,13 +8,13 @@ import java.sql.SQLException;
 
 public class TableStatueRowMapper implements RowMapper<TableStatusEntity> {
 
-    @Override
-    public TableStatusEntity mapRow(ResultSet resultSet, int i) throws SQLException {
-        TableStatusEntity tableStatusEntity = new TableStatusEntity();
-        tableStatusEntity.setName(resultSet.getString("Name"));
-        tableStatusEntity.setEngine(resultSet.getString("Engine"));
-        tableStatusEntity.setVersion(resultSet.getString("Version"));
-        tableStatusEntity.setRowFormat(resultSet.getString("Row_format"));
+  @Override
+  public TableStatusEntity mapRow(ResultSet resultSet, int i) throws SQLException {
+    TableStatusEntity tableStatusEntity = new TableStatusEntity();
+    tableStatusEntity.setName(resultSet.getString("Name"));
+    tableStatusEntity.setEngine(resultSet.getString("Engine"));
+    tableStatusEntity.setVersion(resultSet.getString("Version"));
+    tableStatusEntity.setRowFormat(resultSet.getString("Row_format"));
     tableStatusEntity.setRows(resultSet.getString("Rows"));
     tableStatusEntity.setAvgRowLength(resultSet.getString("Avg_row_length"));
     tableStatusEntity.setDataLength(resultSet.getString("Data_length"));

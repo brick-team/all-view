@@ -7,9 +7,9 @@ public enum MysqlVarType {
   MEDIUMINT("MEDIUMINT"),
   INT("INT"),
   BIGINT("BIGINT"),
-  FLOAT("FLOAT",true),
-  DOUBLE("DOUBLE",true),
-  DECIMAL("DECIMAL",true),
+  FLOAT("FLOAT", true),
+  DOUBLE("DOUBLE", true),
+  DECIMAL("DECIMAL", true),
   DATE("DATE"),
   TIME("TIME"),
   YEAR("YEAR"),
@@ -28,9 +28,7 @@ public enum MysqlVarType {
   ;
   private final String name;
 
-  /**
-   * 是否支持 M,D
-   */
+  /** 是否支持 M,D */
   private boolean md;
 
   public boolean isMd() {

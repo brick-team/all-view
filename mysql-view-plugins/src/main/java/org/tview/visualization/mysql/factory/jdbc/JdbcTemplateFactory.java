@@ -9,15 +9,13 @@ import java.sql.SQLException;
 
 public class JdbcTemplateFactory implements JdbcFactory {
 
-    /**
-     * JdbcTemplate 缓存对象
-     */
-    private final JdbcTemplateCache cache = new JdbcTemplateCache(10);
+  /** JdbcTemplate 缓存对象 */
+  private final JdbcTemplateCache cache = new JdbcTemplateCache(10);
 
-    /**
-     * 创建 JdbcTemplate
-     *
-     * @param connectionConfig 链接配置
+  /**
+   * 创建 JdbcTemplate
+   *
+   * @param connectionConfig 链接配置
    * @return
    * @throws SQLException
    */

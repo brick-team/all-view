@@ -12,16 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * mysql 的sql执行器
- */
+/** mysql 的sql执行器 */
 public class MysqlExecute implements SqlExecute {
-    JdbcFactory jdbcFactory;
+  JdbcFactory jdbcFactory;
 
-    @PostConstruct
-    public void initJdbcFactory() {
-        jdbcFactory = new JdbcTemplateFactory();
-    }
+  @PostConstruct
+  public void initJdbcFactory() {
+    jdbcFactory = new JdbcTemplateFactory();
+  }
 
   /**
    * 执行sql

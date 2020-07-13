@@ -17,21 +17,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 class MysqlTableOperationTest extends AbsConfig {
-    JdbcFactory jdbcFactory;
-    DBConnectionConfig dbConnectionConfig;
-    TableOperation tableOperation;
+  JdbcFactory jdbcFactory;
+  DBConnectionConfig dbConnectionConfig;
+  TableOperation tableOperation;
 
-    @BeforeEach
-    void initc() {
-        jdbcFactory = new JdbcTemplateFactory();
-        DBConnectionConfig config = getConf();
+  @BeforeEach
+  void initc() {
+    jdbcFactory = new JdbcTemplateFactory();
+    DBConnectionConfig config = getConf();
 
-        config.setDbName("at15");
-        config.setTimeZone(ServerTimezone.UTC.getValue());
-        dbConnectionConfig = config;
+    config.setDbName("at15");
+    config.setTimeZone(ServerTimezone.UTC.getValue());
+    dbConnectionConfig = config;
 
-        tableOperation = new MysqlTableOperation();
-    }
+    tableOperation = new MysqlTableOperation();
+  }
 
   @Test
   void findAll() throws SQLException {

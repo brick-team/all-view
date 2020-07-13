@@ -19,17 +19,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * mysql 数据库操作
- */
+/** mysql 数据库操作 */
 public class MysqlDatabaseOperationImpl implements DatabaseOperation {
 
-    public static final String SHOW_DATABASE = "show databases";
-    public static final String SHOW_TABLES = "show tables";
-    protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
-    JdbcFactory jdbcFactory = new JdbcTemplateFactory();
+  public static final String SHOW_DATABASE = "show databases";
+  public static final String SHOW_TABLES = "show tables";
+  protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
+  JdbcFactory jdbcFactory = new JdbcTemplateFactory();
 
-    /**
+  /**
    * 数据库列表
    *
    * @param connectionConfig
@@ -66,7 +64,7 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
       // 返回链接配置中的数据库表名列表
       return showTables(connectionConfig.getDbName(), jdbcTemplate);
     }
-      return List.of();
+    return List.of();
   }
 
   /**
@@ -210,8 +208,8 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
       List<ShowStatusEntity> query =
           jdbcTemplate.query("show status like 'uptime';", new ShowStatusEntityRowMapper());
       upTime =
-              Optional.of(query)
-                      .orElseThrow(() -> new IllegalArgumentException("没有获取到数据库的已启动时间"))
+          Optional.of(query)
+              .orElseThrow(() -> new IllegalArgumentException("没有获取到数据库的已启动时间"))
               .get(0)
               .getValue();
     }
