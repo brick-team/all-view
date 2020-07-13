@@ -5,6 +5,7 @@ import org.tview.visualization.cache.impl.LruCache;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 
 public class RedisConnectionCache extends LruCache<RedisConnectionConfig, RedisTemplate> {
+
     public RedisConnectionCache(int size) {
         super(size);
     }

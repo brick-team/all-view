@@ -6,5 +6,5 @@ import org.tview.visualization.redis.cache.RedisConnectionCache;
 
 public interface RedisConnectionCacheFactory {
 
-    RedisTemplate factory(RedisConnectionConfig config);
+  RedisTemplate factory(RedisConnectionConfig config);
 }

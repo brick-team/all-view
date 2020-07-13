@@ -7,30 +7,31 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.cache.RedisConnectionCache;
 
 public class RedisConnectionCacheFactoryImpl implements RedisConnectionCacheFactory {
-    RedisConnectionCache CACHE = new RedisConnectionCache(10);
 
-    @Override
-    public RedisTemplate factory(RedisConnectionConfig config) {
-        RedisTemplate redisTemplate = CACHE.get(config);
-        if (redisTemplate != null) {
-            return redisTemplate;
-        } else {
-            JedisConnectionFactory conn = new JedisConnectionFactory();
-            conn.setDatabase(config.getDbIndex());
-            conn.setHostName(config.getHost());
-            conn.setPort(config.getPort());
-            conn.setPassword(config.getPwd());
-            conn.afterPropertiesSet();
-            RedisTemplate<byte[], byte[]> template = new RedisTemplate<>();
-            template.setConnectionFactory(conn);
-            template.setKeySerializer(RedisSerializer.string());
-            template.setValueSerializer(RedisSerializer.string());
-            template.setHashKeySerializer(RedisSerializer.string());
-            template.setHashValueSerializer(RedisSerializer.string());
-            template.setDefaultSerializer(RedisSerializer.string());
-            template.afterPropertiesSet();
-            CACHE.put(config, template);
-            return template;
-        }
+  RedisConnectionCache CACHE = new RedisConnectionCache(10);
+
+  @Override
+  public RedisTemplate factory(RedisConnectionConfig config) {
+    RedisTemplate redisTemplate = CACHE.get(config);
+    if (redisTemplate != null) {
+      return redisTemplate;
+    } else {
+      JedisConnectionFactory conn = new JedisConnectionFactory();
+      conn.setDatabase(config.getDbIndex());
+      conn.setHostName(config.getHost());
+      conn.setPort(config.getPort());
+      conn.setPassword(config.getPwd());
+      conn.afterPropertiesSet();
+      RedisTemplate<byte[], byte[]> template = new RedisTemplate<>();
+      template.setConnectionFactory(conn);
+      template.setKeySerializer(RedisSerializer.string());
+      template.setValueSerializer(RedisSerializer.string());
+      template.setHashKeySerializer(RedisSerializer.string());
+      template.setHashValueSerializer(RedisSerializer.string());
+      template.setDefaultSerializer(RedisSerializer.string());
+      template.afterPropertiesSet();
+      CACHE.put(config, template);
+      return template;
     }
+  }
 }

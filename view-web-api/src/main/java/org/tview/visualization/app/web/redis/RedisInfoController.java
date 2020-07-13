@@ -30,49 +30,41 @@ public class RedisInfoController {
     @PostMapping("/server")
     public ResultVO server(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.server(config), 200);
-
     }
 
     @PostMapping("/clients")
     public ResultVO clients(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.clients(config), 200);
-
     }
 
     @PostMapping("/memory")
     public ResultVO memory(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.memory(config), 200);
-
     }
 
     @PostMapping("/persistence")
     public ResultVO persistence(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.persistence(config), 200);
-
     }
 
     @PostMapping("/stats")
     public ResultVO stats(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.stats(config), 200);
-
     }
 
     @PostMapping("/replication")
     public ResultVO replication(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.replication(config), 200);
-
     }
 
     @PostMapping("/cpu")
     public ResultVO cpu(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.cpu(config), 200);
-
     }
 
     @PostMapping("/cluster")
     public ResultVO cluster(@RequestBody RedisConnectionConfig config) {
         return new ResultVO("OK", redisServerInfo.cluster(config), 200);
-
     }
 
     @PostMapping("/keyspace")

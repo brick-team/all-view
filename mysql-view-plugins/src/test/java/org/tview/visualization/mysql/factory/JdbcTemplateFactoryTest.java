@@ -24,10 +24,10 @@ class JdbcTemplateFactoryTest {
 
   @Test
   void create() throws Exception {
-    DBConnectionConfig dbConnectionConfig = new DBConnectionConfig();
-    dbConnectionConfig.setDbType("mysql");
-    dbConnectionConfig.setHost("47.98.225.144");
-    dbConnectionConfig.setPort(3306);
+      DBConnectionConfig dbConnectionConfig = new DBConnectionConfig();
+      dbConnectionConfig.setDbType("mysql");
+      dbConnectionConfig.setHost("47.98.225.144");
+      dbConnectionConfig.setPort(3306);
       dbConnectionConfig.setUsername("huifer");
       dbConnectionConfig.setPassword("a12345");
       dbConnectionConfig.setTimeZone(ServerTimezone.UTC.getValue());
@@ -50,10 +50,10 @@ class JdbcTemplateFactoryTest {
           String yes =
                   String.format(
                           "%s(\"%s\",\"%s\",%s),", split[0], split[0], split[1], split[3].equals("Yes"));
-      System.out.println(yes);
-    }
-    bf.close();
-    inputReader.close();
+          System.out.println(yes);
+      }
+      bf.close();
+      inputReader.close();
   }
 
   private boolean s(String b) {
