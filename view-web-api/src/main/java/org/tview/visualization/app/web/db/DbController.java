@@ -1,7 +1,5 @@
 package org.tview.visualization.app.web.db;
 
-import java.sql.SQLException;
-import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,15 +9,18 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.res.ResultVO;
 import org.tview.visualization.mysql.impl.MysqlDatabaseOperationImpl;
 
+import java.sql.SQLException;
+import java.util.List;
+
 @RestController
 @RequestMapping("/db")
 public class DbController {
-  DatabaseOperation databaseOperation = new MysqlDatabaseOperationImpl();
+    DatabaseOperation databaseOperation = new MysqlDatabaseOperationImpl();
 
-  @PostMapping("/databases")
-  public ResultVO databases(@RequestBody DBConnectionConfig connectionConfig) throws SQLException {
-    List<String> databases = databaseOperation.databases(connectionConfig);
-    return new ResultVO("ok", databases, 200);
+    @PostMapping("/databases")
+    public ResultVO databases(@RequestBody DBConnectionConfig connectionConfig) throws SQLException {
+        List<String> databases = databaseOperation.databases(connectionConfig);
+        return new ResultVO("ok", databases, 200);
   }
 
   @PostMapping("/tables")

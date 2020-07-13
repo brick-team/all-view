@@ -2,7 +2,9 @@ package org.tview.visualization.inter.db.mysq;
 
 import java.util.List;
 
-/** * mysql 的字符集操作 */
+/**
+ * mysql 的字符集操作
+ */
 public interface MysqlCharSetOperation {
 
   /**

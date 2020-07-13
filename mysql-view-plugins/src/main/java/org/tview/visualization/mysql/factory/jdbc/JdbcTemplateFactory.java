@@ -1,20 +1,23 @@
 package org.tview.visualization.mysql.factory.jdbc;
 
-import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.DBType;
 import org.tview.visualization.mysql.cache.JdbcTemplateCache;
 
+import java.sql.SQLException;
+
 public class JdbcTemplateFactory implements JdbcFactory {
 
-  /** JdbcTemplate 缓存对象 */
-  private final JdbcTemplateCache cache = new JdbcTemplateCache(10);
+    /**
+     * JdbcTemplate 缓存对象
+     */
+    private final JdbcTemplateCache cache = new JdbcTemplateCache(10);
 
-  /**
-   * 创建 JdbcTemplate
-   *
-   * @param connectionConfig 链接配置
+    /**
+     * 创建 JdbcTemplate
+     *
+     * @param connectionConfig 链接配置
    * @return
    * @throws SQLException
    */

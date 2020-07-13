@@ -1,9 +1,10 @@
 package org.tview.visualization.cache.impl;
 
+import org.tview.visualization.cache.CacheInterface;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.tview.visualization.cache.CacheInterface;
 
 public class FifoCache<K, V> implements CacheInterface<K, V> {
 

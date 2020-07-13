@@ -1,22 +1,23 @@
 package org.tview.visualization.mysql.factory.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.model.db.DBConnectionConfig;
 
-public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
-  public static final String NOT_DB =
-      "jdbc:mysql://%s:%s/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
-  public static final String HAS_DB =
-      "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-  /**
-   * 生成 jdbc url
-   *
+public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
+    public static final String NOT_DB =
+            "jdbc:mysql://%s:%s/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
+    public static final String HAS_DB =
+            "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
+
+    /**
+     * 生成 jdbc url
+     *
    * @param connectionConfig 链接配置
    * @return jdbc url
    */

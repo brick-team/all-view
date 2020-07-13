@@ -1,8 +1,8 @@
 package org.tview.visualization.model.db.mysql;
 
-import java.util.List;
-
 import org.tview.visualization.model.db.CreateRowParams;
+
+import java.util.List;
 
 /**
  * 修改表结构的请求参数
@@ -18,7 +18,6 @@ public class MysqlChangeTableStructureParam {
      */
     private String oldTableName;
 
-
     /**
      * 需要变化的字段结构
      */
@@ -27,7 +26,6 @@ public class MysqlChangeTableStructureParam {
      * 新增的字段结构
      */
     private List<CreateRowParams> addRow;
-
 
     /**
      * 删除的字段
@@ -47,5 +45,4 @@ public class MysqlChangeTableStructureParam {
      * 需要删除的索引
      */
     private List<String> removeIndex;
-
 }

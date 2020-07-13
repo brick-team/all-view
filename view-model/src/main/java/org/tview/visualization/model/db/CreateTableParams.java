@@ -8,5 +8,4 @@ public class CreateTableParams {
   private String charSet;
   /** 注释 */
   private String comment;
-
 }

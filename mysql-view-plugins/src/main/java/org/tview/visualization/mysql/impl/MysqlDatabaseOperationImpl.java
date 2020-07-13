@@ -1,20 +1,11 @@
 package org.tview.visualization.mysql.impl;
 
-import java.sql.SQLException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.inter.db.DatabaseOperation;
-import org.tview.visualization.model.db.DBConnectionConfig;
-import org.tview.visualization.model.db.DBInfoEntity;
-import org.tview.visualization.model.db.DatabasesEntity;
-import org.tview.visualization.model.db.TableEntity;
-import org.tview.visualization.model.db.TableStatusEntity;
+import org.tview.visualization.model.db.*;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
@@ -23,15 +14,22 @@ import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
 import org.tview.visualization.mysql.row.TableNamesRowMapper;
 import org.tview.visualization.mysql.row.TableStatueRowMapper;
 
-/** mysql 数据库操作 */
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+/**
+ * mysql 数据库操作
+ */
 public class MysqlDatabaseOperationImpl implements DatabaseOperation {
 
-  public static final String SHOW_DATABASE = "show databases";
-  public static final String SHOW_TABLES = "show tables";
-  protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
-  JdbcFactory jdbcFactory = new JdbcTemplateFactory();
+    public static final String SHOW_DATABASE = "show databases";
+    public static final String SHOW_TABLES = "show tables";
+    protected Logger log = LoggerFactory.getLogger(MysqlDatabaseOperationImpl.class);
+    JdbcFactory jdbcFactory = new JdbcTemplateFactory();
 
-  /**
+    /**
    * 数据库列表
    *
    * @param connectionConfig
@@ -68,7 +66,7 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
       // 返回链接配置中的数据库表名列表
       return showTables(connectionConfig.getDbName(), jdbcTemplate);
     }
-    return Collections.EMPTY_LIST;
+      return List.of();
   }
 
   /**
@@ -202,8 +200,8 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
       List<ShowStatusEntity> query =
           jdbcTemplate.query("show status like 'uptime';", new ShowStatusEntityRowMapper());
       upTime =
-          Optional.of(query)
-              .orElseThrow(() -> new IllegalArgumentException("没有数据库文件存放地址地址"))
+              Optional.of(query)
+                      .orElseThrow(() -> new IllegalArgumentException("没有获取到数据库的已启动时间"))
               .get(0)
               .getValue();
     }

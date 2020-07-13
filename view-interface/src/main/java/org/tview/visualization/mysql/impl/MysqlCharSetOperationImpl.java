@@ -1,21 +1,24 @@
 package org.tview.visualization.mysql.impl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.tview.visualization.inter.db.mysq.MysqlCharSetOperation;
 import org.tview.visualization.model.db.mysql.MysqlCharSet;
 import org.tview.visualization.model.db.mysql.MysqlCharSetCollation;
 
-/** mysql 字符集操作实现 */
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * mysql 字符集操作实现
+ */
 public class MysqlCharSetOperationImpl implements MysqlCharSetOperation {
-  /**
-   * 获取字符集
-   *
-   * @return 字符集
-   */
-  @Override
-  public List<String> charSetList() {
+    /**
+     * 获取字符集
+     *
+     * @return 字符集
+     */
+    @Override
+    public List<String> charSetList() {
     return Arrays.stream(MysqlCharSet.values())
         .map(MysqlCharSet::getName)
         .collect(Collectors.toList());

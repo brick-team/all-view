@@ -2,7 +2,9 @@ package org.tview.visualization.inter.db;
 
 import java.sql.SQLException;
 import java.util.Map;
+import javax.swing.Spring;
 
+import org.tview.visualization.model.db.CreateIndexParam;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.TableInfoEntity;
@@ -58,7 +60,6 @@ public interface TableOperation {
      */
     void deleteTable(DBConnectionConfig config, String table) throws SQLException;
 
-
     /**
      * 修改表名
      *
@@ -66,8 +67,17 @@ public interface TableOperation {
      *
      * @return
      */
-    boolean changeTableName(DBConnectionConfig config);
+    boolean changeTableName(DBConnectionConfig config, String oldName, String newName);
 
+    /**
+     * 删除字段
+     *
+     * @param config 配置
+     * @param fields 需要删除的字段列表
+     *
+     * @return
+     */
+    boolean removeField(DBConnectionConfig config, String tableName, Spring... fields);
 
     /**
      * 修改字段结构
@@ -81,12 +91,14 @@ public interface TableOperation {
     /**
      * 创建索引
      */
-    void createIndex(DBConnectionConfig config);
+    void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException;
+
+    void addIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException;
 
     /**
      * 删除索引
      */
-    void removeIndex(DBConnectionConfig config);
+    void removeIndex(DBConnectionConfig config, String indexName, String tableName) throws SQLException;
 
     /**
      * 修改索引
@@ -95,5 +107,5 @@ public interface TableOperation {
      *
      * @return
      */
-    boolean changeIndex(DBConnectionConfig config);
+    boolean changeIndex(DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex);
 }
