@@ -44,6 +44,12 @@
             <artifactId>view-interface</artifactId>
             <version>xi-hu</version>
         </dependency>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
+            <artifactId>redis-view-plugins</artifactId>
+            <version>xi-hu</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 

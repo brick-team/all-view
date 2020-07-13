@@ -1,6 +1,5 @@
 package org.tview.visualization.inter.zk;
 
-import java.io.IOException;
 import java.util.Map;
 import org.tview.visualization.model.zk.ZookeeperState;
 
@@ -19,10 +18,9 @@ public interface ZookeeperStateService {
    */
   ZookeeperState srvr(String host, int port) throws Exception;
 
-    Map<String, String> mntr(String host, int port) throws Exception;
+  Map<String, String> mntr(String host, int port) throws Exception;
 
     Map<String, String> conf(String host, int port) throws Exception;
 
     Map<String, String> envi(String host, int port) throws Exception;
-
 }

@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.zookeeper.client.FourLetterWordMain;
 import org.apache.zookeeper.common.X509Exception;
@@ -33,6 +32,7 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
         }
         return map;
     }
+
     @Override
     public Map<String, String> conf(String host, int port) throws IOException, SSLContextException {
         String conf = FourLetterWordMain.send4LetterWord(host, port, "conf");
@@ -49,6 +49,7 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
         }
         return map;
     }
+
     @Override
     public Map<String, String> mntr(String host, int port) throws IOException, SSLContextException {
         String mntr = FourLetterWordMain.send4LetterWord(host, port, "mntr");
@@ -65,12 +66,12 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
         }
         return map;
     }
+
     /**
      * 获取zookeeper的状态
      *
      * @param host IP地址
      * @param port 端口
-     *
      * @return 状态
      */
     @Override
@@ -130,9 +131,7 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
         return zookeeperState;
     }
 
-    /**
-     * client number
-     */
+    /** client number */
     private int clientNumber(String host, int port)
             throws IOException, X509Exception.SSLContextException {
         int clientNumber = -1;
@@ -151,9 +150,7 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
         return clientNumber;
     }
 
-    /**
-     * total watchers
-     */
+    /** total watchers */
     private int totalWatches(String host, int port)
             throws IOException, X509Exception.SSLContextException {
         int totalWatches = -1;
@@ -175,7 +172,6 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
      * 去掉没用的空格
      *
      * @param line
-     *
      * @return
      */
     private String split(String line) {
@@ -192,9 +188,7 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
         }
     }
 
-    /**
-     * zookeeper srvr 执行结果
-     */
+    /** zookeeper srvr 执行结果 */
     private class Srvr {
         private final String stateText;
         private int minLatency;
