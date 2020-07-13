@@ -1,6 +1,5 @@
 package org.tview.visualization.inter.zk;
 
-import java.io.IOException;
 import java.util.Map;
 import org.tview.visualization.model.zk.ZookeeperState;
 

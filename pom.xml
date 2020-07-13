@@ -10,6 +10,7 @@
         <module>zookeeper-view-plugins</module>
         <module>mysql-view-plugins</module>
         <module>view-common</module>
+        <module>redis-view-plugins</module>
     </modules>
 
     <groupId>org.tview.visualization</groupId>
@@ -49,6 +50,11 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jdbc</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-redis</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
             <dependency>

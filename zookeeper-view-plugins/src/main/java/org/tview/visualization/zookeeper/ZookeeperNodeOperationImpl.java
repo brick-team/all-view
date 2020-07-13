@@ -2,9 +2,6 @@ package org.tview.visualization.zookeeper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
