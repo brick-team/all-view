@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import org.tview.visualization.model.db.CreateIndexParam;
+import org.tview.visualization.model.db.CreateTableParams;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.TableInfoEntity;
@@ -44,7 +45,7 @@ public interface TableOperation {
       throws SQLException;
 
   /** 创建数据表 */
-  void createTable(DBConnectionConfig config, String table);
+  void createTable(DBConnectionConfig config, CreateTableParams params) throws SQLException;
 
   /** 删除表 */
   void deleteTable(DBConnectionConfig config, String table) throws SQLException;

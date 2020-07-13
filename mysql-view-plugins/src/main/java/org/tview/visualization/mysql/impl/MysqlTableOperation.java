@@ -342,8 +342,12 @@ public class MysqlTableOperation implements TableOperation {
    * @param table
    */
   @Override
-  public void createTable(DBConnectionConfig config, String table) {
+  public void createTable(DBConnectionConfig config, CreateTableParams params) throws SQLException {
     // todo: 2020/7/11 建表语句
+    JdbcTemplate jdbcTemplate = factory.create(config);
+    String tableSql = createTableSql(params);
+    jdbcTemplate.execute(tableSql);
+
   }
 
   /**
