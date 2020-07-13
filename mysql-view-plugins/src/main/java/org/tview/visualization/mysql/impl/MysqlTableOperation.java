@@ -211,8 +211,65 @@ public class MysqlTableOperation implements TableOperation {
    */
   @Override
   public void deleteTable(DBConnectionConfig config, String table) throws SQLException {
-    JdbcTemplate jdbcTemplate = factory.create(config);
-    String sql = String.format("DROP TABLE %s ", table);
-    jdbcTemplate.execute(sql);
+      JdbcTemplate jdbcTemplate = factory.create(config);
+      String sql = String.format("DROP TABLE %s ", table);
+      jdbcTemplate.execute(sql);
   }
+
+
+    /**
+     * 修改表名
+     *
+     * @param config
+     *
+     * @return
+     */
+    @Override
+    public boolean changeTableName(DBConnectionConfig config) {
+        return false;
+    }
+
+    /**
+     * 修改字段结构
+     *
+     * @param config
+     *
+     * @return
+     */
+    @Override
+    public boolean changeFiled(DBConnectionConfig config) {
+        return false;
+    }
+
+    /**
+     * 创建索引
+     *
+     * @param config
+     */
+    @Override
+    public void createIndex(DBConnectionConfig config) {
+
+    }
+
+    /**
+     * 删除索引
+     *
+     * @param config
+     */
+    @Override
+    public void removeIndex(DBConnectionConfig config) {
+
+    }
+
+    /**
+     * 修改索引
+     *
+     * @param config 链接参数
+     *
+     * @return
+     */
+    @Override
+    public boolean changeIndex(DBConnectionConfig config) {
+        return false;
+    }
 }
