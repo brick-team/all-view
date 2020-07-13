@@ -1,16 +1,15 @@
 package org.tview.visualization.mysql.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.inter.db.SqlExecute;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.res.ExecuteRes;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /** mysql 的sql执行器 */
 public class MysqlExecute implements SqlExecute {

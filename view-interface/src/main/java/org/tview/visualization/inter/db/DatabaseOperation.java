@@ -1,12 +1,11 @@
 package org.tview.visualization.inter.db;
 
+import java.sql.SQLException;
+import java.util.List;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.DBInfoEntity;
 import org.tview.visualization.model.db.TableStatusEntity;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
-
-import java.sql.SQLException;
-import java.util.List;
 
 /** mysql 数据库操作接口 */
 public interface DatabaseOperation {

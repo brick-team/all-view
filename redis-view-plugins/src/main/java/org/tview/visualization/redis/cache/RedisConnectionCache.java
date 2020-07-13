@@ -6,22 +6,22 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 
 public class RedisConnectionCache extends LruCache<RedisConnectionConfig, RedisTemplate> {
 
-    public RedisConnectionCache(int size) {
-        super(size);
-    }
+  public RedisConnectionCache(int size) {
+    super(size);
+  }
 
-    @Override
-    public int size() {
-        return super.size();
-    }
+  @Override
+  public int size() {
+    return super.size();
+  }
 
-    @Override
-    public void put(RedisConnectionConfig key, RedisTemplate value) {
-        super.put(key, value);
-    }
+  @Override
+  public void put(RedisConnectionConfig key, RedisTemplate value) {
+    super.put(key, value);
+  }
 
-    @Override
-    public RedisTemplate get(RedisConnectionConfig key) {
-        return super.get(key);
-    }
+  @Override
+  public RedisTemplate get(RedisConnectionConfig key) {
+    return super.get(key);
+  }
 }

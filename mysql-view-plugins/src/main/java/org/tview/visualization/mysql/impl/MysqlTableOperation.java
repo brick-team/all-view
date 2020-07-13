@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.swing.Spring;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -347,7 +346,6 @@ public class MysqlTableOperation implements TableOperation {
     JdbcTemplate jdbcTemplate = factory.create(config);
     String tableSql = createTableSql(params);
     jdbcTemplate.execute(tableSql);
-
   }
 
   /**

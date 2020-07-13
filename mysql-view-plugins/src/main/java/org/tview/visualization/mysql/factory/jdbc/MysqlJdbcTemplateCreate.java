@@ -1,13 +1,12 @@
 package org.tview.visualization.mysql.factory.jdbc;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.model.db.DBConnectionConfig;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
   public static final String NOT_DB =

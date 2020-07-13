@@ -1,10 +1,9 @@
 package org.tview.visualization.mysql.row;
 
-import org.springframework.jdbc.core.RowMapper;
-import org.tview.visualization.model.db.TableStatusEntity;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.jdbc.core.RowMapper;
+import org.tview.visualization.model.db.TableStatusEntity;
 
 public class TableStatueRowMapper implements RowMapper<TableStatusEntity> {
 
