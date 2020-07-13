@@ -16,4 +16,34 @@ public class ZkNodeInfo {
    * </ol>
    */
   private String type;
+
+  public ZkStat getStat() {
+    return stat;
+  }
+
+  public void setStat(ZkStat stat) {
+    this.stat = stat;
+  }
+
+  public String getData() {
+    return data;
+  }
+
+  public void setData(String data) {
+    this.data = data;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public ZkNodeInfo(ZkStat stat, String data, String type) {
+    this.stat = stat;
+    this.data = data;
+    this.type = type;
+  }
 }

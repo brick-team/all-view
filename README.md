@@ -6,15 +6,15 @@ t-view-parent is a web ui of mysql 、zookeeper 、 kafka .
 
 ## Todo
 - mysql
-    - Display database information(展示数据库信息)
-        - Display database state(展示数据库状态)
-    - Display table information(展示表信息)
-        - Display table names (展示表名)
-        - Display table structure (展示表结构)
-        - Display table index (展示表索引)
-    - Execute SQL statement(执行sql语句)
+    - Display database information
+        - Display database state
+    - Display table information
+        - Display table names 
+        - Display table structure 
+        - Display table index 
+    - Execute SQL statement
 - zookeeper
-    - Display zookeeper node information (展示zookeeper节点信息)
+    - Display zookeeper node information 
     
 - kafka
     - Display kafka topic information

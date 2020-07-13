@@ -17,11 +17,6 @@
             <artifactId>view-interface</artifactId>
             <version>xi-hu</version>
         </dependency>
-        <dependency>
-            <groupId>org.tview.visualization</groupId>
-            <artifactId>view-model</artifactId>
-            <version>xi-hu</version>
-        </dependency>
     </dependencies>
 
 </project>
