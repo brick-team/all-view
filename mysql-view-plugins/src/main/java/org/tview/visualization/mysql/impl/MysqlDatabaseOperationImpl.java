@@ -110,12 +110,22 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
    * @param createDbName
    */
   @Override
-  public boolean createDatabase(DBConnectionConfig connectionConfig, String createDbName) {
+  public boolean createDatabase(
+      DBConnectionConfig connectionConfig,
+      String createDbName,
+      String charSet,
+      String charCollection) {
 
     try {
 
       JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
-      jdbcTemplate.execute("create database " + createDbName);
+      String sql =
+          String.format(
+              " CREATE DATABASE IF NOT EXISTS %s"
+                  + " DEFAULT CHARACTER SET %s"
+                  + " DEFAULT COLLATE %s;",
+              createDbName, charSet, charCollection);
+      jdbcTemplate.execute(sql);
       return true;
     } catch (Exception e) {
       log.error("创建数据库失败,e={}", e);

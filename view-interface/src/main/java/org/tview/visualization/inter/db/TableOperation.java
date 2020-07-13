@@ -1,6 +1,7 @@
 package org.tview.visualization.inter.db;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import javax.swing.Spring;
 
@@ -9,6 +10,7 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.TableInfoEntity;
 import org.tview.visualization.model.req.PageVO;
+import org.tview.visualization.model.res.MysqlDataTypeRes;
 
 /**
  * 表的操作
@@ -108,4 +110,12 @@ public interface TableOperation {
      * @return
      */
     boolean changeIndex(DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex);
+  /** 删除表 */
+
+  /**
+   * mysql 支持的数据类型
+   *
+   * @return 数据类型
+   */
+  List<MysqlDataTypeRes> mysqlDataType();
 }

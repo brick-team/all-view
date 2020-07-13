@@ -12,10 +12,25 @@ class MysqlDatabaseOperationImplTest extends AbsConfig {
     JdbcFactory jdbcFactory;
     DatabaseOperation databaseOperation;
 
-    @Test
-    void databases() throws SQLException {
-        databaseOperation.createDatabase(getConf(), "zzz");
-    }
+  @BeforeEach
+  void init() {
+    jdbcFactory = new JdbcTemplateFactory();
+
+    DBConnectionConfig config = new DBConnectionConfig();
+    config.setDbType("mysql");
+    config.setHost("47.98.225.144");
+    config.setPort(3306);
+    config.setUsername("huifer");
+    config.setPassword("a12345");
+    config.setTimeZone(ServerTimezone.UTC.getValue());
+    dbConnectionConfig = config;
+
+    databaseOperation = new MysqlDatabaseOperationImpl();
+  }
+
+  @Test
+  void databases() throws SQLException {
+  }
 
     @Test
     void tableNames() {

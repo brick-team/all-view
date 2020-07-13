@@ -1,5 +1,8 @@
 package org.tview.visualization.app.web.db;
 
+import java.sql.SQLException;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +39,13 @@ public class DbController {
 
   @PostMapping("/create_database")
   public ResultVO createDatabase(
-      @RequestBody DBConnectionConfig connectionConfig, @RequestBody String db) {
-    return new ResultVO("ok", databaseOperation.createDatabase(connectionConfig, db), 200);
+      @RequestBody DBConnectionConfig connectionConfig,
+      @RequestBody String db,
+      @RequestBody String charSet,
+      @RequestBody String charCollection) {
+    return new ResultVO(
+        "ok", databaseOperation.createDatabase(connectionConfig, db, charSet, charCollection), 200);
   }
+
+
 }
