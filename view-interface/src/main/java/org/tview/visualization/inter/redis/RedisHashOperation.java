@@ -1,5 +1,6 @@
 package org.tview.visualization.inter.redis;
 
+import java.util.Map;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 
 /**
@@ -9,7 +10,7 @@ public interface RedisHashOperation extends IRedisOperationLabel {
 
   void add(RedisConnectionConfig config, String k, String field, String v);
 
-  Object get(RedisConnectionConfig config, String k);
+  Map get(RedisConnectionConfig config, String k);
 
   void del(RedisConnectionConfig config, String k, String field);
 

@@ -1,6 +1,7 @@
 package org.tview.visualization.redis.impl;
 
 import java.util.List;
+import java.util.Map;
 import org.tview.visualization.inter.redis.RedisHashOperation;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
@@ -16,13 +17,13 @@ public class RedisHashOperationImpl implements RedisHashOperation {
   }
 
   @Override
-  public Object get(RedisConnectionConfig config, String k) {
+  public Map get(RedisConnectionConfig config, String k) {
     return factory.factory(config).opsForHash().entries(k);
   }
 
   @Override
   public void del(RedisConnectionConfig config, String k, String field) {
-    factory.factory(config).opsForHash().delete(k, List.of(field));
+    factory.factory(config).opsForHash().delete(k, field);
   }
 
   @Override

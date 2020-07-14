@@ -6,7 +6,7 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 public interface RedisStringOperation extends IRedisOperationLabel {
   void add(RedisConnectionConfig config, String k, String v);
 
-  Object get(RedisConnectionConfig config, String k, String v);
+  Object get(RedisConnectionConfig config, String k);
 
   void delete(RedisConnectionConfig config, String k);
 

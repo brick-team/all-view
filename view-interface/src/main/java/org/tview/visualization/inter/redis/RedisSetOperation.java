@@ -1,5 +1,6 @@
 package org.tview.visualization.inter.redis;
 
+import java.util.Collection;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 
 /**
@@ -9,9 +10,11 @@ public interface RedisSetOperation extends IRedisOperationLabel {
 
   void add(RedisConnectionConfig config, String k, String v);
 
-  Object get(RedisConnectionConfig config, String k);
+  Collection get(RedisConnectionConfig config, String k);
 
-  void update(RedisConnectionConfig config, String k, String v);
+  void update(RedisConnectionConfig config, String k, String ov, String nv);
 
   void del(RedisConnectionConfig config, String k, String v);
+
+
 }

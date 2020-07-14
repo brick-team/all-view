@@ -19,7 +19,7 @@ public class RedisStringOperationImpl implements RedisStringOperation {
   }
 
   @Override
-  public Object get(RedisConnectionConfig config, String k, String v) {
+  public Object get(RedisConnectionConfig config, String k) {
     return getRedisTemplate(config).opsForValue().get(k);
   }
 
