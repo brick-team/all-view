@@ -35,4 +35,8 @@ public class LruCache<K, V> implements CacheInterface<K, V> {
   public V get(K key) {
     return map.get(key);
   }
+
+  public Map<K, V> getMap() {
+    return map;
+  }
 }

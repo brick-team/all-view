@@ -29,7 +29,6 @@ class RedisHashOperationImplTest extends AbsRedisTemplate {
     Assert.assertTrue(map.size() == 2);
   }
 
-
   @Test
   void del() {
     hashOperation.add(this.config, HASH_KEY, "A", "A");
@@ -46,6 +45,5 @@ class RedisHashOperationImplTest extends AbsRedisTemplate {
     Map map = hashOperation.get(this.config, HASH_KEY);
     Object a = map.get("A");
     Assert.assertTrue(a.equals("NEW_VALUE"));
-
   }
 }

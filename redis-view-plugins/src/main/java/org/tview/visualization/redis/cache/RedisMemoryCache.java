@@ -23,5 +23,4 @@ public class RedisMemoryCache extends FifoCache<String, RedisMemoryTaskData> {
   public RedisMemoryTaskData get(String key) {
     return super.get(key);
   }
-
 }

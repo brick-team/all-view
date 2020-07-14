@@ -2,27 +2,41 @@ package org.tview.visualization.model.db;
 
 import java.util.Objects;
 
-/** 数据库链接配置 */
+/**
+ * 数据库链接配置
+ */
 public class DBConnectionConfig {
+
   /** host */
   private String host;
   /** port */
   private Integer port;
   /** username */
   private String username;
-  /** password */
+  /**
+   * password
+   */
   private String password;
-  /** timezone */
+  /**
+   * timezone
+   */
   private String timeZone;
 
   private String dbType;
 
   private String dbName;
 
+  public DBConnectionConfig() {
+  }
+
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     DBConnectionConfig that = (DBConnectionConfig) o;
     return Objects.equals(host, that.host)
         && Objects.equals(port, that.port)
@@ -45,8 +59,6 @@ public class DBConnectionConfig {
   public void setDbName(String dbName) {
     this.dbName = dbName;
   }
-
-  public DBConnectionConfig() {}
 
   public String getDbType() {
     return dbType;

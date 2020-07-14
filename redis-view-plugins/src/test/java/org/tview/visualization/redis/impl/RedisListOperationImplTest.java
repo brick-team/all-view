@@ -40,8 +40,8 @@ class RedisListOperationImplTest extends AbsRedisTemplate {
     listOperation.add(this.config, LIST_KEY, "b");
     listOperation.add(this.config, LIST_KEY, "c");
     listOperation.del(this.config, LIST_KEY);
-//    List list = listOperation.get(this.config, LIST_KEY);
-//    Assert.assertEquals(list.size(), 0);
+    //    List list = listOperation.get(this.config, LIST_KEY);
+    //    Assert.assertEquals(list.size(), 0);
   }
 
   @Test

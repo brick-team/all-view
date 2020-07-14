@@ -17,5 +17,7 @@ class RedisKeysServiceTest extends AbsRedisTemplate {
   @Test
   void keys() {
     List<RedisKeyInfo> keys = keysOperation.keys(this.config, "*");
+    List<RedisKeyInfo> ff = keysOperation.keys(this.config, "hash");
+    System.out.println();
   }
 }

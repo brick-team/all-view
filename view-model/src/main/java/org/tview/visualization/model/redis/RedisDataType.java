@@ -8,6 +8,8 @@ public enum RedisDataType {
   SET("SET"),
   ;
 
+  private String name;
+
   RedisDataType(String name) {
     this.name = name;
   }
@@ -15,6 +17,4 @@ public enum RedisDataType {
   public String getName() {
     return name;
   }
-
-  private String name;
 }

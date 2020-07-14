@@ -5,6 +5,7 @@ import java.util.List;
 
 /** 创建表的参数 */
 public class CreateTableParams {
+  List<CreateRowParams> rowParams = new ArrayList<>();
   /**
    * 排序方式
    *
@@ -19,7 +20,6 @@ public class CreateTableParams {
   private String charSet;
   /** 注释 */
   private String comment;
-
   /** 表名 */
   private String tableName;
 
@@ -65,8 +65,6 @@ public class CreateTableParams {
     this.comment = comment;
   }
 
-  List<CreateRowParams> rowParams = new ArrayList<>();
-
   public List<CreateRowParams> getRowParams() {
     return rowParams;
   }
@@ -75,10 +73,56 @@ public class CreateTableParams {
     this.rowParams = rowParams;
   }
 
-  /** 行数据 */
+  /**
+   * 行数据
+   */
   public static class CreateRowParams {
 
-    public CreateRowParams() {}
+    /**
+     * 字段名称
+     */
+    private String name;
+    /**
+     * 字段类型
+     */
+    private String type;
+    /**
+     * 长度
+     */
+    private Integer length;
+    /**
+     * 小数位
+     */
+    private Integer scale;
+    /**
+     * 是否可以为null true: 可以, false 不能
+     */
+    private boolean nullable;
+    /**
+     * 是否是键
+     */
+    private boolean key;
+    /**
+     * 备注
+     */
+    private String content;
+    /**
+     * 是否自增
+     */
+    private boolean autoAdd;
+    /**
+     * 默认值
+     */
+    private String defaultValue;
+    /**
+     * 是否有符号
+     */
+    private boolean unsigned;
+
+    private boolean pk;
+
+    public CreateRowParams() {
+    }
 
     public CreateRowParams(
         String name,
@@ -104,29 +148,6 @@ public class CreateTableParams {
       this.unsigned = unsigned;
       this.pk = pk;
     }
-
-    /** 字段名称 */
-    private String name;
-    /** 字段类型 */
-    private String type;
-    /** 长度 */
-    private Integer length;
-    /** 小数位 */
-    private Integer scale;
-    /** 是否可以为null true: 可以, false 不能 */
-    private boolean nullable;
-    /** 是否是键 */
-    private boolean key;
-    /** 备注 */
-    private String content;
-    /** 是否自增 */
-    private boolean autoAdd;
-    /** 默认值 */
-    private String defaultValue;
-    /** 是否有符号 */
-    private boolean unsigned;
-
-    private boolean pk;
 
     public boolean isPk() {
       return pk;

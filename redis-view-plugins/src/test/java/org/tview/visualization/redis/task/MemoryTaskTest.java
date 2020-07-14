@@ -14,6 +14,5 @@ class MemoryTaskTest extends AbsRedisTemplate {
     Thread.sleep(12 * 1000);
     memoryTask.shutdown();
     System.out.println(memoryTask.get());
-
   }
 }

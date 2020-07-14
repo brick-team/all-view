@@ -26,8 +26,8 @@ public interface RedisListOperation extends IRedisOperationLabel {
    * 删除这个key的第row行数据
    *
    * @param config redis 连接配置
-   * @param k      键
-   * @param row    行号
+   * @param k 键
+   * @param row 行号
    */
   void removeByRow(RedisConnectionConfig config, String k, int row);
 
@@ -35,7 +35,7 @@ public interface RedisListOperation extends IRedisOperationLabel {
    * 删除整个key
    *
    * @param conf redis 连接配置
-   * @param k    键
+   * @param k 键
    */
   void del(RedisConnectionConfig conf, String k);
 }

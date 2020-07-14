@@ -31,7 +31,6 @@ class RedisStringOperationImplTest extends AbsRedisTemplate {
     stringOperation.delete(this.config, key);
     Object o = stringOperation.get(this.config, key);
     assertNull(o);
-
   }
 
   @Test

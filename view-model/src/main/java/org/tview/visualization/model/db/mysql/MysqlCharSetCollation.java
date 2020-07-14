@@ -229,6 +229,12 @@ public enum MysqlCharSetCollation {
   private final String charSet;
   private final boolean defaultCollection;
 
+  MysqlCharSetCollation(String collection, String charSet, boolean defaultCollection) {
+    this.collection = collection;
+    this.charSet = charSet;
+    this.defaultCollection = defaultCollection;
+  }
+
   public String getCollection() {
     return collection;
   }
@@ -239,11 +245,5 @@ public enum MysqlCharSetCollation {
 
   public boolean isDefaultCollection() {
     return defaultCollection;
-  }
-
-  MysqlCharSetCollation(String collection, String charSet, boolean defaultCollection) {
-    this.collection = collection;
-    this.charSet = charSet;
-    this.defaultCollection = defaultCollection;
   }
 }

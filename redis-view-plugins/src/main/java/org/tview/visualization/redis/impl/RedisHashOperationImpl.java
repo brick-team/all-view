@@ -1,6 +1,5 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.List;
 import java.util.Map;
 import org.tview.visualization.inter.redis.RedisHashOperation;
 import org.tview.visualization.model.redis.RedisConnectionConfig;

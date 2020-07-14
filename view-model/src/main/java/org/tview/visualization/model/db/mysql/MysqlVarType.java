@@ -31,10 +31,6 @@ public enum MysqlVarType {
   /** 是否支持 M,D */
   private boolean md;
 
-  public boolean isMd() {
-    return md;
-  }
-
   MysqlVarType(String name) {
     this.name = name;
   }
@@ -42,6 +38,10 @@ public enum MysqlVarType {
   MysqlVarType(String name, boolean md) {
     this.name = name;
     this.md = md;
+  }
+
+  public boolean isMd() {
+    return md;
   }
 
   public String getName() {

@@ -13,6 +13,5 @@ public class AbsRedisTemplate {
     config.setPort(6379);
     config.setPwd("");
     config.setDbIndex(1);
-
   }
 }

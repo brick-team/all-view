@@ -50,6 +50,4 @@ public class MemoryTask {
     Map<String, RedisMemoryTaskData> map = cache.getMap();
     return map.values().stream().collect(Collectors.toList());
   }
-
-
 }

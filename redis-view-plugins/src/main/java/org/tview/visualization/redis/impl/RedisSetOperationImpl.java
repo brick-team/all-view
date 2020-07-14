@@ -30,5 +30,4 @@ public class RedisSetOperationImpl implements RedisSetOperation {
   public void del(RedisConnectionConfig config, String k, String v) {
     factory.factory(config).opsForSet().remove(k, v);
   }
-
 }

@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableInfoEntity {
+
   List<TableStructure> tableStruct = new ArrayList<>();
   List<TableIndex> tableIndex = new ArrayList<>();
   private String tableName;
   private List<String> enFiled;
   private List<String> cnFiled;
+
+  public TableInfoEntity() {
+  }
 
   public List<TableStructure> getTableStruct() {
     return tableStruct;
@@ -49,6 +53,4 @@ public class TableInfoEntity {
   public void setCnFiled(List<String> cnFiled) {
     this.cnFiled = cnFiled;
   }
-
-  public TableInfoEntity() {}
 }

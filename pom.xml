@@ -30,6 +30,27 @@
         <slf4j.version>1.7.25</slf4j.version>
     </properties>
 
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>huifer</name>
+            <email>huifer97@163.com</email>
+            <url>https://github.com/huifer</url>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>Github Issues</system>
+        <url>https://github.com/t-view/all-view/issues</url>
+    </issueManagement>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

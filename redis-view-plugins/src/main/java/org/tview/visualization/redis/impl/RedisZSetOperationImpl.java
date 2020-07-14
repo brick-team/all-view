@@ -50,11 +50,11 @@ public class RedisZSetOperationImpl implements RedisZSetOperation {
 
   @Override
   public void del(RedisConnectionConfig config, String key, String member) {
-    factory.factory(config).rename(key, member);
+    factory.factory(config).opsForZSet().remove(key, member);
   }
 
   @Override
-  public Object get(RedisConnectionConfig config, String key) {
+  public Set<TypedTuple> get(RedisConnectionConfig config, String key) {
     return factory.factory(config).opsForZSet().rangeWithScores(key, 0, -1);
   }
 
@@ -63,5 +63,3 @@ public class RedisZSetOperationImpl implements RedisZSetOperation {
     factory.factory(config).opsForZSet().add(k, member, score);
   }
 }
-
-

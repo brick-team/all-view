@@ -32,7 +32,6 @@ class RedisSetOperationImplTest extends AbsRedisTemplate {
     assertEquals(size, 2);
   }
 
-
   @Test
   void update() {
     setOperation.add(this.config, SET_KEY, "1");
