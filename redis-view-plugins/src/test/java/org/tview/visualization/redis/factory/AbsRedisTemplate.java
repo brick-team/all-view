@@ -12,5 +12,7 @@ public class AbsRedisTemplate {
     config.setHost("127.0.0.1");
     config.setPort(6379);
     config.setPwd("");
+    config.setDbIndex(1);
+
   }
 }
