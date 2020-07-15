@@ -1,12 +1,14 @@
 package org.tview.visualization.mysql.factory.table;
 
+import static org.tview.visualization.mysql.singlet.MysqlCacheSinglet.getTableInfoCache;
+
 import org.tview.visualization.cache.CacheInterface;
 import org.tview.visualization.model.db.TableInfoEntity;
 import org.tview.visualization.mysql.cache.TableInfoCache;
 
 public class TableStructureCacheFactory implements CacheInterface<String, TableInfoEntity> {
 
-  TableInfoCache tableInfoCache = new TableInfoCache(100);
+  TableInfoCache tableInfoCache = getTableInfoCache();
 
   /**
    * 缓存容量
