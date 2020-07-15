@@ -1,4 +1,4 @@
-package org.tview.visualization.app.web.db;
+package org.tview.visualization.app.web.db.mysq;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -11,9 +11,13 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.res.ResultVO;
 import org.tview.visualization.mysql.impl.MysqlDatabaseOperationImpl;
 
+/**
+ * mysql 数据库操作
+ */
 @RestController
-@RequestMapping("/db")
-public class DbController {
+@RequestMapping("/mysql/db")
+public class MysqlDbController {
+
   DatabaseOperation databaseOperation = new MysqlDatabaseOperationImpl();
 
   @PostMapping("/databases")
