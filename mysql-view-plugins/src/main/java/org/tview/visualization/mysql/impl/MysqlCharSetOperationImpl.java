@@ -3,7 +3,7 @@ package org.tview.visualization.mysql.impl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.tview.visualization.inter.db.mysq.MysqlCharSetOperation;
+import org.tview.visualization.inter.db.mysql.MysqlCharSetOperation;
 import org.tview.visualization.model.db.mysql.MysqlCharSet;
 import org.tview.visualization.model.db.mysql.MysqlCharSetCollation;
 

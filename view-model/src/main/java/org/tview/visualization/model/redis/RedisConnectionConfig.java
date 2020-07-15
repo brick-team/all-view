@@ -1,9 +1,10 @@
 package org.tview.visualization.model.redis;
 
 import java.util.Objects;
+import org.tview.visualization.model.label.AbsConfig;
 
 /** redis 的链接配置对象 */
-public class RedisConnectionConfig {
+public class RedisConnectionConfig extends AbsConfig {
   private String host;
   private Integer port;
   private String pwd;

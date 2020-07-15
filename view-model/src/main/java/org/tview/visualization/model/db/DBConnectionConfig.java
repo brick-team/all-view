@@ -1,11 +1,12 @@
 package org.tview.visualization.model.db;
 
 import java.util.Objects;
+import org.tview.visualization.model.label.AbsConfig;
 
 /**
  * 数据库链接配置
  */
-public class DBConnectionConfig {
+public class DBConnectionConfig extends AbsConfig {
 
   /** host */
   private String host;

@@ -1,4 +1,4 @@
-package org.tview.visualization.inter.db.mysq;
+package org.tview.visualization.inter.db.mysql;
 
 import java.util.List;
 

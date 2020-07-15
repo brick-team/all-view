@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.tview.visualization.inter.db.mysq.MysqlCharSetOperation;
+import org.tview.visualization.inter.db.mysql.MysqlCharSetOperation;
 import org.tview.visualization.model.res.ResultVO;
 import org.tview.visualization.mysql.impl.MysqlCharSetOperationImpl;
 
