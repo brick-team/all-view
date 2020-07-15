@@ -3,11 +3,13 @@ package org.tview.visualization.common.impl;
 import java.sql.SQLException;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.tview.visualization.inter.ConfigLoginService;
+import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.mysql.factory.AbsConfig;
 
 class IDbLoginServiceImplTest extends AbsConfig {
 
-  IDbLoginService loginService = new IDbLoginServiceImpl();
+  ConfigLoginService<DBConnectionConfig> loginService = new IDbLoginServiceImpl();
 
   @Test
   void connection() throws SQLException {

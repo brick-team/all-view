@@ -3,9 +3,10 @@ package org.tview.visualization.redis.cache;
 import java.util.Map;
 import org.tview.visualization.cache.impl.FifoCache;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
+import org.tview.visualization.redis.singlet.RedisSinglet;
 
 /**
- *
+ * @see RedisSinglet#getRedisNameConfigCache()
  */
 public class RedisNameConfigCache extends FifoCache<String , RedisConnectionConfig> {
 

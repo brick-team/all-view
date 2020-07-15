@@ -5,10 +5,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.cache.RedisConnectionCache;
+import org.tview.visualization.redis.singlet.RedisSinglet;
 
 public class RedisConnectionCacheFactoryImpl implements RedisConnectionCacheFactory {
 
-  RedisConnectionCache CACHE = new RedisConnectionCache(10);
+  RedisConnectionCache CACHE = RedisSinglet.getRedisConnectionCache();
 
   @Override
   public RedisTemplate factory(RedisConnectionConfig config) {

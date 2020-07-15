@@ -3,7 +3,11 @@ package org.tview.visualization.redis.cache;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.tview.visualization.cache.impl.LruCache;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
+import org.tview.visualization.redis.singlet.RedisSinglet;
 
+/**
+ * @see RedisSinglet#getRedisConnectionCache()
+ */
 public class RedisConnectionCache extends LruCache<RedisConnectionConfig, RedisTemplate> {
 
   public RedisConnectionCache(int size) {

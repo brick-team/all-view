@@ -2,3 +2,9 @@ server:
   port: 9011
   servlet:
     context-path: /dev-api
+
+
+redis-event:
+  open: true
+  size: 100
+  period: 1000

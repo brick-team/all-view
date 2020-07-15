@@ -2,7 +2,11 @@ package org.tview.visualization.redis.cache;
 
 import org.tview.visualization.cache.impl.FifoCache;
 import org.tview.visualization.model.redis.RedisMemoryTaskData;
+import org.tview.visualization.redis.singlet.RedisSinglet;
 
+/**
+ * @see RedisSinglet#getMemoryCache()
+ */
 public class RedisMemoryCache extends FifoCache<String, RedisMemoryTaskData> {
 
   public RedisMemoryCache(int size) {

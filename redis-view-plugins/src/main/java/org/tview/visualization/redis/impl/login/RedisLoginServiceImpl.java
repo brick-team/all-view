@@ -7,10 +7,11 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.cache.RedisNameConfigCache;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+import org.tview.visualization.redis.singlet.RedisSinglet;
 
 public class RedisLoginServiceImpl implements ConfigLoginService<RedisConnectionConfig> {
 
-  RedisNameConfigCache cache = new RedisNameConfigCache(10);
+  RedisNameConfigCache cache = RedisSinglet.getRedisNameConfigCache();
   RedisConnectionCacheFactory factory = new RedisConnectionCacheFactoryImpl();
 
   /**
@@ -34,6 +35,7 @@ public class RedisLoginServiceImpl implements ConfigLoginService<RedisConnection
   public boolean connection(RedisConnectionConfig config) {
     RedisTemplate redisTemplate = this.factory.factory(config);
     Properties info = redisTemplate.getConnectionFactory().getConnection().info();
+    factory.factory(config);
     return !info.isEmpty();
   }
 

@@ -13,9 +13,11 @@ import org.tview.visualization.model.res.ResultVO;
 @RequestMapping("/")
 @RestController
 public class Application {
+
   public static void main(String[] args) {
     SpringApplication.run(Application.class);
   }
+
 
   @GetMapping("/health")
   public ResultVO dod() {

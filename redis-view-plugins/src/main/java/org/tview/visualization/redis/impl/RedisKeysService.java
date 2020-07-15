@@ -1,5 +1,7 @@
 package org.tview.visualization.redis.impl;
 
+import static org.tview.visualization.redis.singlet.RedisSinglet.getRedisKeysInfoCache;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
 public class RedisKeysService implements RedisKeysOperation {
 
   RedisConnectionCacheFactory factory = new RedisConnectionCacheFactoryImpl();
-  RedisKeysInfoCache cache = new RedisKeysInfoCache(2048);
+  RedisKeysInfoCache cache = getRedisKeysInfoCache();
 
   public List<RedisKeyInfo> keys(RedisConnectionConfig config, String keyRegion) {
     RedisTemplate redisTemplate = this.factory.factory(config);
