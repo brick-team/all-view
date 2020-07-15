@@ -79,20 +79,16 @@ public interface TableOperation {
   boolean changeFiled(
       DBConnectionConfig config,
       String tableName,
-      List<CreateRowParams> changeRow, List<CreateRowParams> addRow);
+      List<CreateRowParams> changeRow,
+      List<CreateRowParams> addRow);
 
-
-  /**
-   * 创建索引
-   */
+  /** 创建索引 */
   void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam)
       throws SQLException;
 
   void addIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException;
 
-  /**
-   * 删除索引
-   */
+  /** 删除索引 */
   void removeIndex(DBConnectionConfig config, String indexName, String tableName)
       throws SQLException;
 

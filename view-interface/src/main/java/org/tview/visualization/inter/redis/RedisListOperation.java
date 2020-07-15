@@ -16,9 +16,9 @@ public interface RedisListOperation extends IRedisOperationLabel {
    * 更新数据
    *
    * @param conf redis 连接配置
-   * @param k    键
-   * @param ov   老的数据值
-   * @param nv   新的数据值
+   * @param k 键
+   * @param ov 老的数据值
+   * @param nv 新的数据值
    */
   void update(RedisConnectionConfig conf, String k, String ov, String nv);
 

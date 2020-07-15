@@ -14,7 +14,6 @@ class IDbLoginServiceImplTest extends AbsConfig {
   void connection() throws SQLException {
     boolean connection = loginService.connection(this.getConf());
     Assert.assertTrue(connection);
-
   }
 
   @Test

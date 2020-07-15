@@ -526,8 +526,7 @@ public class MysqlTableOperation implements TableOperation {
       DBConnectionConfig config,
       String tableName,
       List<org.tview.visualization.model.db.CreateRowParams> changeRow,
-      List<org.tview.visualization.model.db.CreateRowParams> addRow
-  ) {
+      List<org.tview.visualization.model.db.CreateRowParams> addRow) {
     StringBuilder res = new StringBuilder();
     StringBuilder changeTableColumn = calcChangeRowSql(tableName, changeRow);
 
@@ -547,40 +546,44 @@ public class MysqlTableOperation implements TableOperation {
     }
   }
 
-  private StringBuilder calcChangeRowSql(String tableName,
-      List<org.tview.visualization.model.db.CreateRowParams> changeRow) {
+  private StringBuilder calcChangeRowSql(
+      String tableName, List<org.tview.visualization.model.db.CreateRowParams> changeRow) {
     // 旧字段的修改
     StringBuilder changeTableColumn = new StringBuilder(32);
 
     for (org.tview.visualization.model.db.CreateRowParams createRowParams : changeRow) {
       MysqlVarType mysqlVarType = MysqlVarType.valueOf(createRowParams.getType().toUpperCase());
       if (!mysqlVarType.isMd()) {
-        String s = "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s ) UNSIGNED %s DEFAULT '%s' COMMENT '%s';";
+        String s =
+            "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s ) UNSIGNED %s DEFAULT '%s' COMMENT '%s';";
         s = canRemoveDefaultAndUnsigned(createRowParams, s);
-        changeTableColumn.append(String.format(
-            s,
-            tableName,
-            createRowParams.getOldName(),
-            createRowParams.getName(),
-            createRowParams.getType(),
-            createRowParams.getLength(),
-            createRowParams.isNullable() ? "" : "not null",
-            createRowParams.getDefaultValue(),
-            createRowParams.getContent()));
+        changeTableColumn.append(
+            String.format(
+                s,
+                tableName,
+                createRowParams.getOldName(),
+                createRowParams.getName(),
+                createRowParams.getType(),
+                createRowParams.getLength(),
+                createRowParams.isNullable() ? "" : "not null",
+                createRowParams.getDefaultValue(),
+                createRowParams.getContent()));
       } else {
-        String s = "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s,%s ) UNSIGNED  %s DEFAULT '%s' COMMENT '%s';";
+        String s =
+            "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s,%s ) UNSIGNED  %s DEFAULT '%s' COMMENT '%s';";
         s = canRemoveDefaultAndUnsigned(createRowParams, s);
-        changeTableColumn.append(String.format(
-            s,
-            tableName,
-            createRowParams.getOldName(),
-            createRowParams.getName(),
-            createRowParams.getType(),
-            createRowParams.getLength(),
-            createRowParams.getScale(),
-            createRowParams.isNullable() ? "" : "not null",
-            createRowParams.getDefaultValue(),
-            createRowParams.getContent()));
+        changeTableColumn.append(
+            String.format(
+                s,
+                tableName,
+                createRowParams.getOldName(),
+                createRowParams.getName(),
+                createRowParams.getType(),
+                createRowParams.getLength(),
+                createRowParams.getScale(),
+                createRowParams.isNullable() ? "" : "not null",
+                createRowParams.getDefaultValue(),
+                createRowParams.getContent()));
       }
     }
     return changeTableColumn;
@@ -593,8 +596,8 @@ public class MysqlTableOperation implements TableOperation {
    * @param addRow
    * @return
    */
-  private StringBuilder calcAddRowSql(String tableName,
-      List<org.tview.visualization.model.db.CreateRowParams> addRow) {
+  private StringBuilder calcAddRowSql(
+      String tableName, List<org.tview.visualization.model.db.CreateRowParams> addRow) {
     // 新增字段的处理
     StringBuilder addTableColumn = new StringBuilder(64);
     for (org.tview.visualization.model.db.CreateRowParams createRowParams : addRow) {
@@ -618,7 +621,8 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getContent()));
 
       } else {
-        String s = "ALTER TABLE `%s` ADD COLUMN `%s` %s(%s,%s) UNSIGNED %s DEFAULT %s COMMENT '%s';";
+        String s =
+            "ALTER TABLE `%s` ADD COLUMN `%s` %s(%s,%s) UNSIGNED %s DEFAULT %s COMMENT '%s';";
         s = canRemoveDefaultAndUnsigned(createRowParams, s);
 
         addTableColumn.append(
@@ -630,8 +634,8 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getLength(),
                 createRowParams.getScale(),
                 createRowParams.isNullable() ? "" : "not null",
-                StringUtils.isEmpty(createRowParams.getDefaultValue()) && createRowParams
-                    .isNullable()
+                StringUtils.isEmpty(createRowParams.getDefaultValue())
+                    && createRowParams.isNullable()
                     ? "null"
                     : createRowParams.getDefaultValue(),
                 createRowParams.getContent()));

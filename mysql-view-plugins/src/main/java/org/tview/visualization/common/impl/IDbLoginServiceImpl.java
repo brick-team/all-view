@@ -53,5 +53,4 @@ public class IDbLoginServiceImpl implements IDbLoginService {
   public DBConnectionConfig get(String name) {
     return cache.get(name);
   }
-
 }

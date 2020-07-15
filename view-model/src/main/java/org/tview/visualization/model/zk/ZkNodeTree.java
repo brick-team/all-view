@@ -7,17 +7,11 @@ import java.util.List;
  */
 public class ZkNodeTree {
 
-  /**
-   * 节点全路径
-   */
+  /** 节点全路径 */
   private String path;
-  /**
-   * 展示的节点路径,最后一个
-   */
+  /** 展示的节点路径,最后一个 */
   private String showName;
-  /**
-   * 子节点
-   */
+  /** 子节点 */
   private List<ZkNodeTree> child;
 
   public ZkNodeTree(String path, String showName, List<ZkNodeTree> child) {

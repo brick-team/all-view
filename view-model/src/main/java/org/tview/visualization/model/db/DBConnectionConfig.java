@@ -13,21 +13,16 @@ public class DBConnectionConfig {
   private Integer port;
   /** username */
   private String username;
-  /**
-   * password
-   */
+  /** password */
   private String password;
-  /**
-   * timezone
-   */
+  /** timezone */
   private String timeZone;
 
   private String dbType;
 
   private String dbName;
 
-  public DBConnectionConfig() {
-  }
+  public DBConnectionConfig() {}
 
   @Override
   public boolean equals(Object o) {

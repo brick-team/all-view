@@ -7,14 +7,10 @@ import java.util.Objects;
  */
 public class RedisKeyInfo {
 
-  /**
-   * key name
-   */
+  /** key name */
   private String key;
 
-  /**
-   * 数据类型
-   */
+  /** 数据类型 */
   private RedisDataType dataType;
 
   public RedisKeyInfo(String key, RedisDataType dataType) {

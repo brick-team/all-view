@@ -30,4 +30,3 @@ public class DblLoginCache extends LruCache<String, DBConnectionConfig> {
     return super.getMap();
   }
 }
-

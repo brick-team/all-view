@@ -78,51 +78,30 @@ public class CreateTableParams {
    */
   public static class CreateRowParams {
 
-    /**
-     * 字段名称
-     */
+    /** 字段名称 */
     private String name;
-    /**
-     * 字段类型
-     */
+    /** 字段类型 */
     private String type;
-    /**
-     * 长度
-     */
+    /** 长度 */
     private Integer length;
-    /**
-     * 小数位
-     */
+    /** 小数位 */
     private Integer scale;
-    /**
-     * 是否可以为null true: 可以, false 不能
-     */
+    /** 是否可以为null true: 可以, false 不能 */
     private boolean nullable;
-    /**
-     * 是否是键
-     */
+    /** 是否是键 */
     private boolean key;
-    /**
-     * 备注
-     */
+    /** 备注 */
     private String content;
-    /**
-     * 是否自增
-     */
+    /** 是否自增 */
     private boolean autoAdd;
-    /**
-     * 默认值
-     */
+    /** 默认值 */
     private String defaultValue;
-    /**
-     * 是否有符号
-     */
+    /** 是否有符号 */
     private boolean unsigned;
 
     private boolean pk;
 
-    public CreateRowParams() {
-    }
+    public CreateRowParams() {}
 
     public CreateRowParams(
         String name,
