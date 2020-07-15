@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import org.tview.visualization.model.db.CreateIndexParam;
+import org.tview.visualization.model.db.CreateRowParams;
 import org.tview.visualization.model.db.CreateTableParams;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
@@ -70,18 +71,28 @@ public interface TableOperation {
   /**
    * 修改字段结构
    *
-   * @param config
-   * @return
+   * @param config    连接配置
+   * @param addRow    添加的字段列表
+   * @param changeRow 修改的字段列表
+   * @return true:修改成功,false:修改失败
    */
-  boolean changeFiled(DBConnectionConfig config);
+  boolean changeFiled(
+      DBConnectionConfig config,
+      String tableName,
+      List<CreateRowParams> changeRow, List<CreateRowParams> addRow);
 
-  /** 创建索引 */
+
+  /**
+   * 创建索引
+   */
   void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam)
       throws SQLException;
 
   void addIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException;
 
-  /** 删除索引 */
+  /**
+   * 删除索引
+   */
   void removeIndex(DBConnectionConfig config, String indexName, String tableName)
       throws SQLException;
 

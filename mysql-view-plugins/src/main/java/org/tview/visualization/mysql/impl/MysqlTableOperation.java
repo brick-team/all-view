@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -31,6 +33,8 @@ import org.tview.visualization.mysql.row.TableStructureRowMapper;
 import org.tview.visualization.page.PageUtils;
 
 public class MysqlTableOperation implements TableOperation {
+
+  private static final Logger LOG = LoggerFactory.getLogger(MysqlTableOperation.class);
   public static final String TABLE_INFO =
       "select column_name,\n"
           + "column_comment,column_type,is_nullable from information_schema.columns where table_schema ='%s' and\n"
@@ -512,12 +516,139 @@ public class MysqlTableOperation implements TableOperation {
   /**
    * 修改字段结构
    *
-   * @param config
-   * @return
+   * @param config    连接配置
+   * @param changeRow 修改的字段列表
+   * @param addRow    添加的字段列表
+   * @return true:修改成功,false:修改失败
    */
   @Override
-  public boolean changeFiled(DBConnectionConfig config) {
-    return false;
+  public boolean changeFiled(
+      DBConnectionConfig config,
+      String tableName,
+      List<org.tview.visualization.model.db.CreateRowParams> changeRow,
+      List<org.tview.visualization.model.db.CreateRowParams> addRow
+  ) {
+    StringBuilder res = new StringBuilder();
+    StringBuilder changeTableColumn = calcChangeRowSql(tableName, changeRow);
+
+    StringBuilder addTableColumn = calcAddRowSql(tableName, addRow);
+
+    res.append(changeTableColumn);
+    res.append(addTableColumn);
+
+    try {
+      JdbcTemplate jdbcTemplate = factory.create(config);
+      LOG.info("当前执行的sql = {}", res);
+      jdbcTemplate.execute(res.toString());
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
+  private StringBuilder calcChangeRowSql(String tableName,
+      List<org.tview.visualization.model.db.CreateRowParams> changeRow) {
+    // 旧字段的修改
+    StringBuilder changeTableColumn = new StringBuilder(32);
+
+    for (org.tview.visualization.model.db.CreateRowParams createRowParams : changeRow) {
+      MysqlVarType mysqlVarType = MysqlVarType.valueOf(createRowParams.getType().toUpperCase());
+      if (!mysqlVarType.isMd()) {
+        String s = "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s ) UNSIGNED %s DEFAULT '%s' COMMENT '%s';";
+        s = canRemoveDefaultAndUnsigned(createRowParams, s);
+        changeTableColumn.append(String.format(
+            s,
+            tableName,
+            createRowParams.getOldName(),
+            createRowParams.getName(),
+            createRowParams.getType(),
+            createRowParams.getLength(),
+            createRowParams.isNullable() ? "" : "not null",
+            createRowParams.getDefaultValue(),
+            createRowParams.getContent()));
+      } else {
+        String s = "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s,%s ) UNSIGNED  %s DEFAULT '%s' COMMENT '%s';";
+        s = canRemoveDefaultAndUnsigned(createRowParams, s);
+        changeTableColumn.append(String.format(
+            s,
+            tableName,
+            createRowParams.getOldName(),
+            createRowParams.getName(),
+            createRowParams.getType(),
+            createRowParams.getLength(),
+            createRowParams.getScale(),
+            createRowParams.isNullable() ? "" : "not null",
+            createRowParams.getDefaultValue(),
+            createRowParams.getContent()));
+      }
+    }
+    return changeTableColumn;
+  }
+
+  /**
+   * 计算添加字段的sql语句
+   *
+   * @param tableName
+   * @param addRow
+   * @return
+   */
+  private StringBuilder calcAddRowSql(String tableName,
+      List<org.tview.visualization.model.db.CreateRowParams> addRow) {
+    // 新增字段的处理
+    StringBuilder addTableColumn = new StringBuilder(64);
+    for (org.tview.visualization.model.db.CreateRowParams createRowParams : addRow) {
+
+      MysqlVarType mysqlVarType = MysqlVarType.valueOf(createRowParams.getType().toUpperCase());
+      if (!mysqlVarType.isMd()) {
+        String s = "ALTER TABLE `%s` ADD COLUMN `%s` %s(%s) UNSIGNED %s DEFAULT %s COMMENT '%s';";
+        s = canRemoveDefaultAndUnsigned(createRowParams, s);
+        addTableColumn.append(
+            String.format(
+                s,
+                tableName,
+                createRowParams.getName(),
+                createRowParams.getType(),
+                createRowParams.getLength(),
+                createRowParams.isNullable() ? "" : "not null",
+                StringUtils.isEmpty(createRowParams.getDefaultValue())
+                    && createRowParams.isNullable()
+                    ? ""
+                    : createRowParams.getDefaultValue(),
+                createRowParams.getContent()));
+
+      } else {
+        String s = "ALTER TABLE `%s` ADD COLUMN `%s` %s(%s,%s) UNSIGNED %s DEFAULT %s COMMENT '%s';";
+        s = canRemoveDefaultAndUnsigned(createRowParams, s);
+
+        addTableColumn.append(
+            String.format(
+                s,
+                tableName,
+                createRowParams.getName(),
+                createRowParams.getType(),
+                createRowParams.getLength(),
+                createRowParams.getScale(),
+                createRowParams.isNullable() ? "" : "not null",
+                StringUtils.isEmpty(createRowParams.getDefaultValue()) && createRowParams
+                    .isNullable()
+                    ? "null"
+                    : createRowParams.getDefaultValue(),
+                createRowParams.getContent()));
+      }
+    }
+    return addTableColumn;
+  }
+
+  private String canRemoveDefaultAndUnsigned(
+      org.tview.visualization.model.db.CreateRowParams createRowParams, String s) {
+    if (StringUtils.isEmpty(createRowParams.getDefaultValue())) {
+      s = s.replace("DEFAULT", "");
+    }
+    if (!createRowParams.isUnsigned()) {
+      s = s.replace("UNSIGNED", "");
+    }
+    return s;
   }
 
   /**

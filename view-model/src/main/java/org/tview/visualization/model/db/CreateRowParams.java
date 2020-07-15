@@ -1,28 +1,62 @@
 package org.tview.visualization.model.db;
 
-/** 行结构 */
+/**
+ * 行结构
+ */
 public class CreateRowParams {
 
-  /** 字段名称 */
+  /**
+   * 修改表结构的时候使用: 旧的名字
+   */
+  private String oldName;
+  /**
+   * 字段名称
+   */
   private String name;
-  /** 字段类型 */
+  /**
+   * 字段类型
+   */
   private String type;
-  /** 长度 */
+  /**
+   * 长度
+   */
   private Integer length;
-  /** 小数位 */
+  /**
+   * 小数位
+   */
   private Integer scale;
-  /** 是否可以为null */
+  /**
+   * 是否可以为null
+   */
   private boolean nullable;
-  /** 是否是键 */
+  /**
+   * 是否是键
+   */
   private boolean key;
-  /** 备注 */
+  /**
+   * 备注
+   */
   private String content;
-  /** 是否自增 */
+  /**
+   * 是否自增
+   */
   private boolean autoAdd;
-  /** 默认值 */
+  /**
+   * 默认值
+   */
   private String defaultValue;
-  /** 是否有符号 */
+  /**
+   * 是否有符号
+   */
   private boolean unsigned;
+
+  public String getOldName() {
+    return oldName;
+  }
+
+  public void setOldName(String oldName) {
+    this.oldName = oldName;
+  }
 
   public String getName() {
     return name;
