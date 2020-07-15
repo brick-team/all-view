@@ -30,7 +30,7 @@ public interface ConfigLoginService<T extends AbsConfig> {
    * 登记配置
    *
    * @param name 自定义名称
-   * @param t    配置
+   * @param t 配置
    */
   void login(String name, T t);
 }

@@ -37,8 +37,8 @@ public class RedisListOperationImpl implements RedisListOperation {
    * 删除这个key的第row行数据
    *
    * @param config redis 连接配置
-   * @param k      键
-   * @param row    行号
+   * @param k 键
+   * @param row 行号
    */
   @Override
   public void removeByRow(RedisConnectionConfig config, String k, int row) {

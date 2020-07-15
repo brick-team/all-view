@@ -1,15 +1,12 @@
 package org.tview.visualization.mysql.impl;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.db.TableOperation;
-import org.tview.visualization.model.db.CreateRowParams;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
@@ -60,12 +57,10 @@ class MysqlTableOperationTest extends AbsConfig {
   }
 
   @Test
-  void createTable() {
-  }
+  void createTable() {}
 
   @Test
-  void deleteTable() {
-  }
+  void deleteTable() {}
 
   @Test
   void testChangeFiled() throws SQLException {

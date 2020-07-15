@@ -1,17 +1,12 @@
 package org.tview.visualization.redis.task;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
-import org.tview.visualization.model.redis.RedisEventProperties;
 import org.tview.visualization.model.redis.RedisMemoryTaskData;
 import org.tview.visualization.model.redis.info.RedisCliInfoMemory;
 import org.tview.visualization.redis.cache.RedisMemoryCache;

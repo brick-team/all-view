@@ -9,16 +9,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * 过滤器，用于截取RequestBody
- */
+/** 过滤器，用于截取RequestBody */
 // @Configuration
 // @WebFilter(urlPatterns = "/*",filterName = "httpServletRequestFilter")
 public class HttpServletRequestFilter implements Filter {
 
   @Override
-  public void init(FilterConfig filterConfig) throws ServletException {
-  }
+  public void init(FilterConfig filterConfig) throws ServletException {}
 
   @Override
   public void doFilter(
@@ -31,6 +28,5 @@ public class HttpServletRequestFilter implements Filter {
   }
 
   @Override
-  public void destroy() {
-  }
+  public void destroy() {}
 }

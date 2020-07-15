@@ -11,8 +11,7 @@ public class TableInfoEntity {
   private List<String> enFiled;
   private List<String> cnFiled;
 
-  public TableInfoEntity() {
-  }
+  public TableInfoEntity() {}
 
   public List<TableStructure> getTableStruct() {
     return tableStruct;

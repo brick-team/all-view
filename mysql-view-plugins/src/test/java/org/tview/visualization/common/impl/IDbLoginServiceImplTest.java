@@ -18,10 +18,8 @@ class IDbLoginServiceImplTest extends AbsConfig {
   }
 
   @Test
-  void login() {
-  }
+  void login() {}
 
   @Test
-  void get() {
-  }
+  void get() {}
 }

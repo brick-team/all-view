@@ -1,8 +1,6 @@
 package org.tview.visualization.model.db;
 
-/**
- * 行结构
- */
+/** 行结构 */
 public class CreateRowParams {
 
   /** 修改表结构的时候使用: 旧的名字 */

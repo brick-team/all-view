@@ -2,9 +2,7 @@ package org.tview.visualization.model.redis;
 
 import java.util.Objects;
 
-/**
- * redis key的信息
- */
+/** redis key的信息 */
 public class RedisKeyInfo {
 
   /** key name */

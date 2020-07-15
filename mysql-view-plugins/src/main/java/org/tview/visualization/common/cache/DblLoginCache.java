@@ -2,7 +2,6 @@ package org.tview.visualization.common.cache;
 
 import java.util.Map;
 import org.tview.visualization.cache.impl.FifoCache;
-import org.tview.visualization.cache.impl.LruCache;
 import org.tview.visualization.model.db.DBConnectionConfig;
 
 public class DblLoginCache extends FifoCache<String, DBConnectionConfig> {

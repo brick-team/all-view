@@ -8,9 +8,7 @@ import org.tview.visualization.inter.db.mysql.MysqlCharSetOperation;
 import org.tview.visualization.model.res.ResultVO;
 import org.tview.visualization.mysql.impl.MysqlCharSetOperationImpl;
 
-/**
- * mysql 字符集
- */
+/** mysql 字符集 */
 @RestController
 @RequestMapping("/mysql")
 public class MysqlCharsetController {

@@ -73,9 +73,7 @@ public class CreateTableParams {
     this.rowParams = rowParams;
   }
 
-  /**
-   * 行数据
-   */
+  /** 行数据 */
   public static class CreateRowParams {
 
     /** 字段名称 */

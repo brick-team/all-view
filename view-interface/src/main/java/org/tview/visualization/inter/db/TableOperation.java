@@ -71,8 +71,8 @@ public interface TableOperation {
   /**
    * 修改字段结构
    *
-   * @param config    连接配置
-   * @param addRow    添加的字段列表
+   * @param config 连接配置
+   * @param addRow 添加的字段列表
    * @param changeRow 修改的字段列表
    * @return true:修改成功,false:修改失败
    */

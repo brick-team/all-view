@@ -14,7 +14,8 @@ public class RedisSinglet {
   private static RedisNameConfigCache redisNameConfigCache = null;
 
   private static RedisMemoryCache memoryCache = null;
-  public static RedisMemoryCache getMemoryCache(){
+
+  public static RedisMemoryCache getMemoryCache() {
     if (memoryCache == null) {
       synchronized (RedisSinglet.class) {
         if (memoryCache == null) {
@@ -34,7 +35,6 @@ public class RedisSinglet {
       }
     }
     return redisNameConfigCache;
-
   }
 
   public static RedisKeysInfoCache getRedisKeysInfoCache() {

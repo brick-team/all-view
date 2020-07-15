@@ -7,8 +7,7 @@ public class RedisMemoryEvent {
   private RedisConnectionConfig config;
   private int size;
 
-  public RedisMemoryEvent() {
-  }
+  public RedisMemoryEvent() {}
 
   public RedisMemoryEvent(RedisConnectionConfig config, int size) {
     this.config = config;

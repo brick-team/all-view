@@ -2,9 +2,7 @@ package org.tview.visualization.model.zk;
 
 import java.util.List;
 
-/**
- * zookeeper 节点树
- */
+/** zookeeper 节点树 */
 public class ZkNodeTree {
 
   /** 节点全路径 */

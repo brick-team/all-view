@@ -3,9 +3,7 @@ package org.tview.visualization.inter.redis;
 import java.util.Set;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 
-/**
- * redis 的 zset 数据类型操作
- */
+/** redis 的 zset 数据类型操作 */
 public interface RedisZSetOperation extends IRedisOperationLabel {
 
   /**

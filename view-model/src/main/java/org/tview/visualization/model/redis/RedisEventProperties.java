@@ -1,16 +1,13 @@
 package org.tview.visualization.model.redis;
 
-/**
- * redis event 配置信息
- */
+/** redis event 配置信息 */
 public class RedisEventProperties {
 
   private boolean open = true;
   private int size = 100;
   private long period = 1000;
 
-  public RedisEventProperties() {
-  }
+  public RedisEventProperties() {}
 
   public RedisEventProperties(boolean open, int size) {
     this.open = open;

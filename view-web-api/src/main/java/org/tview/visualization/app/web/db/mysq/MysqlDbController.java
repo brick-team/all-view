@@ -11,9 +11,7 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.res.ResultVO;
 import org.tview.visualization.mysql.impl.MysqlDatabaseOperationImpl;
 
-/**
- * mysql 数据库操作
- */
+/** mysql 数据库操作 */
 @RestController
 @RequestMapping("/mysql/db")
 public class MysqlDbController {

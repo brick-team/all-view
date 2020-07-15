@@ -19,10 +19,10 @@ public class RedisConnectionConfig extends AbsConfig {
       return false;
     }
     RedisConnectionConfig that = (RedisConnectionConfig) o;
-    return dbIndex == that.dbIndex &&
-        Objects.equals(host, that.host) &&
-        Objects.equals(port, that.port) &&
-        Objects.equals(pwd, that.pwd);
+    return dbIndex == that.dbIndex
+        && Objects.equals(host, that.host)
+        && Objects.equals(port, that.port)
+        && Objects.equals(pwd, that.pwd);
   }
 
   @Override

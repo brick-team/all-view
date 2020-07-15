@@ -1,8 +1,6 @@
 package org.tview.visualization.model.redis;
 
-/**
- * redis 内存任务数据
- */
+/** redis 内存任务数据 */
 public class RedisMemoryTaskData {
 
   private long usedMemory = -1;

@@ -18,7 +18,6 @@ public class Application {
     SpringApplication.run(Application.class);
   }
 
-
   @GetMapping("/health")
   public ResultVO dod() {
     return new ResultVO("OK", "ok", 200);

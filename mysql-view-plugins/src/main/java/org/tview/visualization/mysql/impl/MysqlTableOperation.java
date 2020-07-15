@@ -34,7 +34,6 @@ import org.tview.visualization.page.PageUtils;
 
 public class MysqlTableOperation implements TableOperation {
 
-  private static final Logger LOG = LoggerFactory.getLogger(MysqlTableOperation.class);
   public static final String TABLE_INFO =
       "select column_name,\n"
           + "column_comment,column_type,is_nullable from information_schema.columns where table_schema ='%s' and\n"
@@ -45,6 +44,7 @@ public class MysqlTableOperation implements TableOperation {
           + "from INFORMATION_SCHEMA.KEY_COLUMN_USAGE\n"
           + "where CONSTRAINT_SCHEMA ='%s' AND\n"
           + "    TABLE_NAME = '%s';";
+  private static final Logger LOG = LoggerFactory.getLogger(MysqlTableOperation.class);
   JdbcFactory factory = new JdbcTemplateFactory();
   CacheInterface<String, TableInfoEntity> tableStructureCacheFactory =
       new TableStructureCacheFactory();
@@ -516,9 +516,9 @@ public class MysqlTableOperation implements TableOperation {
   /**
    * 修改字段结构
    *
-   * @param config    连接配置
+   * @param config 连接配置
    * @param changeRow 修改的字段列表
-   * @param addRow    添加的字段列表
+   * @param addRow 添加的字段列表
    * @return true:修改成功,false:修改失败
    */
   @Override
@@ -615,7 +615,7 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getLength(),
                 createRowParams.isNullable() ? "" : "not null",
                 StringUtils.isEmpty(createRowParams.getDefaultValue())
-                    && createRowParams.isNullable()
+                        && createRowParams.isNullable()
                     ? ""
                     : createRowParams.getDefaultValue(),
                 createRowParams.getContent()));
@@ -635,7 +635,7 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getScale(),
                 createRowParams.isNullable() ? "" : "not null",
                 StringUtils.isEmpty(createRowParams.getDefaultValue())
-                    && createRowParams.isNullable()
+                        && createRowParams.isNullable()
                     ? "null"
                     : createRowParams.getDefaultValue(),
                 createRowParams.getContent()));

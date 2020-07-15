@@ -5,9 +5,6 @@ import org.tview.visualization.redis.factory.AbsRedisTemplate;
 
 class MemoryTaskTest extends AbsRedisTemplate {
 
-
   @Test
-  void task() throws InterruptedException {
-
-  }
+  void task() throws InterruptedException {}
 }

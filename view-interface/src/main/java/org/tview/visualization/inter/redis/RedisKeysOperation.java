@@ -4,9 +4,7 @@ import java.util.List;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.model.redis.RedisKeyInfo;
 
-/**
- * redis key 的操作接口
- */
+/** redis key 的操作接口 */
 public interface RedisKeysOperation {
 
   /**
