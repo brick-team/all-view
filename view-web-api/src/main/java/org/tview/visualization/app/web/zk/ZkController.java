@@ -48,8 +48,7 @@ public class ZkController {
    * @throws Exception
    */
   @GetMapping("/get/info")
-  public ResultVO info(
-      @RequestParam(value = "path") String path, @RequestParam(value = "host_port") String hostPort)
+  public ResultVO info(@RequestParam(value = "path") String path, @RequestParam(value = "host_port") String hostPort)
       throws Exception {
     return new ResultVO("ok", zkNodeOperation.getNode(path, hostPort), 200);
   }
@@ -72,9 +71,7 @@ public class ZkController {
    * @return
    */
   @GetMapping("/del")
-  public ResultVO del(
-      @RequestParam(value = "path") String path,
-      @RequestParam(value = "host_port") String hostPort) {
+  public ResultVO del(@RequestParam(value = "path") String path, @RequestParam(value = "host_port") String hostPort) {
     return new ResultVO("ok", zkNodeOperation.del(path, hostPort), 200);
   }
 

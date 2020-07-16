@@ -7,10 +7,8 @@
         <module>view-web-api</module>
         <module>view-interface</module>
         <module>view-model</module>
-        <module>zookeeper-view-plugins</module>
-        <module>mysql-view-plugins</module>
         <module>view-common</module>
-        <module>redis-view-plugins</module>
+        <module>view-plugins</module>
     </modules>
 
     <groupId>org.tview.visualization</groupId>

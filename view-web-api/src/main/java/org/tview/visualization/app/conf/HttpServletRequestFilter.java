@@ -18,8 +18,7 @@ public class HttpServletRequestFilter implements Filter {
   public void init(FilterConfig filterConfig) throws ServletException {}
 
   @Override
-  public void doFilter(
-      ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+  public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {
     // 防止流读取一次后就没有了, 所以需要将流继续写出去
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;

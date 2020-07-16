@@ -25,8 +25,7 @@ public class MysqlDbController {
   }
 
   @PostMapping("/tables")
-  public ResultVO tables(@RequestBody DBConnectionConfig connectionConfig, @RequestBody String db)
-      throws SQLException {
+  public ResultVO tables(@RequestBody DBConnectionConfig connectionConfig, @RequestBody String db) throws SQLException {
     return new ResultVO("ok", databaseOperation.tableNames(connectionConfig, db), 200);
   }
 
@@ -41,7 +40,6 @@ public class MysqlDbController {
       @RequestBody String db,
       @RequestBody String charSet,
       @RequestBody String charCollection) {
-    return new ResultVO(
-        "ok", databaseOperation.createDatabase(connectionConfig, db, charSet, charCollection), 200);
+    return new ResultVO("ok", databaseOperation.createDatabase(connectionConfig, db, charSet, charCollection), 200);
   }
 }

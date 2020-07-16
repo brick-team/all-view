@@ -12,8 +12,7 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 @RequestMapping("/redis/timer")
 public class RedisTimerController {
 
-  @Autowired
-  private RedisMemoryListener redisMemoryListener;
+  @Autowired private RedisMemoryListener redisMemoryListener;
 
   @GetMapping("/start/{name}")
   public void start(@PathVariable(value = "name") String name) {

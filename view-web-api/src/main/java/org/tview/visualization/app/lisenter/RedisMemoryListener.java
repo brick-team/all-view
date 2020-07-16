@@ -26,8 +26,8 @@ public class RedisMemoryListener {
   private final Map<String, RedisMemoryCache> memoryCacheMap = new HashMap<>();
   protected Logger log = LoggerFactory.getLogger(RedisMemoryListener.class);
   IRedisServerInfo redisServerInfo = new IRedisServiceInfoImpl();
-  @Autowired
-  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+
   @Value("${redis-memory.corn:0/5 * * * * ?}")
   private String redisMemoryCron;
 
@@ -49,8 +49,7 @@ public class RedisMemoryListener {
             () -> {
               synchronized (this) {
                 RedisCliInfoMemory memory = redisServerInfo.memory(config);
-                DateTimeFormatter dateTimeFormatter =
-                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 RedisMemoryTaskData redisMemoryTaskData =
                     new RedisMemoryTaskData(
                         Long.parseLong(memory.getUsedMemory()),
@@ -62,11 +61,9 @@ public class RedisMemoryListener {
                 log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name, redisMemoryTaskData);
                 if (redisMemoryCache == null) {
                   redisMemoryCache = new RedisMemoryCache(redisMemorySize);
-                  redisMemoryCache.put(
-                      dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 } else {
-                  redisMemoryCache.put(
-                      dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 }
                 log.info("开始设置redis组级别的缓存,name=[{}]", name);
                 memoryCacheMap.put(name, redisMemoryCache);
@@ -94,5 +91,3 @@ public class RedisMemoryListener {
     }
   }
 }
-
-

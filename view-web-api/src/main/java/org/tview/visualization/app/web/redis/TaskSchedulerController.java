@@ -26,8 +26,7 @@ public class TaskSchedulerController {
   protected Logger log = LoggerFactory.getLogger(TaskSchedulerController.class);
   Map<String, ScheduledFuture<?>> map = new HashMap<>();
   Map<String, List<String>> uidMap = new HashMap<>();
-  @Autowired
-  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
   @GetMapping("/start/{name}")
   public void start(@PathVariable(value = "name") String name) {
@@ -63,4 +62,3 @@ public class TaskSchedulerController {
     }
   }
 }
-

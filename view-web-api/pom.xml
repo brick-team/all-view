@@ -19,34 +19,24 @@
         </dependency>
         <dependency>
             <groupId>org.tview.visualization</groupId>
-            <artifactId>mysql-view-plugins</artifactId>
-            <version>xi-hu</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.tview.visualization</groupId>
-                    <artifactId>view-interface</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.tview.visualization</groupId>
-            <artifactId>zookeeper-view-plugins</artifactId>
-            <version>xi-hu</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.tview.visualization</groupId>
-                    <artifactId>view-interface</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.tview.visualization</groupId>
             <artifactId>view-interface</artifactId>
             <version>xi-hu</version>
         </dependency>
         <dependency>
             <groupId>org.tview.visualization</groupId>
+            <artifactId>mysql-view-plugins</artifactId>
+            <version>xi-hu</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
             <artifactId>redis-view-plugins</artifactId>
+            <version>xi-hu</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.tview.visualization</groupId>
+            <artifactId>zookeeper-view-plugins</artifactId>
             <version>xi-hu</version>
             <scope>compile</scope>
         </dependency>
