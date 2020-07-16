@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
-import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Service;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
@@ -31,6 +30,9 @@ public class RedisMemoryListener {
   private ThreadPoolTaskScheduler threadPoolTaskScheduler;
   @Value("${redis-memory.corn:0/5 * * * * ?}")
   private String redisMemoryCron;
+
+  @Value("${redis-memory.size:50}")
+  private Integer redisMemorySize;
 
   @Bean
   public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
@@ -59,7 +61,7 @@ public class RedisMemoryListener {
                 RedisMemoryCache redisMemoryCache = memoryCacheMap.get(name);
                 log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name, redisMemoryTaskData);
                 if (redisMemoryCache == null) {
-                  redisMemoryCache = new RedisMemoryCache(3);
+                  redisMemoryCache = new RedisMemoryCache(redisMemorySize);
                   redisMemoryCache.put(
                       dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 } else {

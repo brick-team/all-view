@@ -7,3 +7,4 @@ server:
 
 redis-memory:
   cron: 0/5 * * * * ?
+  size: 50
