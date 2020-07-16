@@ -4,7 +4,7 @@ server:
     context-path: /dev-api
 
 
-redis-event:
-  open: true
-  size: 100
-  period: 1000
+
+redis-memory:
+  cron: 0/5 * * * * ?
+  size: 50

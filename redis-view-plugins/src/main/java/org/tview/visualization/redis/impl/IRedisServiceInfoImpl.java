@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
@@ -83,7 +84,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
 
   private Properties redisInfo(RedisConnectionConfig config) {
     RedisTemplate<String, String> factory = redisConnectionCacheFactory.factory(config);
-    return Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info();
+    return getConnection(factory).info();
   }
 
   /**
@@ -115,8 +116,9 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @Override
   public RedisCliInfoServer server(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties server =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("server");
+        connection.info("server");
     RedisCliInfoServer redisCliInfoServer = new RedisCliInfoServer();
     assert server != null;
     redisCliInfoServer.setRedisVersion(server.getProperty("redis_version"));
@@ -136,7 +138,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     redisCliInfoServer.setLruClock(server.getProperty("lru_clock"));
     redisCliInfoServer.setExecutable(server.getProperty("executable"));
     redisCliInfoServer.setConfigFile(server.getProperty("config_file"));
-
+    connection.close();
     return redisCliInfoServer;
   }
 
@@ -144,8 +146,9 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public RedisCliInfoClients clients(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties clients =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("clients");
+        connection.info("clients");
     RedisCliInfoClients redisCliInfoClients = new RedisCliInfoClients();
     assert clients != null;
     redisCliInfoClients.setConnectedClients(clients.getProperty("connected_clients"));
@@ -153,7 +156,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
         clients.getProperty("client_longest_output_list"));
     redisCliInfoClients.setClientBiggestInputBuf(clients.getProperty("client_biggest_input_buf"));
     redisCliInfoClients.setBlockedClients(clients.getProperty("blocked_clients"));
-
+    connection.close();
     return redisCliInfoClients;
   }
 
@@ -161,8 +164,8 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public RedisCliInfoMemory memory(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
-    Properties memory =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("memory");
+    RedisConnection connection = getConnection(factory);
+    Properties memory = connection.info("memory");
     RedisCliInfoMemory redisCliInfoMemory = new RedisCliInfoMemory();
     assert memory != null;
     redisCliInfoMemory.setUsedMemory(memory.getProperty("used_memory"));
@@ -180,7 +183,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     redisCliInfoMemory.setMaxmemoryPolicy(memory.getProperty("maxmemory_policy"));
     redisCliInfoMemory.setMemFragmentationRatio(memory.getProperty("mem_fragmentation_ratio"));
     redisCliInfoMemory.setMemAllocator(memory.getProperty("mem_allocator"));
-
+    connection.close();
     return redisCliInfoMemory;
   }
 
@@ -188,8 +191,9 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public RedisCliInfoPersistence persistence(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties persistence =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("persistence");
+        connection.info("persistence");
     RedisCliInfoPersistence redisCliInfoPersistence = new RedisCliInfoPersistence();
     assert persistence != null;
     redisCliInfoPersistence.setLoading(persistence.getProperty("loading"));
@@ -216,16 +220,21 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     redisCliInfoPersistence.setAofLastBgrewriteStatus(
         persistence.getProperty("aof_last_bgrewrite_status"));
     redisCliInfoPersistence.setAofLastWriteStatus(persistence.getProperty("aof_last_write_status"));
-
+    connection.close();
     return redisCliInfoPersistence;
+  }
+
+  private RedisConnection getConnection(RedisTemplate factory) {
+    return Objects.requireNonNull(factory.getConnectionFactory()).getConnection();
   }
 
   @Override
   @SuppressWarnings("all")
   public RedisCliInfoStats stats(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties stats =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("stats");
+        connection.info("stats");
     RedisCliInfoStats redisCliInfoStats = new RedisCliInfoStats();
     assert stats != null;
     redisCliInfoStats.setTotalConnectionsReceived(stats.getProperty("total_connections_received"));
@@ -247,7 +256,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     redisCliInfoStats.setPubsubPatterns(stats.getProperty("pubsub_patterns"));
     redisCliInfoStats.setLatestForkUsec(stats.getProperty("latest_fork_usec"));
     redisCliInfoStats.setMigrateCachedSockets(stats.getProperty("migrate_cached_sockets"));
-
+    connection.close();
     return redisCliInfoStats;
   }
 
@@ -255,8 +264,9 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public RedisCliInfoReplication replication(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties replication =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("replication");
+        connection.info("replication");
     RedisCliInfoReplication redisCliInfoReplication = new RedisCliInfoReplication();
     assert replication != null;
     redisCliInfoReplication.setRole(replication.getProperty("role"));
@@ -267,7 +277,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     redisCliInfoReplication.setReplBacklogFirstByteOffset(
         replication.getProperty("repl_backlog_first_byte_offset"));
     redisCliInfoReplication.setReplBacklogHistlen(replication.getProperty("repl_backlog_histlen"));
-
+    connection.close();
     return redisCliInfoReplication;
   }
 
@@ -275,15 +285,16 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public RedisCliInfoCpu cpu(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties cpu =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("cpu");
+        connection.info("cpu");
     RedisCliInfoCpu redisCliInfoCpu = new RedisCliInfoCpu();
     assert cpu != null;
     redisCliInfoCpu.setUsedCpuSys(cpu.getProperty("used_cpu_sys"));
     redisCliInfoCpu.setUsedCpuUser(cpu.getProperty("used_cpu_user"));
     redisCliInfoCpu.setUsedCpuSysChildren(cpu.getProperty("used_cpu_sys_children"));
     redisCliInfoCpu.setUsedCpuUserChildren(cpu.getProperty("used_cpu_user_children"));
-
+    connection.close();
     return redisCliInfoCpu;
   }
 
@@ -291,12 +302,13 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public RedisCliInfoCluster cluster(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties cluster =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("cluster");
+        connection.info("cluster");
     RedisCliInfoCluster redisCliInfoCluster = new RedisCliInfoCluster();
     assert cluster != null;
     redisCliInfoCluster.setClusterEnabled(cluster.getProperty("cluster_enabled"));
-
+    connection.close();
     return redisCliInfoCluster;
   }
 
@@ -304,8 +316,9 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @SuppressWarnings("all")
   public List<RedisCliInfoKeyspace> keyspace(RedisConnectionConfig config) {
     RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = getConnection(factory);
     Properties replication =
-        Objects.requireNonNull(factory.getConnectionFactory()).getConnection().info("keyspace");
+        connection.info("keyspace");
     List<RedisCliInfoKeyspace> res = new ArrayList<>();
     replication.forEach(
         (k, v) -> {
@@ -329,6 +342,7 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
           redisCliInfoKeyspace.setKeyInfo(keyInfo);
           res.add(redisCliInfoKeyspace);
         });
+    connection.close();
     return res;
   }
 
