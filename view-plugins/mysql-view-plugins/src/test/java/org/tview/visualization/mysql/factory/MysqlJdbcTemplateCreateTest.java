@@ -9,7 +9,7 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateCreate;
 import org.tview.visualization.mysql.factory.jdbc.MysqlJdbcTemplateCreate;
 
-class MysqlJdbcTemplateCreateTest extends AbsConfig {
+class MysqlJdbcTemplateCreateTest extends AbsMysqlConfig {
   private static final Logger LOG = LoggerFactory.getLogger(MysqlJdbcTemplateCreateTest.class);
   JdbcTemplateCreate mysql = new MysqlJdbcTemplateCreate();
 

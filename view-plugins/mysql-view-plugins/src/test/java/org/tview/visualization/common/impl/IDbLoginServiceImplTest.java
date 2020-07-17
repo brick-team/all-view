@@ -5,9 +5,9 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.ConfigLoginService;
 import org.tview.visualization.model.db.DBConnectionConfig;
-import org.tview.visualization.mysql.factory.AbsConfig;
+import org.tview.visualization.mysql.factory.AbsMysqlConfig;
 
-class IDbLoginServiceImplTest extends AbsConfig {
+class IDbLoginServiceImplTest extends AbsMysqlConfig {
 
   ConfigLoginService<DBConnectionConfig> loginService = new IDbLoginServiceImpl();
 

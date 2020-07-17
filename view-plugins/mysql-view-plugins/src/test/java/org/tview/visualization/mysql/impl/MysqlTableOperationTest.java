@@ -11,11 +11,11 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.req.PageVO;
-import org.tview.visualization.mysql.factory.AbsConfig;
+import org.tview.visualization.mysql.factory.AbsMysqlConfig;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 
-class MysqlTableOperationTest extends AbsConfig {
+class MysqlTableOperationTest extends AbsMysqlConfig {
   JdbcFactory jdbcFactory;
   DBConnectionConfig dbConnectionConfig;
   TableOperation tableOperation;
