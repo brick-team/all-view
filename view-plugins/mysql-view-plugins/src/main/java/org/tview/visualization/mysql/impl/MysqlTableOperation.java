@@ -17,6 +17,7 @@ import org.tview.visualization.model.db.CreateIndexParam;
 import org.tview.visualization.model.db.CreateTableParams;
 import org.tview.visualization.model.db.CreateTableParams.CreateRowParams;
 import org.tview.visualization.model.db.DBConnectionConfig;
+import org.tview.visualization.model.db.ShowCreateTable;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.TableIndex;
 import org.tview.visualization.model.db.TableInfoEntity;
@@ -28,6 +29,7 @@ import org.tview.visualization.model.res.MysqlDataTypeRes;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 import org.tview.visualization.mysql.factory.table.TableStructureCacheFactory;
+import org.tview.visualization.mysql.row.ShowCreateTableRowMapper;
 import org.tview.visualization.mysql.row.TableIndexRowMapper;
 import org.tview.visualization.mysql.row.TableStructureRowMapper;
 import org.tview.visualization.page.PageUtils;
@@ -678,5 +680,22 @@ public class MysqlTableOperation implements TableOperation {
     }
 
     return false;
+  }
+
+  /**
+   * 获取创建表的创建语句
+   *
+   * @param config    链接参数
+   * @param tableName 表名
+   * @return
+   */
+  @Override
+  public String getCreateTableSql(DBConnectionConfig config, String tableName) throws SQLException {
+    JdbcTemplate jdbcTemplate = factory.create(config);
+    ShowCreateTable showCreateTable = jdbcTemplate
+        .queryForObject(String.format("SHOW CREATE TABLE %s", tableName),
+            new ShowCreateTableRowMapper());
+
+    return showCreateTable.getCreateTable();
   }
 }

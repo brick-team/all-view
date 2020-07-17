@@ -125,4 +125,9 @@ class MysqlTableOperationTest extends AbsConfig {
         .execute(
             "ALTER TABLE `issue` CHANGE `price` `total_price` decimal ( 10,2 ) UNSIGNED   DEFAULT '1.0' COMMENT '价格';");
   }
+
+  @Test
+  void testShowTableSql() throws SQLException {
+    String label = tableOperation.getCreateTableSql(this.getConf(), "label");
+  }
 }
