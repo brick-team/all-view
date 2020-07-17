@@ -164,7 +164,7 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
    */
   @Override
   public BigDecimal tableCache(DBConnectionConfig config) {
-    return null;
+    return BigDecimal.ZERO;
   }
 
   /**
