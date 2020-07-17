@@ -1,2 +1,10 @@
 server:
   port: 9011
+  servlet:
+    context-path: /dev-api
+
+
+
+redis-memory:
+  cron: 0/5 * * * * ?
+  size: 50

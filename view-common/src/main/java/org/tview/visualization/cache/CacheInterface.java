@@ -5,7 +5,7 @@ package org.tview.visualization.cache;
  *
  * @param <T> 实体对象
  */
-public interface CacheInterface<T> {
+public interface CacheInterface<K, V> {
 
   /**
    * 缓存容量
@@ -20,7 +20,7 @@ public interface CacheInterface<T> {
    * @param key key
    * @param value value
    */
-  void put(String key, T value);
+  void put(K key, V value);
 
   /**
    * 获取缓存
@@ -28,5 +28,5 @@ public interface CacheInterface<T> {
    * @param key key
    * @return value
    */
-  T get(String key);
+  V get(K key);
 }

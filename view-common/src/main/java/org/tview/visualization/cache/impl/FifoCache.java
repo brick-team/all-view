@@ -5,17 +5,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.tview.visualization.cache.CacheInterface;
 
-public class FifoCache<T> implements CacheInterface<T> {
+public class FifoCache<K, V> implements CacheInterface<K, V> {
 
   private final int size;
-  private final Map<String, T> map;
+  private final Map<K, V> map;
 
   public FifoCache(int size) {
     this.size = size;
     map =
         new LinkedHashMap<>(size, 1, false) {
           @Override
-          protected boolean removeEldestEntry(Entry<String, T> entry) {
+          protected boolean removeEldestEntry(Entry<K, V> entry) {
             return size() > size;
           }
         };
@@ -27,12 +27,16 @@ public class FifoCache<T> implements CacheInterface<T> {
   }
 
   @Override
-  public void put(String key, T value) {
+  public void put(K key, V value) {
     map.put(key, value);
   }
 
   @Override
-  public T get(String key) {
+  public V get(K key) {
     return map.get(key);
+  }
+
+  public Map<K, V> getMap() {
+    return map;
   }
 }
