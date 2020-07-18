@@ -26,7 +26,8 @@ public class RedisMemoryListener {
   private final Map<String, RedisMemoryCache> memoryCacheMap = new HashMap<>();
   protected Logger log = LoggerFactory.getLogger(RedisMemoryListener.class);
   IRedisServerInfo redisServerInfo = new IRedisServiceInfoImpl();
-  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+  @Autowired
+  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
   @Value("${redis-memory.corn:0/5 * * * * ?}")
   private String redisMemoryCron;
@@ -48,25 +49,37 @@ public class RedisMemoryListener {
         threadPoolTaskScheduler.scheduleWithFixedDelay(
             () -> {
               synchronized (this) {
-                RedisCliInfoMemory memory = redisServerInfo.memory(config);
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                RedisMemoryTaskData redisMemoryTaskData =
-                    new RedisMemoryTaskData(
-                        Long.parseLong(memory.getUsedMemory()),
-                        Long.parseLong(memory.getUsedMemoryRss()),
-                        Long.parseLong(memory.getUsedMemoryPeak()),
-                        Long.parseLong(memory.getUsedMemoryLua()));
+                try {
+                  RedisCliInfoMemory memory = redisServerInfo.memory(config);
+                  DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                      .ofPattern("yyyy-MM-dd HH:mm:ss");
+                  RedisMemoryTaskData redisMemoryTaskData =
+                      new RedisMemoryTaskData(
+                          Long.parseLong(memory.getUsedMemory()),
+                          Long.parseLong(memory.getUsedMemoryRss()),
+                          Long.parseLong(memory.getUsedMemoryPeak()),
+                          Long.parseLong(memory.getUsedMemoryLua()));
 
-                RedisMemoryCache redisMemoryCache = memoryCacheMap.get(name);
-                log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name, redisMemoryTaskData);
-                if (redisMemoryCache == null) {
-                  redisMemoryCache = new RedisMemoryCache(redisMemorySize);
-                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
-                } else {
-                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  RedisMemoryCache redisMemoryCache = memoryCacheMap.get(name);
+                  log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name,
+                      redisMemoryTaskData);
+                  if (redisMemoryCache == null) {
+                    redisMemoryCache = new RedisMemoryCache(redisMemorySize);
+                    redisMemoryCache
+                        .put(dateTimeFormatter.format(LocalDateTime.now()),
+                            redisMemoryTaskData);
+                  }
+                  else {
+                    redisMemoryCache
+                        .put(dateTimeFormatter.format(LocalDateTime.now()),
+                            redisMemoryTaskData);
+                  }
+                  log.info("开始设置redis组级别的缓存,name=[{}]", name);
+                  memoryCacheMap.put(name, redisMemoryCache);
+                } catch (Exception e) {
+                  e.printStackTrace();
+                  log.error("redis内存监听定时任务出现异常,{}", e);
                 }
-                log.info("开始设置redis组级别的缓存,name=[{}]", name);
-                memoryCacheMap.put(name, redisMemoryCache);
               }
             },
             //            triggerContext -> new
