@@ -28,7 +28,7 @@ public class RedisMemoryPerformanceListener implements IPerformanceListener {
   @Autowired
   private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-  @Value("${redis-memory.corn:0/5 * * * * ?}")
+  @Value("${redis-memory.cron:\"/5 * * * * ?\"}")
   private String redisMemoryCron;
 
   @Value("${redis-memory.size:50}")
