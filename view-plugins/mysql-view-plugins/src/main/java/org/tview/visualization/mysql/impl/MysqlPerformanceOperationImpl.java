@@ -33,6 +33,7 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
         .queryForObject(MysqlConstantSql.Question, new ShowStatusEntityRowMapper());
     ShowStatusEntity uptime = jdbcTemplate
         .queryForObject(MysqlConstantSql.uptime, new ShowStatusEntityRowMapper());
+
     return new BigDecimal(question.getValue())
         .divide(new BigDecimal(uptime.getValue()), 8, RoundingMode.DOWN);
   }

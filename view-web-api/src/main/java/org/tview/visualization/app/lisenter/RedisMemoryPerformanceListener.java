@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
@@ -20,13 +19,14 @@ import org.tview.visualization.redis.cache.RedisMemoryCache;
 import org.tview.visualization.redis.impl.IRedisServiceInfoImpl;
 
 @Service
-public class RedisMemoryListener {
+public class RedisMemoryPerformanceListener implements IPerformanceListener {
 
   private final Map<String, ScheduledFuture<?>> futureMap = new HashMap<>();
   private final Map<String, RedisMemoryCache> memoryCacheMap = new HashMap<>();
-  protected Logger log = LoggerFactory.getLogger(RedisMemoryListener.class);
+  protected Logger log = LoggerFactory.getLogger(RedisMemoryPerformanceListener.class);
   IRedisServerInfo redisServerInfo = new IRedisServiceInfoImpl();
-  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+  @Autowired
+  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
   @Value("${redis-memory.corn:0/5 * * * * ?}")
   private String redisMemoryCron;
@@ -34,22 +34,16 @@ public class RedisMemoryListener {
   @Value("${redis-memory.size:50}")
   private Integer redisMemorySize;
 
-  @Bean
-  public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
 
-    ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-    threadPoolTaskScheduler.setPoolSize(10);
-    threadPoolTaskScheduler.initialize();
-    return threadPoolTaskScheduler;
-  }
-
-  public void createWork(String name, RedisConnectionConfig config) {
+  public void createWork(String name, ConfigInterface config) {
     ScheduledFuture<?> schedule =
         threadPoolTaskScheduler.scheduleWithFixedDelay(
             () -> {
               synchronized (this) {
-                RedisCliInfoMemory memory = redisServerInfo.memory(config);
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                RedisCliInfoMemory memory = redisServerInfo.memory(
+                    (RedisConnectionConfig) config.get());
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                    .ofPattern("yyyy-MM-dd HH:mm:ss");
                 RedisMemoryTaskData redisMemoryTaskData =
                     new RedisMemoryTaskData(
                         Long.parseLong(memory.getUsedMemory()),
@@ -61,9 +55,12 @@ public class RedisMemoryListener {
                 log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name, redisMemoryTaskData);
                 if (redisMemoryCache == null) {
                   redisMemoryCache = new RedisMemoryCache(redisMemorySize);
-                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
-                } else {
-                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  redisMemoryCache
+                      .put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                }
+                else {
+                  redisMemoryCache
+                      .put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 }
                 log.info("开始设置redis组级别的缓存,name=[{}]", name);
                 memoryCacheMap.put(name, redisMemoryCache);
