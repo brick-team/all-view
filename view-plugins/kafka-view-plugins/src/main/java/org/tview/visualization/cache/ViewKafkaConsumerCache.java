@@ -8,8 +8,7 @@ import org.apache.kafka.common.cache.LRUCache;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.tview.visualization.model.kafka.KafkaConnectionConfig;
 
-public class ViewKafkaConsumerCache extends
-    LRUCache<KafkaConnectionConfig, KafkaConsumer<byte[], byte[]>> {
+public class ViewKafkaConsumerCache extends LRUCache<KafkaConnectionConfig, KafkaConsumer<byte[], byte[]>> {
 
   public ViewKafkaConsumerCache(int maxSize) {
     super(maxSize);
@@ -45,8 +44,7 @@ public class ViewKafkaConsumerCache extends
     properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
     properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ByteArrayDeserializer.class);
     properties.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, 100);
-    properties.setProperty(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG,
-        connectionConfig.getBrokerConnect());
+    properties.setProperty(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, connectionConfig.getBrokerConnect());
     return properties;
   }
 }

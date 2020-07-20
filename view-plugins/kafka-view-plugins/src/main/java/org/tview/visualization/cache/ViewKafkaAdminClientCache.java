@@ -38,8 +38,7 @@ public class ViewKafkaAdminClientCache extends LRUCache<KafkaConnectionConfig, A
 
   private Properties pro(KafkaConnectionConfig kafkaConnectionConfig) {
     Properties properties = new Properties();
-    properties.setProperty(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG,
-        kafkaConnectionConfig.getBrokerConnect());
+    properties.setProperty(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, kafkaConnectionConfig.getBrokerConnect());
     return properties;
   }
 }

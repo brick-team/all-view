@@ -10,7 +10,6 @@ public class KafkaSinglet {
   private static ViewKafkaAdminClientCache viewKafkaAdminClientCache = null;
   private static ViewKafkaProducerCache viewKafkaProducerCache = null;
 
-
   public static ViewKafkaProducerCache getViewKafkaProducerCache() {
     if (viewKafkaProducerCache == null) {
       synchronized (KafkaSinglet.class) {
@@ -43,5 +42,4 @@ public class KafkaSinglet {
     }
     return viewKafkaConsumerCache;
   }
-
 }

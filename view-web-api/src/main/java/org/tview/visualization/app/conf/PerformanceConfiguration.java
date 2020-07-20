@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "performance")
 public class PerformanceConfiguration {
 
-
   private PerInfo mysql;
   private PerInfo redis;
 
@@ -48,5 +47,4 @@ public class PerformanceConfiguration {
       this.size = size;
     }
   }
-
 }

@@ -25,8 +25,7 @@ public class RedisMemoryPerformanceListener {
   private final Map<String, RedisMemoryCache> memoryCacheMap = new HashMap<>();
   protected Logger log = LoggerFactory.getLogger(RedisMemoryPerformanceListener.class);
   IRedisServerInfo redisServerInfo = new IRedisServiceInfoImpl();
-  @Autowired
-  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
   @Value("${performance.redis.cron:0/5 * * * * ?}")
   private String redisMemoryCron;
@@ -34,16 +33,13 @@ public class RedisMemoryPerformanceListener {
   @Value("${performance.redis.size:50}")
   private Integer redisMemorySize;
 
-
   public void createWork(String name, ConfigInterface config, IListenerWork work) {
     ScheduledFuture<?> schedule =
         threadPoolTaskScheduler.scheduleWithFixedDelay(
             () -> {
               synchronized (this) {
-                RedisCliInfoMemory memory = redisServerInfo.memory(
-                    (RedisConnectionConfig) config.get());
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-                    .ofPattern("yyyy-MM-dd HH:mm:ss");
+                RedisCliInfoMemory memory = redisServerInfo.memory((RedisConnectionConfig) config.get());
+                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 RedisMemoryTaskData redisMemoryTaskData =
                     new RedisMemoryTaskData(
                         Long.parseLong(memory.getUsedMemory()),
@@ -55,12 +51,9 @@ public class RedisMemoryPerformanceListener {
                 log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name, redisMemoryTaskData);
                 if (redisMemoryCache == null) {
                   redisMemoryCache = new RedisMemoryCache(redisMemorySize);
-                  redisMemoryCache
-                      .put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
-                }
-                else {
-                  redisMemoryCache
-                      .put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                } else {
+                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 }
                 log.info("开始设置redis组级别的缓存,name=[{}]", name);
                 memoryCacheMap.put(name, redisMemoryCache);
@@ -76,7 +69,6 @@ public class RedisMemoryPerformanceListener {
   public Object get(String name) {
     return memoryCacheMap.get(name);
   }
-
 
   public void remove(String name) {
     log.info("开始删除redis组级别缓存,name=[{}]", name);

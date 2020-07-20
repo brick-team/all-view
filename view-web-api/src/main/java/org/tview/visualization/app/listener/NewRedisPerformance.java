@@ -31,21 +31,20 @@ public class NewRedisPerformance extends AbsPerformanceListener implements IList
       RedisMemoryTaskData redisMemoryTaskData = redisMemoryTaskData(config);
       if (!cache.containsKey(name)) {
         log.info("开始记录 redis 性能指标,time=[{}]", time);
-        RedisMemoryCache mysqlPerformanceCache = new RedisMemoryCache(
-            getPerformanceConfiguration().getRedis().getSize());
+        RedisMemoryCache mysqlPerformanceCache =
+            new RedisMemoryCache(getPerformanceConfiguration().getRedis().getSize());
         mysqlPerformanceCache.put(time, redisMemoryTaskData);
         cache.put(name, mysqlPerformanceCache);
       } else {
         log.info("开始记录 redis 性能指标,time=[{}]", time);
         cache.get(name).put(time, redisMemoryTaskData);
       }
-
     }
   }
 
   @Override
-  public void createWork(String name, ConfigInterface absConfig, IListenerWork work,
-      PerformanceEnums performanceEnums) {
+  public void createWork(
+      String name, ConfigInterface absConfig, IListenerWork work, PerformanceEnums performanceEnums) {
     this.config = (RedisConnectionConfig) absConfig.get();
     this.name = name;
     if (performanceEnums == null) {
@@ -57,11 +56,10 @@ public class NewRedisPerformance extends AbsPerformanceListener implements IList
 
   private RedisMemoryTaskData redisMemoryTaskData(RedisConnectionConfig config) {
     RedisCliInfoMemory memory = redisServerInfo.memory(config);
-    return
-        new RedisMemoryTaskData(
-            Long.parseLong(memory.getUsedMemory()),
-            Long.parseLong(memory.getUsedMemoryRss()),
-            Long.parseLong(memory.getUsedMemoryPeak()),
-            Long.parseLong(memory.getUsedMemoryLua()));
+    return new RedisMemoryTaskData(
+        Long.parseLong(memory.getUsedMemory()),
+        Long.parseLong(memory.getUsedMemoryRss()),
+        Long.parseLong(memory.getUsedMemoryPeak()),
+        Long.parseLong(memory.getUsedMemoryLua()));
   }
 }

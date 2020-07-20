@@ -1,6 +1,5 @@
 package org.tview.visualization.factory;
 
-
 import org.apache.kafka.clients.admin.AdminClient;
 import org.junit.jupiter.api.Test;
 
@@ -17,12 +16,9 @@ class KafkaConnectionFactoryImplTest extends AbsKafkaConfig {
 
   void factoryConsumer() {
     factory.factoryConsumer(this.config());
-
   }
 
   void factoryProducer() {
     factory.factoryProducer(this.config());
-
   }
-
 }

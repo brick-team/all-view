@@ -17,10 +17,8 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 @RequestMapping("/G")
 public class TestController {
 
-  @Autowired
-  private NewMysqlPerformance newMysqlPerformance;
-  @Autowired
-  private NewRedisPerformance newRedisPerformance;
+  @Autowired private NewMysqlPerformance newMysqlPerformance;
+  @Autowired private NewRedisPerformance newRedisPerformance;
 
   @GetMapping("/tmysql")
   public void tmysql() {
@@ -31,12 +29,16 @@ public class TestController {
     config.setUsername("huifer");
     config.setPassword("a12345");
     config.setTimeZone(ServerTimezone.UTC.getValue());
-    this.newMysqlPerformance.createWork("test", new ConfigInterface() {
-      @Override
-      public AbsConfig get() {
-        return config;
-      }
-    }, this.newMysqlPerformance, PerformanceEnums.MYSQL);
+    this.newMysqlPerformance.createWork(
+        "test",
+        new ConfigInterface() {
+          @Override
+          public AbsConfig get() {
+            return config;
+          }
+        },
+        this.newMysqlPerformance,
+        PerformanceEnums.MYSQL);
   }
 
   @GetMapping("/getm")
@@ -51,12 +53,16 @@ public class TestController {
     config.setPort(32768);
     config.setPwd("");
     config.setDbIndex(1);
-    newRedisPerformance.createWork("tr", new ConfigInterface() {
-      @Override
-      public AbsConfig get() {
-        return config;
-      }
-    }, this.newRedisPerformance, PerformanceEnums.REDIS);
+    newRedisPerformance.createWork(
+        "tr",
+        new ConfigInterface() {
+          @Override
+          public AbsConfig get() {
+            return config;
+          }
+        },
+        this.newRedisPerformance,
+        PerformanceEnums.REDIS);
   }
 
   @GetMapping("/getr")

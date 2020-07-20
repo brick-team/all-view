@@ -685,16 +685,15 @@ public class MysqlTableOperation implements TableOperation {
   /**
    * 获取创建表的创建语句
    *
-   * @param config    链接参数
+   * @param config 链接参数
    * @param tableName 表名
    * @return
    */
   @Override
   public String getCreateTableSql(DBConnectionConfig config, String tableName) throws SQLException {
     JdbcTemplate jdbcTemplate = factory.create(config);
-    ShowCreateTable showCreateTable = jdbcTemplate
-        .queryForObject(String.format("SHOW CREATE TABLE %s", tableName),
-            new ShowCreateTableRowMapper());
+    ShowCreateTable showCreateTable =
+        jdbcTemplate.queryForObject(String.format("SHOW CREATE TABLE %s", tableName), new ShowCreateTableRowMapper());
 
     return showCreateTable.getCreateTable();
   }

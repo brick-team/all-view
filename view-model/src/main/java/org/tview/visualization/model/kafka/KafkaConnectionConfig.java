@@ -3,14 +3,10 @@ package org.tview.visualization.model.kafka;
 import java.util.Objects;
 import org.tview.visualization.model.label.AbsConfig;
 
-/**
- * kafka 连接配置
- */
+/** kafka 连接配置 */
 public class KafkaConnectionConfig extends AbsConfig {
 
-  /**
-   * kafka 地址: ip:port
-   */
+  /** kafka 地址: ip:port */
   private String brokerConnect;
 
   @Override
@@ -34,13 +30,14 @@ public class KafkaConnectionConfig extends AbsConfig {
   public String toString() {
     return "{\"KafkaConnectionConfig\":{"
         + "\"brokerConnect\":\""
-        + brokerConnect + '\"'
-        + "},\"super-KafkaConnectionConfig\":" + super.toString() + "}";
-
+        + brokerConnect
+        + '\"'
+        + "},\"super-KafkaConnectionConfig\":"
+        + super.toString()
+        + "}";
   }
 
-  public KafkaConnectionConfig() {
-  }
+  public KafkaConnectionConfig() {}
 
   public String getBrokerConnect() {
     return brokerConnect;

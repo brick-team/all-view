@@ -21,14 +21,14 @@ public class Application {
     SpringApplication.run(Application.class);
   }
 
-  @Autowired
-  private PerformanceConfiguration performanceConfiguration;
+  @Autowired private PerformanceConfiguration performanceConfiguration;
 
   @Value("${performance.redis.cron}")
   private String redisMemoryCron;
 
   @Value("${performance.redis.size}")
   private Integer redisMemorySize;
+
   @GetMapping("/health")
   public ResultVO dod() {
     return new ResultVO("OK", "ok", 200);

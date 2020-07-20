@@ -17,7 +17,6 @@ public class MysqlConstantSql {
   public static final String innodb_buffer_pool_reads = "show status like 'innodb_buffer_pool_reads';";
   public static final String innodb_buffer_pool_read_requests = "show status like 'innodb_buffer_pool_read_requests';";
 
-
   public static final String Qcache_hits = "show status like 'Qcache_hits';";
   public static final String Qcache_inserts = "show status like 'Qcache_inserts';";
 
@@ -28,7 +27,6 @@ public class MysqlConstantSql {
   public static final String Created_tmp_tables = "show global status like 'Created_tmp_tables';";
 
   public static final String slave_status = "show slave status";
-
 
   public static final String Binlog_cache = "show global status like 'Binlog_cache_disk_use';";
 

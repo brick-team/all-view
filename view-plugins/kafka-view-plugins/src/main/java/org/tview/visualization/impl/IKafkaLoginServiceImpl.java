@@ -30,11 +30,9 @@ public class IKafkaLoginServiceImpl implements ConfigLoginService<KafkaConnectio
   /**
    * 登记配置
    *
-   * @param name                  自定义名称
+   * @param name 自定义名称
    * @param kafkaConnectionConfig 配置
    */
   @Override
-  public void login(String name, KafkaConnectionConfig kafkaConnectionConfig) {
-
-  }
+  public void login(String name, KafkaConnectionConfig kafkaConnectionConfig) {}
 }

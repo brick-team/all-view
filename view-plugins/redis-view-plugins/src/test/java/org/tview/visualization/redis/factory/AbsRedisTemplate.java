@@ -1,6 +1,5 @@
 package org.tview.visualization.redis.factory;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 

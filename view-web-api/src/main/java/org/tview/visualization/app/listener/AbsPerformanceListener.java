@@ -21,10 +21,8 @@ public abstract class AbsPerformanceListener implements IPerformanceListener {
   private final Map<String, FifoCache> MYSQL = new HashMap<>();
   private final Map<String, FifoCache> REDIS = new HashMap<>();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-  @Autowired
-  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
-  @Autowired
-  private PerformanceConfiguration performanceConfiguration;
+  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+  @Autowired private PerformanceConfiguration performanceConfiguration;
 
   public PerformanceConfiguration getPerformanceConfiguration() {
     return performanceConfiguration;
@@ -44,22 +42,25 @@ public abstract class AbsPerformanceListener implements IPerformanceListener {
   }
 
   @Override
-  public void createWork(String name, ConfigInterface absConfig, IListenerWork work,
-      PerformanceEnums performanceEnums) {
-    ScheduledFuture<?> scheduledFuture = this.threadPoolTaskScheduler.schedule(() -> {
-      try {
-        work.work();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    }, triggerContext -> {
-      String cron = cron(performanceEnums);
-      if (StringUtils.isEmpty(cron)) {
-        throw new IllegalArgumentException("定时任务时间为空");
-      }
-      CronTrigger trigger = new CronTrigger(cron);
-      return trigger.nextExecutionTime(triggerContext);
-    });
+  public void createWork(
+      String name, ConfigInterface absConfig, IListenerWork work, PerformanceEnums performanceEnums) {
+    ScheduledFuture<?> scheduledFuture =
+        this.threadPoolTaskScheduler.schedule(
+            () -> {
+              try {
+                work.work();
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            },
+            triggerContext -> {
+              String cron = cron(performanceEnums);
+              if (StringUtils.isEmpty(cron)) {
+                throw new IllegalArgumentException("定时任务时间为空");
+              }
+              CronTrigger trigger = new CronTrigger(cron);
+              return trigger.nextExecutionTime(triggerContext);
+            });
     this.futureMap.put(name, scheduledFuture);
   }
 
