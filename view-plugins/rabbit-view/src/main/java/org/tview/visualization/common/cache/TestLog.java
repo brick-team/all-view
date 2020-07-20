@@ -9,5 +9,4 @@ public class TestLog {
   public static void main(String[] args) {
     log.info("rabbit ");
   }
-
 }

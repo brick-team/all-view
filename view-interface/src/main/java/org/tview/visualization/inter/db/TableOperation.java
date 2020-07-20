@@ -23,7 +23,8 @@ public interface TableOperation {
    * @param pageVO 分页参数
    * @return
    */
-  TableDataEntity findAll(DBConnectionConfig config, String table, PageVO pageVO) throws SQLException;
+  TableDataEntity findAll(DBConnectionConfig config, String table, PageVO pageVO)
+      throws SQLException;
 
   /**
    * 表的信息
@@ -41,7 +42,8 @@ public interface TableOperation {
   void deleteOnceData(DBConnectionConfig config, String table, int id) throws SQLException;
 
   /** 创建一条数据 */
-  void createOnceData(DBConnectionConfig config, String table, Map<String, Object> data) throws SQLException;
+  void createOnceData(DBConnectionConfig config, String table, Map<String, Object> data)
+      throws SQLException;
 
   /** 创建数据表 */
   void createTable(DBConnectionConfig config, CreateTableParams params) throws SQLException;
@@ -75,15 +77,20 @@ public interface TableOperation {
    * @return true:修改成功,false:修改失败
    */
   boolean changeFiled(
-      DBConnectionConfig config, String tableName, List<CreateRowParams> changeRow, List<CreateRowParams> addRow);
+      DBConnectionConfig config,
+      String tableName,
+      List<CreateRowParams> changeRow,
+      List<CreateRowParams> addRow);
 
   /** 创建索引 */
-  void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException;
+  void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam)
+      throws SQLException;
 
   void addIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException;
 
   /** 删除索引 */
-  void removeIndex(DBConnectionConfig config, String indexName, String tableName) throws SQLException;
+  void removeIndex(DBConnectionConfig config, String indexName, String tableName)
+      throws SQLException;
 
   /**
    * 修改索引
@@ -91,7 +98,8 @@ public interface TableOperation {
    * @param config 链接参数
    * @return
    */
-  boolean changeIndex(DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex);
+  boolean changeIndex(
+      DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex);
 
   /**
    * mysql 支持的数据类型

@@ -17,7 +17,8 @@ public class KafkaConnectionFactoryImpl implements KafkaConnectionFactory {
 
   @Override
   public AdminClient factoryAdminClient(KafkaConnectionConfig kafkaConnectionConfig) {
-    ViewKafkaAdminClientCache viewKafkaAdminClientCache = KafkaSinglet.getViewKafkaAdminClientCache();
+    ViewKafkaAdminClientCache viewKafkaAdminClientCache =
+        KafkaSinglet.getViewKafkaAdminClientCache();
     AdminClient adminClient = viewKafkaAdminClientCache.get(kafkaConnectionConfig);
     if (adminClient == null) {
       log.info("该配置不在缓存,conf = [{}]", kafkaConnectionConfig);
@@ -27,7 +28,8 @@ public class KafkaConnectionFactoryImpl implements KafkaConnectionFactory {
   }
 
   @Override
-  public KafkaConsumer<byte[], byte[]> factoryConsumer(KafkaConnectionConfig kafkaConnectionConfig) {
+  public KafkaConsumer<byte[], byte[]> factoryConsumer(
+      KafkaConnectionConfig kafkaConnectionConfig) {
     ViewKafkaConsumerCache viewKafkaConsumerCache = KafkaSinglet.getViewKafkaConsumerCache();
     KafkaConsumer<byte[], byte[]> kafkaConsumer = viewKafkaConsumerCache.get(kafkaConnectionConfig);
     if (kafkaConsumer == null) {
@@ -38,7 +40,8 @@ public class KafkaConnectionFactoryImpl implements KafkaConnectionFactory {
   }
 
   @Override
-  public KafkaProducer<byte[], byte[]> factoryProducer(KafkaConnectionConfig kafkaConnectionConfig) {
+  public KafkaProducer<byte[], byte[]> factoryProducer(
+      KafkaConnectionConfig kafkaConnectionConfig) {
     ViewKafkaProducerCache viewKafkaProducerCache = KafkaSinglet.getViewKafkaProducerCache();
     KafkaProducer<byte[], byte[]> kafkaProducer = viewKafkaProducerCache.get(kafkaConnectionConfig);
     if (kafkaProducer == null) {

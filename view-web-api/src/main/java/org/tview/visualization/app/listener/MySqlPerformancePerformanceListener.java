@@ -38,9 +38,11 @@ public class MySqlPerformancePerformanceListener {
                   MysqlPerformanceCache mysqlPerformanceCache = dbPerformanceMap.get(name);
                   if (mysqlPerformanceCache == null) {
                     mysqlPerformanceCache = new MysqlPerformanceCache(10);
-                    mysqlPerformanceCache.put(dateTimeFormatter.format(LocalDateTime.now()), performance);
+                    mysqlPerformanceCache.put(
+                        dateTimeFormatter.format(LocalDateTime.now()), performance);
                   } else {
-                    mysqlPerformanceCache.put(dateTimeFormatter.format(LocalDateTime.now()), performance);
+                    mysqlPerformanceCache.put(
+                        dateTimeFormatter.format(LocalDateTime.now()), performance);
                   }
                   log.info("开始设置mysql的指标,name = [{}]", name);
                   dbPerformanceMap.put(name, mysqlPerformanceCache);

@@ -25,7 +25,10 @@ public class NewMysqlPerformance extends AbsPerformanceListener implements IList
 
   @Override
   public void createWork(
-      String name, ConfigInterface absConfig, IListenerWork work, PerformanceEnums performanceEnums) {
+      String name,
+      ConfigInterface absConfig,
+      IListenerWork work,
+      PerformanceEnums performanceEnums) {
     log.info("开始执行mysql的性能监控,name=[{}]", name);
     this.name = name;
     config = (DBConnectionConfig) absConfig.get();

@@ -86,7 +86,17 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
 
     int nodeCount = -1;
     Srvr srvr =
-        new Srvr(stateText, minLatency, avgLatency, maxLatency, received, sent, outStanding, zxid, mode, nodeCount)
+        new Srvr(
+                stateText,
+                minLatency,
+                avgLatency,
+                maxLatency,
+                received,
+                sent,
+                outStanding,
+                zxid,
+                mode,
+                nodeCount)
             .invoke();
     minLatency = srvr.getMinLatency();
     avgLatency = srvr.getAvgLatency();
@@ -119,7 +129,8 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
   }
 
   /** client number */
-  private int clientNumber(String host, int port) throws IOException, X509Exception.SSLContextException {
+  private int clientNumber(String host, int port)
+      throws IOException, X509Exception.SSLContextException {
     int clientNumber = -1;
     String consText = FourLetterWordMain.send4LetterWord(host, port, "cons");
 
@@ -137,7 +148,8 @@ public class ZookeeperStateServiceImpl implements ZookeeperStateService {
   }
 
   /** total watchers */
-  private int totalWatches(String host, int port) throws IOException, X509Exception.SSLContextException {
+  private int totalWatches(String host, int port)
+      throws IOException, X509Exception.SSLContextException {
     int totalWatches = -1;
     String wchsText = FourLetterWordMain.send4LetterWord(host, port, "wchs");
     if (!StringUtils.isEmpty(wchsText)) {

@@ -34,7 +34,8 @@ class MysqlTableOperationTest extends AbsMysqlConfig {
 
   @Test
   void findAll() throws SQLException {
-    TableDataEntity t_project = tableOperation.findAll(dbConnectionConfig, "t_project", new PageVO(0, 2));
+    TableDataEntity t_project =
+        tableOperation.findAll(dbConnectionConfig, "t_project", new PageVO(0, 2));
     System.out.println();
   }
 

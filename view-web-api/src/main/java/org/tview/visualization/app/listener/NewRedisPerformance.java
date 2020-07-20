@@ -44,7 +44,10 @@ public class NewRedisPerformance extends AbsPerformanceListener implements IList
 
   @Override
   public void createWork(
-      String name, ConfigInterface absConfig, IListenerWork work, PerformanceEnums performanceEnums) {
+      String name,
+      ConfigInterface absConfig,
+      IListenerWork work,
+      PerformanceEnums performanceEnums) {
     this.config = (RedisConnectionConfig) absConfig.get();
     this.name = name;
     if (performanceEnums == null) {

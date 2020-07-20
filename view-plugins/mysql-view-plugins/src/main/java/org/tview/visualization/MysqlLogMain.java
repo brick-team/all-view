@@ -10,5 +10,4 @@ public class MysqlLogMain {
   public static void main(String[] args) {
     log.info("mysql log");
   }
-
 }

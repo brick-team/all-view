@@ -38,8 +38,10 @@ public class RedisMemoryPerformanceListener {
         threadPoolTaskScheduler.scheduleWithFixedDelay(
             () -> {
               synchronized (this) {
-                RedisCliInfoMemory memory = redisServerInfo.memory((RedisConnectionConfig) config.get());
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                RedisCliInfoMemory memory =
+                    redisServerInfo.memory((RedisConnectionConfig) config.get());
+                DateTimeFormatter dateTimeFormatter =
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 RedisMemoryTaskData redisMemoryTaskData =
                     new RedisMemoryTaskData(
                         Long.parseLong(memory.getUsedMemory()),
@@ -51,9 +53,11 @@ public class RedisMemoryPerformanceListener {
                 log.debug("开始设置redis内存监控缓存,name=[{}],value=[{}]", name, redisMemoryTaskData);
                 if (redisMemoryCache == null) {
                   redisMemoryCache = new RedisMemoryCache(redisMemorySize);
-                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  redisMemoryCache.put(
+                      dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 } else {
-                  redisMemoryCache.put(dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
+                  redisMemoryCache.put(
+                      dateTimeFormatter.format(LocalDateTime.now()), redisMemoryTaskData);
                 }
                 log.info("开始设置redis组级别的缓存,name=[{}]", name);
                 memoryCacheMap.put(name, redisMemoryCache);

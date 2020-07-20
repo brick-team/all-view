@@ -48,7 +48,8 @@ public class MysqlTableOperation implements TableOperation {
           + "    TABLE_NAME = '%s';";
   private static final Logger LOG = LoggerFactory.getLogger(MysqlTableOperation.class);
   JdbcFactory factory = new JdbcTemplateFactory();
-  CacheInterface<String, TableInfoEntity> tableStructureCacheFactory = new TableStructureCacheFactory();
+  CacheInterface<String, TableInfoEntity> tableStructureCacheFactory =
+      new TableStructureCacheFactory();
 
   public static void main(String[] args) {
     CreateTableParams c = new CreateTableParams();
@@ -57,11 +58,13 @@ public class MysqlTableOperation implements TableOperation {
     c.setEngine("InnoDB");
     c.setTableName("tttt_uuu");
     List<CreateRowParams> rowParams = new ArrayList<>();
-    CreateRowParams id = new CreateRowParams("id", "int", 11, 0, false, true, "主键", true, null, false, true);
+    CreateRowParams id =
+        new CreateRowParams("id", "int", 11, 0, false, true, "主键", true, null, false, true);
     rowParams.add(id);
 
     CreateRowParams source =
-        new CreateRowParams("source", "float", 11, 2, false, true, "分数", false, "0.00", true, false);
+        new CreateRowParams(
+            "source", "float", 11, 2, false, true, "分数", false, "0.00", true, false);
     rowParams.add(source);
     c.setRowParams(rowParams);
 
@@ -78,7 +81,8 @@ public class MysqlTableOperation implements TableOperation {
     String format = "CREATE TABLE `%s` (%s  %s) ENGINE=%s  CHARSET=`%s` COMMENT=\"%s\" ;";
 
     String substring = keySql.substring(0, keySql.length() - 1);
-    return String.format(format, tableName, dtl, substring, engine, charSet, createTableParams.getComment());
+    return String.format(
+        format, tableName, dtl, substring, engine, charSet, createTableParams.getComment());
   }
 
   private static String genKey(List<CreateRowParams> rowParams) {
@@ -190,13 +194,15 @@ public class MysqlTableOperation implements TableOperation {
    * @return
    */
   @Override
-  public TableDataEntity findAll(DBConnectionConfig config, String table, PageVO pageVO) throws SQLException {
+  public TableDataEntity findAll(DBConnectionConfig config, String table, PageVO pageVO)
+      throws SQLException {
     JdbcTemplate jdbcTemplate = factory.create(config);
     PageVO calc = PageUtils.calc(pageVO);
     TableDataEntity tableDataEntity = new TableDataEntity();
 
     List<Map<String, Object>> maps =
-        jdbcTemplate.queryForList("select * from " + table + " limit " + calc.getNum() + " , " + calc.getSize());
+        jdbcTemplate.queryForList(
+            "select * from " + table + " limit " + calc.getNum() + " , " + calc.getSize());
 
     List<String> fields = new ArrayList<>();
 
@@ -251,7 +257,8 @@ public class MysqlTableOperation implements TableOperation {
       tableInfoEntity.setTableStruct(tableStruct);
       tableInfoEntity.setTableIndex(tableIndex);
       tableInfoEntity.setTableName(table);
-      tableInfoEntity.setEnFiled(tableStruct.stream().map(TableStructure::getColumnName).collect(Collectors.toList()));
+      tableInfoEntity.setEnFiled(
+          tableStruct.stream().map(TableStructure::getColumnName).collect(Collectors.toList()));
       tableInfoEntity.setCnFiled(
           tableStruct.stream().map(TableStructure::getColumnComment).collect(Collectors.toList()));
 
@@ -272,7 +279,8 @@ public class MysqlTableOperation implements TableOperation {
    * @param tableName
    * @param jdbcTemplate
    */
-  private List<TableStructure> getTableStruct(String db, String tableName, JdbcTemplate jdbcTemplate) {
+  private List<TableStructure> getTableStruct(
+      String db, String tableName, JdbcTemplate jdbcTemplate) {
     List<TableStructure> query =
         jdbcTemplate.query(String.format(TABLE_INFO, db, tableName), new TableStructureRowMapper());
     return query;
@@ -310,7 +318,8 @@ public class MysqlTableOperation implements TableOperation {
    * @param data
    */
   @Override
-  public void createOnceData(DBConnectionConfig config, String table, Map<String, Object> data) throws SQLException {
+  public void createOnceData(DBConnectionConfig config, String table, Map<String, Object> data)
+      throws SQLException {
 
     JdbcTemplate jdbcTemplate = factory.create(config);
 
@@ -420,7 +429,8 @@ public class MysqlTableOperation implements TableOperation {
   }
 
   @Override
-  public void addIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException {
+  public void addIndex(DBConnectionConfig config, CreateIndexParam createIndexParam)
+      throws SQLException {
     JdbcTemplate jdbcTemplate = factory.create(config);
     String indexType = createIndexParam.getIndexType();
     MysqlIndexType mysqlIndexType = MysqlIndexType.valueOf(indexType.toUpperCase());
@@ -501,7 +511,8 @@ public class MysqlTableOperation implements TableOperation {
       fileds.append(String.format("`%s`,", filedName));
     }
     fileds.substring(0, fileds.length() - 1);
-    return String.format(format, createIndexParam.getTableName(), createIndexParam.getIndexName(), fileds);
+    return String.format(
+        format, createIndexParam.getTableName(), createIndexParam.getIndexName(), fileds);
   }
 
   /**
@@ -545,7 +556,8 @@ public class MysqlTableOperation implements TableOperation {
     for (org.tview.visualization.model.db.CreateRowParams createRowParams : changeRow) {
       MysqlVarType mysqlVarType = MysqlVarType.valueOf(createRowParams.getType().toUpperCase());
       if (!mysqlVarType.isMd()) {
-        String s = "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s ) UNSIGNED %s DEFAULT '%s' COMMENT '%s';";
+        String s =
+            "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s ) UNSIGNED %s DEFAULT '%s' COMMENT '%s';";
         s = canRemoveDefaultAndUnsigned(createRowParams, s);
         changeTableColumn.append(
             String.format(
@@ -559,7 +571,8 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getDefaultValue(),
                 createRowParams.getContent()));
       } else {
-        String s = "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s,%s ) UNSIGNED  %s DEFAULT '%s' COMMENT '%s';";
+        String s =
+            "ALTER TABLE `%s` CHANGE `%s` `%s` %s ( %s,%s ) UNSIGNED  %s DEFAULT '%s' COMMENT '%s';";
         s = canRemoveDefaultAndUnsigned(createRowParams, s);
         changeTableColumn.append(
             String.format(
@@ -585,7 +598,8 @@ public class MysqlTableOperation implements TableOperation {
    * @param addRow
    * @return
    */
-  private StringBuilder calcAddRowSql(String tableName, List<org.tview.visualization.model.db.CreateRowParams> addRow) {
+  private StringBuilder calcAddRowSql(
+      String tableName, List<org.tview.visualization.model.db.CreateRowParams> addRow) {
     // 新增字段的处理
     StringBuilder addTableColumn = new StringBuilder(64);
     for (org.tview.visualization.model.db.CreateRowParams createRowParams : addRow) {
@@ -602,13 +616,15 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getType(),
                 createRowParams.getLength(),
                 createRowParams.isNullable() ? "" : "not null",
-                StringUtils.isEmpty(createRowParams.getDefaultValue()) && createRowParams.isNullable()
+                StringUtils.isEmpty(createRowParams.getDefaultValue())
+                        && createRowParams.isNullable()
                     ? ""
                     : createRowParams.getDefaultValue(),
                 createRowParams.getContent()));
 
       } else {
-        String s = "ALTER TABLE `%s` ADD COLUMN `%s` %s(%s,%s) UNSIGNED %s DEFAULT %s COMMENT '%s';";
+        String s =
+            "ALTER TABLE `%s` ADD COLUMN `%s` %s(%s,%s) UNSIGNED %s DEFAULT %s COMMENT '%s';";
         s = canRemoveDefaultAndUnsigned(createRowParams, s);
 
         addTableColumn.append(
@@ -620,7 +636,8 @@ public class MysqlTableOperation implements TableOperation {
                 createRowParams.getLength(),
                 createRowParams.getScale(),
                 createRowParams.isNullable() ? "" : "not null",
-                StringUtils.isEmpty(createRowParams.getDefaultValue()) && createRowParams.isNullable()
+                StringUtils.isEmpty(createRowParams.getDefaultValue())
+                        && createRowParams.isNullable()
                     ? "null"
                     : createRowParams.getDefaultValue(),
                 createRowParams.getContent()));
@@ -646,7 +663,8 @@ public class MysqlTableOperation implements TableOperation {
    * @param config
    */
   @Override
-  public void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam) throws SQLException {
+  public void createIndex(DBConnectionConfig config, CreateIndexParam createIndexParam)
+      throws SQLException {
     // 暂定认为是手动后续插入的使用 alter  语句
     this.addIndex(config, createIndexParam);
   }
@@ -657,7 +675,8 @@ public class MysqlTableOperation implements TableOperation {
    * @param config
    */
   @Override
-  public void removeIndex(DBConnectionConfig config, String indexName, String tableName) throws SQLException {
+  public void removeIndex(DBConnectionConfig config, String indexName, String tableName)
+      throws SQLException {
     String s = String.format("DROP INDEX %s on `%s`", indexName, tableName);
     JdbcTemplate jdbcTemplate = factory.create(config);
     jdbcTemplate.execute(s);
@@ -670,7 +689,8 @@ public class MysqlTableOperation implements TableOperation {
    * @return
    */
   @Override
-  public boolean changeIndex(DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex) {
+  public boolean changeIndex(
+      DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex) {
     try {
       removeIndex(config, oldIndex.getIndexName(), oldIndex.getTableName());
       addIndex(config, newIndex);
@@ -693,7 +713,8 @@ public class MysqlTableOperation implements TableOperation {
   public String getCreateTableSql(DBConnectionConfig config, String tableName) throws SQLException {
     JdbcTemplate jdbcTemplate = factory.create(config);
     ShowCreateTable showCreateTable =
-        jdbcTemplate.queryForObject(String.format("SHOW CREATE TABLE %s", tableName), new ShowCreateTableRowMapper());
+        jdbcTemplate.queryForObject(
+            String.format("SHOW CREATE TABLE %s", tableName), new ShowCreateTableRowMapper());
 
     return showCreateTable.getCreateTable();
   }

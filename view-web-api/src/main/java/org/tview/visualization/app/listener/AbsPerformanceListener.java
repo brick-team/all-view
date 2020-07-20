@@ -43,7 +43,10 @@ public abstract class AbsPerformanceListener implements IPerformanceListener {
 
   @Override
   public void createWork(
-      String name, ConfigInterface absConfig, IListenerWork work, PerformanceEnums performanceEnums) {
+      String name,
+      ConfigInterface absConfig,
+      IListenerWork work,
+      PerformanceEnums performanceEnums) {
     ScheduledFuture<?> scheduledFuture =
         this.threadPoolTaskScheduler.schedule(
             () -> {

@@ -18,7 +18,9 @@ import org.tview.visualization.model.res.ResultVO;
 @RequestMapping("/mysql/login")
 public class MysqlDbLoginController {
 
-  @Autowired MySqlPerformancePerformanceListener mySqlPerformanceListener = new MySqlPerformancePerformanceListener();
+  @Autowired
+  MySqlPerformancePerformanceListener mySqlPerformanceListener =
+      new MySqlPerformancePerformanceListener();
 
   @PostMapping("/start/{name}")
   public ResultVO start(@PathVariable(value = "name") String name) {
