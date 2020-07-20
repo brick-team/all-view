@@ -11,7 +11,7 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 
-class JdbcTemplateFactoryTest extends AbsConfig {
+class JdbcTemplateFactoryTest extends AbsMysqlConfig {
   JdbcFactory jdbcFactory;
 
   @Test

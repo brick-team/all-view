@@ -91,7 +91,8 @@ public interface TableOperation {
    * @param config 链接参数
    * @return
    */
-  boolean changeIndex(DBConnectionConfig config, CreateIndexParam oldIndex, CreateIndexParam newIndex);
+  boolean changeIndex(DBConnectionConfig config, CreateIndexParam oldIndex,
+      CreateIndexParam newIndex);
 
   /**
    * mysql 支持的数据类型
@@ -99,4 +100,14 @@ public interface TableOperation {
    * @return 数据类型
    */
   List<MysqlDataTypeRes> mysqlDataType();
+
+
+  /**
+   * 获取创建表的创建语句
+   *
+   * @param config 链接参数
+   * @param tableName 表名
+   * @return
+   */
+  String getCreateTableSql(DBConnectionConfig config, String tableName) throws SQLException;
 }

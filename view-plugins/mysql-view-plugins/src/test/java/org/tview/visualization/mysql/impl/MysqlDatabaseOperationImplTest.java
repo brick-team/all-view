@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.db.DatabaseOperation;
 import org.tview.visualization.model.db.DBInfoEntity;
-import org.tview.visualization.mysql.factory.AbsConfig;
+import org.tview.visualization.mysql.factory.AbsMysqlConfig;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 
-class MysqlDatabaseOperationImplTest extends AbsConfig {
+class MysqlDatabaseOperationImplTest extends AbsMysqlConfig {
   JdbcFactory jdbcFactory;
   DatabaseOperation databaseOperation;
 

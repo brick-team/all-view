@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 
-public class AbsConfig {
+public class AbsMysqlConfig {
   DBConnectionConfig conf = new DBConnectionConfig();
 
   @BeforeEach

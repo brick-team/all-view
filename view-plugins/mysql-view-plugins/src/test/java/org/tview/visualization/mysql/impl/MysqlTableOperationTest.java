@@ -11,11 +11,11 @@ import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.TableDataEntity;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.req.PageVO;
-import org.tview.visualization.mysql.factory.AbsConfig;
+import org.tview.visualization.mysql.factory.AbsMysqlConfig;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 
-class MysqlTableOperationTest extends AbsConfig {
+class MysqlTableOperationTest extends AbsMysqlConfig {
   JdbcFactory jdbcFactory;
   DBConnectionConfig dbConnectionConfig;
   TableOperation tableOperation;
@@ -124,5 +124,10 @@ class MysqlTableOperationTest extends AbsConfig {
         .create(this.dbConnectionConfig)
         .execute(
             "ALTER TABLE `issue` CHANGE `price` `total_price` decimal ( 10,2 ) UNSIGNED   DEFAULT '1.0' COMMENT '价格';");
+  }
+
+  @Test
+  void testShowTableSql() throws SQLException {
+    String label = tableOperation.getCreateTableSql(this.getConf(), "label");
   }
 }

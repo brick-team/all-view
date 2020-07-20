@@ -1,6 +1,7 @@
 package org.tview.visualization.redis.factory;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,7 @@ class RedisConnectionCacheFactoryImplTest extends AbsRedisTemplate {
   RedisConnectionCacheFactory factory = new RedisConnectionCacheFactoryImpl();
 
   public static void convertByteToString(RedisConnection connection, Set<byte[]> keysSet, List<Object> tempList) {
-    StringRedisSerializer stringSerializer = new StringRedisSerializer(Charset.forName("UTF8"));
+    StringRedisSerializer stringSerializer = new StringRedisSerializer(StandardCharsets.UTF_8);
     for (byte[] byteArray : keysSet) {
       String converted = stringSerializer.deserialize(byteArray);
       DataType dateType = connection.type(byteArray);

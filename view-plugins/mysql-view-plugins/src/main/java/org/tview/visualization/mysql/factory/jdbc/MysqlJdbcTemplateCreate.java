@@ -1,5 +1,7 @@
 package org.tview.visualization.mysql.factory.jdbc;
 
+import static org.tview.visualization.mysql.singlet.MysqlCacheSinglet.getJdbcTemplateCache;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,12 +9,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.model.db.DBConnectionConfig;
+import org.tview.visualization.mysql.cache.JdbcTemplateCache;
 
 public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
+
   public static final String NOT_DB =
       "jdbc:mysql://%s:%s/?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
   public static final String HAS_DB =
       "jdbc:mysql://%s:%s/%s?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=%s&user=%s&password=%s";
+  JdbcTemplateCache jdbcTemplateCache = getJdbcTemplateCache();
 
   /**
    * 生成 jdbc url
@@ -31,7 +36,8 @@ public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
           connectionConfig.getTimeZone(),
           connectionConfig.getUsername(),
           connectionConfig.getPassword());
-    } else {
+    }
+    else {
       return String.format(
           HAS_DB,
           connectionConfig.getHost(),
@@ -51,7 +57,14 @@ public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
    */
   @Override
   public JdbcTemplate create(DBConnectionConfig connectionConfig) throws SQLException {
-    Connection target = DriverManager.getConnection(genUrl(connectionConfig));
-    return new JdbcTemplate(new SingleConnectionDataSource(target, true));
+
+    JdbcTemplate jdbcTemplate = jdbcTemplateCache.get(connectionConfig);
+    if (jdbcTemplate == null) {
+      Connection target = DriverManager.getConnection(genUrl(connectionConfig));
+      return new JdbcTemplate(new SingleConnectionDataSource(target, true));
+    }
+    else {
+      return jdbcTemplate;
+    }
   }
 }
