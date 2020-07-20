@@ -3,21 +3,24 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>parent</artifactId>
+    <artifactId>view-plugins</artifactId>
     <groupId>org.tview.visualization</groupId>
     <version>xi-hu</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>view-plugins</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-    <module>kafka-view-plugins</module>
-    <module>zookeeper-view-plugins</module>
-    <module>mysql-view-plugins</module>
-    <module>redis-view-plugins</module>
-    <module>rabbit-view</module>
-  </modules>
+  <artifactId>rabbit-view</artifactId>
+
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+      <version>5.9.0</version>
+    </dependency>
+
+  </dependencies>
 
 
 </project>
