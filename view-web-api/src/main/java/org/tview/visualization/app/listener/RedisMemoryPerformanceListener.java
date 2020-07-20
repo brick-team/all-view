@@ -1,4 +1,4 @@
-package org.tview.visualization.app.lisenter;
+package org.tview.visualization.app.listener;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +19,7 @@ import org.tview.visualization.redis.cache.RedisMemoryCache;
 import org.tview.visualization.redis.impl.IRedisServiceInfoImpl;
 
 @Service
-public class RedisMemoryPerformanceListener implements IPerformanceListener {
+public class RedisMemoryPerformanceListener {
 
   private final Map<String, ScheduledFuture<?>> futureMap = new HashMap<>();
   private final Map<String, RedisMemoryCache> memoryCacheMap = new HashMap<>();
@@ -28,14 +28,14 @@ public class RedisMemoryPerformanceListener implements IPerformanceListener {
   @Autowired
   private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-  @Value("${redis-memory.corn:0/5 * * * * ?}")
+  @Value("${performance.redis.cron:0/5 * * * * ?}")
   private String redisMemoryCron;
 
-  @Value("${redis-memory.size:50}")
+  @Value("${performance.redis.size:50}")
   private Integer redisMemorySize;
 
 
-  public void createWork(String name, ConfigInterface config) {
+  public void createWork(String name, ConfigInterface config, IListenerWork work) {
     ScheduledFuture<?> schedule =
         threadPoolTaskScheduler.scheduleWithFixedDelay(
             () -> {
@@ -76,6 +76,7 @@ public class RedisMemoryPerformanceListener implements IPerformanceListener {
   public Object get(String name) {
     return memoryCacheMap.get(name);
   }
+
 
   public void remove(String name) {
     log.info("开始删除redis组级别缓存,name=[{}]", name);

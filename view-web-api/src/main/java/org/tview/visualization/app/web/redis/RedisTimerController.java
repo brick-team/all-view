@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.tview.visualization.app.lisenter.ConfigInterface;
-import org.tview.visualization.app.lisenter.RedisMemoryPerformanceListener;
+import org.tview.visualization.app.listener.ConfigInterface;
+import org.tview.visualization.app.listener.RedisMemoryPerformanceListener;
 import org.tview.visualization.model.label.AbsConfig;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 
@@ -30,7 +30,7 @@ public class RedisTimerController {
       public AbsConfig get() {
         return config;
       }
-    });
+    },null);
   }
 
   @GetMapping("/stop/{name}")
