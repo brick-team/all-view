@@ -36,8 +36,7 @@ public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
           connectionConfig.getTimeZone(),
           connectionConfig.getUsername(),
           connectionConfig.getPassword());
-    }
-    else {
+    } else {
       return String.format(
           HAS_DB,
           connectionConfig.getHost(),
@@ -62,8 +61,7 @@ public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
     if (jdbcTemplate == null) {
       Connection target = DriverManager.getConnection(genUrl(connectionConfig));
       return new JdbcTemplate(new SingleConnectionDataSource(target, true));
-    }
-    else {
+    } else {
       return jdbcTemplate;
     }
   }

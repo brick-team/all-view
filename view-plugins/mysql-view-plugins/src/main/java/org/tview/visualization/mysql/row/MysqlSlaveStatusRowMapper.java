@@ -27,8 +27,8 @@ public class MysqlSlaveStatusRowMapper implements RowMapper<MysqlSlaveStatus> {
     mysqlSlaveStatus.setReplicate_Do_Table(resultSet.getString("Replicate_Do_Table"));
     mysqlSlaveStatus.setReplicate_Ignore_Table(resultSet.getString("Replicate_Ignore_Table"));
     mysqlSlaveStatus.setReplicate_Wild_Do_Table(resultSet.getString("Replicate_Wild_Do_Table"));
-    mysqlSlaveStatus
-        .setReplicate_Wild_Ignore_Table(resultSet.getString("Replicate_Wild_Ignore_Table"));
+    mysqlSlaveStatus.setReplicate_Wild_Ignore_Table(
+        resultSet.getString("Replicate_Wild_Ignore_Table"));
     mysqlSlaveStatus.setLast_Errno(resultSet.getString("Last_Errno"));
     mysqlSlaveStatus.setLast_Error(resultSet.getString("Last_Error"));
     mysqlSlaveStatus.setSkip_Counter(resultSet.getString("Skip_Counter"));
@@ -44,14 +44,14 @@ public class MysqlSlaveStatusRowMapper implements RowMapper<MysqlSlaveStatus> {
     mysqlSlaveStatus.setMaster_SSL_Cipher(resultSet.getString("Master_SSL_Cipher"));
     mysqlSlaveStatus.setMaster_SSL_Key(resultSet.getString("Master_SSL_Key"));
     mysqlSlaveStatus.setSeconds_Behind_Master(resultSet.getString("Seconds_Behind_Master"));
-    mysqlSlaveStatus
-        .setMaster_SSL_Verify_Server_Cert(resultSet.getString("Master_SSL_Verify_Server_Cert"));
+    mysqlSlaveStatus.setMaster_SSL_Verify_Server_Cert(
+        resultSet.getString("Master_SSL_Verify_Server_Cert"));
     mysqlSlaveStatus.setLast_IO_Errno(resultSet.getString("Last_IO_Errno"));
     mysqlSlaveStatus.setLast_IO_Error(resultSet.getString("Last_IO_Error"));
     mysqlSlaveStatus.setLast_SQL_Errno(resultSet.getString("Last_SQL_Errno"));
     mysqlSlaveStatus.setLast_SQL_Error(resultSet.getString("Last_SQL_Error"));
-    mysqlSlaveStatus
-        .setReplicate_Ignore_Server_Ids(resultSet.getString("Replicate_Ignore_Server_Ids"));
+    mysqlSlaveStatus.setReplicate_Ignore_Server_Ids(
+        resultSet.getString("Replicate_Ignore_Server_Ids"));
     mysqlSlaveStatus.setMaster_Server_Id(resultSet.getString("Master_Server_Id"));
     mysqlSlaveStatus.setMaster_UUID(resultSet.getString("Master_UUID"));
     mysqlSlaveStatus.setMaster_Info_File(resultSet.getString("Master_Info_File"));

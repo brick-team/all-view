@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class DbPerformance {
 
-
   private BigDecimal qps;
   private BigDecimal tps;
   private BigDecimal keyBufferRead;

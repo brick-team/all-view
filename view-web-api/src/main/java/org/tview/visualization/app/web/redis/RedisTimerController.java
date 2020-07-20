@@ -14,8 +14,7 @@ import org.tview.visualization.model.redis.RedisConnectionConfig;
 @RequestMapping("/redis/timer")
 public class RedisTimerController {
 
-  @Autowired
-  private RedisMemoryPerformanceListener redisMemoryListener;
+  @Autowired private RedisMemoryPerformanceListener redisMemoryListener;
 
   @GetMapping("/start/{name}")
   public void start(@PathVariable(value = "name") String name) {
@@ -25,12 +24,15 @@ public class RedisTimerController {
     config.setPort(32768);
     config.setPwd("");
     config.setDbIndex(1);
-    redisMemoryListener.createWork(name, new ConfigInterface() {
-      @Override
-      public AbsConfig get() {
-        return config;
-      }
-    },null);
+    redisMemoryListener.createWork(
+        name,
+        new ConfigInterface() {
+          @Override
+          public AbsConfig get() {
+            return config;
+          }
+        },
+        null);
   }
 
   @GetMapping("/stop/{name}")

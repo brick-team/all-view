@@ -5,12 +5,10 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.db.IDBPerformanceOperation;
 import org.tview.visualization.mysql.factory.AbsMysqlConfig;
-import org.tview.visualization.page.PageUtils;
 
 class MysqlPerformanceOperationImplTest extends AbsMysqlConfig {
 
   IDBPerformanceOperation performanceOperation = new MysqlPerformanceOperationImpl();
-
 
   @Test
   void qps() throws SQLException {
@@ -41,16 +39,13 @@ class MysqlPerformanceOperationImplTest extends AbsMysqlConfig {
   }
 
   @Test
-  void queryCache() {
-  }
+  void queryCache() {}
 
   @Test
-  void tableCache() {
-  }
+  void tableCache() {}
 
   @Test
-  void threadCache() {
-  }
+  void threadCache() {}
 
   @Test
   void slaveStatus() throws SQLException {
@@ -58,14 +53,11 @@ class MysqlPerformanceOperationImplTest extends AbsMysqlConfig {
   }
 
   @Test
-  void tmpTable() {
-  }
+  void tmpTable() {}
 
   @Test
-  void binlogCache() {
-  }
+  void binlogCache() {}
 
   @Test
-  void innodbLogWaits() {
-  }
+  void innodbLogWaits() {}
 }

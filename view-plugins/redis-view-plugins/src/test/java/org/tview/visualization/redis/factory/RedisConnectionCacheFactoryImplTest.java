@@ -1,6 +1,5 @@
 package org.tview.visualization.redis.factory;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +16,8 @@ class RedisConnectionCacheFactoryImplTest extends AbsRedisTemplate {
 
   RedisConnectionCacheFactory factory = new RedisConnectionCacheFactoryImpl();
 
-  public static void convertByteToString(RedisConnection connection, Set<byte[]> keysSet, List<Object> tempList) {
+  public static void convertByteToString(
+      RedisConnection connection, Set<byte[]> keysSet, List<Object> tempList) {
     StringRedisSerializer stringSerializer = new StringRedisSerializer(StandardCharsets.UTF_8);
     for (byte[] byteArray : keysSet) {
       String converted = stringSerializer.deserialize(byteArray);
@@ -31,7 +31,8 @@ class RedisConnectionCacheFactoryImplTest extends AbsRedisTemplate {
   @org.junit.jupiter.api.Test
   void factory() {
     RedisTemplate redisTemplate = this.factory.factory(this.config);
-    RedisConnection connection = RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
+    RedisConnection connection =
+        RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
     Set<byte[]> keys = connection.keys("*".getBytes());
     ArrayList<Object> objects = new ArrayList<>();
     convertByteToString(connection, keys, objects);

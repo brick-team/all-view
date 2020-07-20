@@ -13,25 +13,26 @@ import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.label.AbsConfig;
 import org.tview.visualization.model.res.ResultVO;
 
-/**
- * mysql 数据库登录
- */
+/** mysql 数据库登录 */
 @RestController
 @RequestMapping("/mysql/login")
 public class MysqlDbLoginController {
 
   @Autowired
-  MySqlPerformancePerformanceListener mySqlPerformanceListener = new MySqlPerformancePerformanceListener();
+  MySqlPerformancePerformanceListener mySqlPerformanceListener =
+      new MySqlPerformancePerformanceListener();
 
   @PostMapping("/start/{name}")
-  public ResultVO start(
-      @PathVariable(value = "name") String name) {
-    mySqlPerformanceListener.createWork(name, new ConfigInterface() {
-      @Override
-      public AbsConfig get() {
-        return config();
-      }
-    }, null);
+  public ResultVO start(@PathVariable(value = "name") String name) {
+    mySqlPerformanceListener.createWork(
+        name,
+        new ConfigInterface() {
+          @Override
+          public AbsConfig get() {
+            return config();
+          }
+        },
+        null);
     return new ResultVO("ok", "ok", 200);
   }
 
@@ -46,13 +47,11 @@ public class MysqlDbLoginController {
     return config;
   }
 
-
   @PostMapping("/stop/{name}")
   public ResultVO stop(@PathVariable String name) {
     mySqlPerformanceListener.remove(name);
     return new ResultVO("ok", "ok", 200);
   }
-
 
   @PutMapping("/get/{name}")
   public ResultVO get(@PathVariable String name) {

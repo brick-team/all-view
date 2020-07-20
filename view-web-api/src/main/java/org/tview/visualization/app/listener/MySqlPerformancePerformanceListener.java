@@ -13,52 +13,49 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.tview.visualization.inter.db.IDBPerformanceOperation;
 import org.tview.visualization.model.db.DBConnectionConfig;
-import org.tview.visualization.model.enums.PerformanceEnums;
 import org.tview.visualization.model.res.DbPerformance;
 import org.tview.visualization.mysql.cache.MysqlPerformanceCache;
 import org.tview.visualization.mysql.impl.MysqlPerformanceOperationImpl;
 
 @Service
-public class MySqlPerformancePerformanceListener  {
+public class MySqlPerformancePerformanceListener {
 
   private final Map<String, ScheduledFuture<?>> futureMap = new HashMap<>();
   private final Map<String, MysqlPerformanceCache> dbPerformanceMap = new HashMap<>();
   protected Logger log = LoggerFactory.getLogger(MySqlPerformancePerformanceListener.class);
   IDBPerformanceOperation performanceOperation = new MysqlPerformanceOperationImpl();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-  @Autowired
-  private ThreadPoolTaskScheduler threadPoolTaskScheduler;
-
+  @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
   public void createWork(String name, ConfigInterface config, IListenerWork work) {
 
-    ScheduledFuture<?> scheduledFuture = this.threadPoolTaskScheduler.scheduleWithFixedDelay(() -> {
-          try {
-            synchronized (this) {
-              DbPerformance performance = performance((DBConnectionConfig) config.get());
-              MysqlPerformanceCache mysqlPerformanceCache = dbPerformanceMap.get(name);
-              if (mysqlPerformanceCache == null) {
-                mysqlPerformanceCache = new MysqlPerformanceCache(10);
-                mysqlPerformanceCache
-                    .put(dateTimeFormatter.format(LocalDateTime.now()), performance);
+    ScheduledFuture<?> scheduledFuture =
+        this.threadPoolTaskScheduler.scheduleWithFixedDelay(
+            () -> {
+              try {
+                synchronized (this) {
+                  DbPerformance performance = performance((DBConnectionConfig) config.get());
+                  MysqlPerformanceCache mysqlPerformanceCache = dbPerformanceMap.get(name);
+                  if (mysqlPerformanceCache == null) {
+                    mysqlPerformanceCache = new MysqlPerformanceCache(10);
+                    mysqlPerformanceCache.put(
+                        dateTimeFormatter.format(LocalDateTime.now()), performance);
+                  } else {
+                    mysqlPerformanceCache.put(
+                        dateTimeFormatter.format(LocalDateTime.now()), performance);
+                  }
+                  log.info("开始设置mysql的指标,name = [{}]", name);
+                  dbPerformanceMap.put(name, mysqlPerformanceCache);
+                }
+              } catch (Exception e) {
+                log.error("mysql 指标获取失败,{}", e);
+                e.printStackTrace();
               }
-              else {
-                mysqlPerformanceCache
-                    .put(dateTimeFormatter.format(LocalDateTime.now()), performance);
-              }
-              log.info("开始设置mysql的指标,name = [{}]", name);
-              dbPerformanceMap.put(name, mysqlPerformanceCache);
-            }
-          } catch (Exception e) {
-            log.error("mysql 指标获取失败,{}", e);
-            e.printStackTrace();
-          }
-        },
-        2000);
+            },
+            2000);
 
     futureMap.put(name, scheduledFuture);
   }
-
 
   private DbPerformance performance(DBConnectionConfig config) throws SQLException {
     DbPerformance dbPerformance = new DbPerformance();
@@ -80,8 +77,6 @@ public class MySqlPerformancePerformanceListener  {
     return dbPerformanceMap.get(name);
   }
 
-
-
   public void remove(String name) {
     if (!futureMap.isEmpty()) {
       if (futureMap.containsKey(name)) {
@@ -91,5 +86,4 @@ public class MySqlPerformancePerformanceListener  {
       }
     }
   }
-
 }

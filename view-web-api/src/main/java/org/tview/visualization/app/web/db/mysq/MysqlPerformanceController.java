@@ -20,7 +20,6 @@ public class MysqlPerformanceController {
 
   IDBPerformanceOperation performanceOperation = new MysqlPerformanceOperationImpl();
 
-
   @GetMapping("/static")
   public ResultVO staticValue() {
     DbPerformance dbPerformance = new DbPerformance();
@@ -28,11 +27,8 @@ public class MysqlPerformanceController {
     return new ResultVO("ok", "ok", 200);
   }
 
-
   @PostMapping("/info")
-  public ResultVO info(
-      @RequestBody DBConnectionConfig config
-  ) throws SQLException {
+  public ResultVO info(@RequestBody DBConnectionConfig config) throws SQLException {
 
     config = new DBConnectionConfig();
     config.setDbType("mysql");
@@ -41,7 +37,6 @@ public class MysqlPerformanceController {
     config.setUsername("huifer");
     config.setPassword("a12345");
     config.setTimeZone(ServerTimezone.UTC.getValue());
-
 
     DbPerformance dbPerformance = new DbPerformance();
     dbPerformance.setQps(performanceOperation.qps(config));
@@ -56,6 +51,5 @@ public class MysqlPerformanceController {
     dbPerformance.setBinlogCache(performanceOperation.binlogCache(config));
     dbPerformance.setInnodbLogWaits(performanceOperation.innodbLogWaits(config));
     return new ResultVO("ok", dbPerformance, 200);
-
   }
 }

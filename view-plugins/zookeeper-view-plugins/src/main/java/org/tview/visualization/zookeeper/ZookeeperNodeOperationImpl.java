@@ -236,7 +236,8 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
    * @param path
    * @param zkNodeTree
    */
-  private void calcTree(CuratorFramework curator, String path, ZkNodeTree zkNodeTree) throws Exception {
+  private void calcTree(CuratorFramework curator, String path, ZkNodeTree zkNodeTree)
+      throws Exception {
     List<String> strings = curator.getChildren().forPath(path);
     zkNodeTree.setPath(path);
     zkNodeTree.setChild(child(strings, path));

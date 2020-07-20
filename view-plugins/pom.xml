@@ -16,6 +16,7 @@
     <module>zookeeper-view-plugins</module>
     <module>mysql-view-plugins</module>
     <module>redis-view-plugins</module>
+    <module>rabbit-view</module>
   </modules>
 
 

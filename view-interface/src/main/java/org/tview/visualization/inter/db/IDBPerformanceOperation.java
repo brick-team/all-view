@@ -39,7 +39,6 @@ public interface IDBPerformanceOperation {
    */
   BigDecimal keyBufferWrite(DBConnectionConfig config) throws SQLException;
 
-
   /**
    * InnoDB Buffer命中率: (1 -innodb_buffer_pool_reads / innodb_buffer_pool_read_requests) * 100%
    *
@@ -48,17 +47,15 @@ public interface IDBPerformanceOperation {
    */
   BigDecimal innoDBBuffer(DBConnectionConfig config) throws SQLException;
 
-
   /**
-   * Query Cache命中率:  (Qcahce_hits /(Qcache_hits + Qcache_inserts )) * 100%;
+   * Query Cache命中率: (Qcahce_hits /(Qcache_hits + Qcache_inserts )) * 100%;
    *
    * @return
    */
   BigDecimal queryCache(DBConnectionConfig config) throws SQLException;
 
-
   /**
-   * show global  status like 'open%';
+   * show global status like 'open%';
    *
    * @return
    */
@@ -71,7 +68,6 @@ public interface IDBPerformanceOperation {
    */
   BigDecimal threadCache(DBConnectionConfig config) throws SQLException;
 
-
   /**
    * 复制延时量
    *
@@ -79,14 +75,12 @@ public interface IDBPerformanceOperation {
    */
   MysqlSlaveStatus slaveStatus(DBConnectionConfig config) throws SQLException;
 
-
   /**
    * 临时表状况 Created_tmp_disk_tables/Created_tmp_tables
    *
    * @return
    */
   BigDecimal tmpTable(DBConnectionConfig config) throws SQLException;
-
 
   /**
    * Binlog Cache 使用状况
@@ -102,4 +96,3 @@ public interface IDBPerformanceOperation {
    */
   BigDecimal innodbLogWaits(DBConnectionConfig config) throws SQLException;
 }
-

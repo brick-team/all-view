@@ -27,7 +27,8 @@ public class RedisKeysService implements RedisKeysOperation {
 
   public List<RedisKeyInfo> keys(RedisConnectionConfig config, String keyRegion) {
     RedisTemplate redisTemplate = this.factory.factory(config);
-    RedisConnection connection = RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
+    RedisConnection connection =
+        RedisConnectionUtils.getConnection(redisTemplate.getConnectionFactory());
     Set<byte[]> keys = connection.keys(keyRegion.getBytes());
     StringRedisSerializer stringSerializer = new StringRedisSerializer(StandardCharsets.UTF_8);
 

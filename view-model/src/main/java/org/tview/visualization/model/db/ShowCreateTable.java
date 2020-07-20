@@ -5,8 +5,7 @@ public class ShowCreateTable {
   private String table;
   private String createTable;
 
-  public ShowCreateTable() {
-  }
+  public ShowCreateTable() {}
 
   public ShowCreateTable(String table, String createTable) {
     this.table = table;

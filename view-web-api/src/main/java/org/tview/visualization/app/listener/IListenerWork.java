@@ -5,5 +5,4 @@ import java.sql.SQLException;
 public interface IListenerWork {
 
   void work() throws SQLException;
-
 }

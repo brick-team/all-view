@@ -24,7 +24,10 @@ public class NewMysqlPerformance extends AbsPerformanceListener implements IList
   private String name;
 
   @Override
-  public void createWork(String name, ConfigInterface absConfig, IListenerWork work,
+  public void createWork(
+      String name,
+      ConfigInterface absConfig,
+      IListenerWork work,
       PerformanceEnums performanceEnums) {
     log.info("开始执行mysql的性能监控,name=[{}]", name);
     this.name = name;
@@ -45,8 +48,8 @@ public class NewMysqlPerformance extends AbsPerformanceListener implements IList
       if (!cache.containsKey(name)) {
         System.out.println("not key");
         log.info("开始记录 mysql 性能指标,time=[{}]", time);
-        MysqlPerformanceCache mysqlPerformanceCache = new MysqlPerformanceCache(
-            getPerformanceConfiguration().getMysql().getSize());
+        MysqlPerformanceCache mysqlPerformanceCache =
+            new MysqlPerformanceCache(getPerformanceConfiguration().getMysql().getSize());
         mysqlPerformanceCache.put(time, performance);
         cache.put(name, mysqlPerformanceCache);
       } else {

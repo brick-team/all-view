@@ -78,7 +78,8 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
   @Override
   public long execSize(RedisConnectionConfig config) {
     Properties info = redisInfo(config);
-    return Long.parseLong(String.valueOf(Objects.requireNonNull(info).get(TOTAL_COMMANDS_PROCESSED)));
+    return Long.parseLong(
+        String.valueOf(Objects.requireNonNull(info).get(TOTAL_COMMANDS_PROCESSED)));
   }
 
   private Properties redisInfo(RedisConnectionConfig config) {
@@ -149,7 +150,8 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     RedisCliInfoClients redisCliInfoClients = new RedisCliInfoClients();
     assert clients != null;
     redisCliInfoClients.setConnectedClients(clients.getProperty("connected_clients"));
-    redisCliInfoClients.setClientLongestOutputList(clients.getProperty("client_longest_output_list"));
+    redisCliInfoClients.setClientLongestOutputList(
+        clients.getProperty("client_longest_output_list"));
     redisCliInfoClients.setClientBiggestInputBuf(clients.getProperty("client_biggest_input_buf"));
     redisCliInfoClients.setBlockedClients(clients.getProperty("blocked_clients"));
     connection.close();
@@ -192,18 +194,28 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     RedisCliInfoPersistence redisCliInfoPersistence = new RedisCliInfoPersistence();
     assert persistence != null;
     redisCliInfoPersistence.setLoading(persistence.getProperty("loading"));
-    redisCliInfoPersistence.setRdbChangesSinceLastSave(persistence.getProperty("rdb_changes_since_last_save"));
-    redisCliInfoPersistence.setRdbBgsaveInProgress(persistence.getProperty("rdb_bgsave_in_progress"));
+    redisCliInfoPersistence.setRdbChangesSinceLastSave(
+        persistence.getProperty("rdb_changes_since_last_save"));
+    redisCliInfoPersistence.setRdbBgsaveInProgress(
+        persistence.getProperty("rdb_bgsave_in_progress"));
     redisCliInfoPersistence.setRdbLastSaveTime(persistence.getProperty("rdb_last_save_time"));
-    redisCliInfoPersistence.setRdbLastBgsaveStatus(persistence.getProperty("rdb_last_bgsave_status"));
-    redisCliInfoPersistence.setRdbLastBgsaveTimeSec(persistence.getProperty("rdb_last_bgsave_time_sec"));
-    redisCliInfoPersistence.setRdbCurrentBgsaveTimeSec(persistence.getProperty("rdb_current_bgsave_time_sec"));
+    redisCliInfoPersistence.setRdbLastBgsaveStatus(
+        persistence.getProperty("rdb_last_bgsave_status"));
+    redisCliInfoPersistence.setRdbLastBgsaveTimeSec(
+        persistence.getProperty("rdb_last_bgsave_time_sec"));
+    redisCliInfoPersistence.setRdbCurrentBgsaveTimeSec(
+        persistence.getProperty("rdb_current_bgsave_time_sec"));
     redisCliInfoPersistence.setAofEnabled(persistence.getProperty("aof_enabled"));
-    redisCliInfoPersistence.setAofRewriteInProgress(persistence.getProperty("aof_rewrite_in_progress"));
-    redisCliInfoPersistence.setAofRewriteScheduled(persistence.getProperty("aof_rewrite_scheduled"));
-    redisCliInfoPersistence.setAofLastRewriteTimeSec(persistence.getProperty("aof_last_rewrite_time_sec"));
-    redisCliInfoPersistence.setAofCurrentRewriteTimeSec(persistence.getProperty("aof_current_rewrite_time_sec"));
-    redisCliInfoPersistence.setAofLastBgrewriteStatus(persistence.getProperty("aof_last_bgrewrite_status"));
+    redisCliInfoPersistence.setAofRewriteInProgress(
+        persistence.getProperty("aof_rewrite_in_progress"));
+    redisCliInfoPersistence.setAofRewriteScheduled(
+        persistence.getProperty("aof_rewrite_scheduled"));
+    redisCliInfoPersistence.setAofLastRewriteTimeSec(
+        persistence.getProperty("aof_last_rewrite_time_sec"));
+    redisCliInfoPersistence.setAofCurrentRewriteTimeSec(
+        persistence.getProperty("aof_current_rewrite_time_sec"));
+    redisCliInfoPersistence.setAofLastBgrewriteStatus(
+        persistence.getProperty("aof_last_bgrewrite_status"));
     redisCliInfoPersistence.setAofLastWriteStatus(persistence.getProperty("aof_last_write_status"));
     connection.close();
     return redisCliInfoPersistence;
@@ -257,7 +269,8 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
     redisCliInfoReplication.setMasterReplOffset(replication.getProperty("master_repl_offset"));
     redisCliInfoReplication.setReplBacklogActive(replication.getProperty("repl_backlog_active"));
     redisCliInfoReplication.setReplBacklogSize(replication.getProperty("repl_backlog_size"));
-    redisCliInfoReplication.setReplBacklogFirstByteOffset(replication.getProperty("repl_backlog_first_byte_offset"));
+    redisCliInfoReplication.setReplBacklogFirstByteOffset(
+        replication.getProperty("repl_backlog_first_byte_offset"));
     redisCliInfoReplication.setReplBacklogHistlen(replication.getProperty("repl_backlog_histlen"));
     connection.close();
     return redisCliInfoReplication;
