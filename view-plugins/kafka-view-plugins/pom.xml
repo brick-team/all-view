@@ -13,28 +13,15 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-commons</artifactId>
-      <version>1.4.1</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.4.0</version>
+      <version>${junit-jupiter-engine.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
-      <version>5.4.0</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>junit</artifactId>
-          <groupId>junit</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
+
 
     <dependency>
       <groupId>org.apache.kafka</groupId>
@@ -79,32 +66,10 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-core</artifactId>
-      <version>${logback.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-access</artifactId>
-      <version>${logback.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>${logback.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>1.7.5</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${slf4j.version}</version>
     </dependency>
   </dependencies>
 

@@ -14,7 +14,7 @@
             <onMismatch>DENY</onMismatch>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <FileNamePattern>/var/huifer/logs/local/redis-view-plugins_error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <FileNamePattern>/var/huifer/logs/local/mysql-view-plugins_error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
             <MaxHistory>60</MaxHistory>
             <MaxFileSize>500MB</MaxFileSize>
         </rollingPolicy>

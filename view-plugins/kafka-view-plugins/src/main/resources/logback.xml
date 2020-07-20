@@ -14,7 +14,7 @@
       <onMismatch>DENY</onMismatch>
     </filter>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <FileNamePattern>/var/huifer/logs/local/kavka-view-plugins_error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+      <FileNamePattern>/var/huifer/logs/local/kafka-view-plugins_error_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
       <MaxHistory>60</MaxHistory>
       <MaxFileSize>500MB</MaxFileSize>
     </rollingPolicy>
@@ -28,7 +28,7 @@
     <Prudent>true</Prudent>
     <append>true</append>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <FileNamePattern>/var/huifer/logs/local/kavka-view-plugins_info_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+      <FileNamePattern>/var/huifer/logs/local/kafka-view-plugins_info_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
       <MaxHistory>60</MaxHistory>
       <MaxFileSize>500MB</MaxFileSize>
     </rollingPolicy>
