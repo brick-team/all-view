@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.tview.visualization.app.lisenter.ConfigInterface;
-import org.tview.visualization.app.lisenter.MySqlPerformancePerformanceListener;
+import org.tview.visualization.app.listener.ConfigInterface;
+import org.tview.visualization.app.listener.MySqlPerformancePerformanceListener;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
 import org.tview.visualization.model.label.AbsConfig;
@@ -31,7 +31,7 @@ public class MysqlDbLoginController {
       public AbsConfig get() {
         return config();
       }
-    });
+    }, null);
     return new ResultVO("ok", "ok", 200);
   }
 

@@ -61,11 +61,9 @@ public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
     JdbcTemplate jdbcTemplate = jdbcTemplateCache.get(connectionConfig);
     if (jdbcTemplate == null) {
       Connection target = DriverManager.getConnection(genUrl(connectionConfig));
-      System.out.println("非缓存");
       return new JdbcTemplate(new SingleConnectionDataSource(target, true));
     }
     else {
-      System.out.println("缓存");
       return jdbcTemplate;
     }
   }

@@ -1,4 +1,4 @@
-package org.tview.visualization.app.lisenter;
+package org.tview.visualization.app.listener;
 
 import org.tview.visualization.model.label.AbsConfig;
 

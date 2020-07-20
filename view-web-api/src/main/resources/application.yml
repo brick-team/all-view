@@ -1,0 +1,19 @@
+#server:
+#  port: 9011
+#  servlet:
+#    context-path: /dev-api
+
+
+
+redis-memory:
+  cron: 0/5 * * * * ?
+  size: 50
+
+
+performance:
+  mysql:
+    size: 50
+    cron: 0/5 * * * * ?
+  redis:
+    size: 50
+    cron: 0/5 * * * * ?

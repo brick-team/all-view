@@ -1,4 +1,4 @@
-package org.tview.visualization.app.lisenter;
+package org.tview.visualization.app.listener;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -13,12 +13,13 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
 import org.tview.visualization.inter.db.IDBPerformanceOperation;
 import org.tview.visualization.model.db.DBConnectionConfig;
+import org.tview.visualization.model.enums.PerformanceEnums;
 import org.tview.visualization.model.res.DbPerformance;
 import org.tview.visualization.mysql.cache.MysqlPerformanceCache;
 import org.tview.visualization.mysql.impl.MysqlPerformanceOperationImpl;
 
 @Service
-public class MySqlPerformancePerformanceListener implements IPerformanceListener {
+public class MySqlPerformancePerformanceListener  {
 
   private final Map<String, ScheduledFuture<?>> futureMap = new HashMap<>();
   private final Map<String, MysqlPerformanceCache> dbPerformanceMap = new HashMap<>();
@@ -29,7 +30,7 @@ public class MySqlPerformancePerformanceListener implements IPerformanceListener
   private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
 
-  public void createWork(String name, ConfigInterface config) {
+  public void createWork(String name, ConfigInterface config, IListenerWork work) {
 
     ScheduledFuture<?> scheduledFuture = this.threadPoolTaskScheduler.scheduleWithFixedDelay(() -> {
           try {
@@ -78,6 +79,7 @@ public class MySqlPerformancePerformanceListener implements IPerformanceListener
   public Object get(String name) {
     return dbPerformanceMap.get(name);
   }
+
 
 
   public void remove(String name) {
