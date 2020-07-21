@@ -25,8 +25,9 @@ public class ViewKafkaConsumerCache
     if (value == null) {
       KafkaConsumer<byte[], byte[]> nv = new KafkaConsumer<byte[], byte[]>(pro(key));
       super.put(key, nv);
+    } else {
+      super.put(key, value);
     }
-    super.put(key, value);
   }
 
   @Override

@@ -25,8 +25,10 @@ public class ViewKafkaProducerCache
     if (value == null) {
       KafkaProducer<byte[], byte[]> producer = new KafkaProducer<>(pro(key));
       super.put(key, producer);
-    }
+    } else {
+
     super.put(key, value);
+    }
   }
 
   @Override

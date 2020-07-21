@@ -22,8 +22,10 @@ public class ViewKafkaAdminClientCache extends LRUCache<KafkaConnectionConfig, A
     if (value == null) {
       AdminClient adminClient = AdminClient.create(pro(key));
       super.put(key, adminClient);
-    }
+    } else {
+
     super.put(key, value);
+    }
   }
 
   @Override

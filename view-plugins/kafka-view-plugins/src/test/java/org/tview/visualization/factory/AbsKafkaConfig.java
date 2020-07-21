@@ -6,7 +6,7 @@ public class AbsKafkaConfig {
 
   public KafkaConnectionConfig config() {
     KafkaConnectionConfig kafkaConnectionConfig = new KafkaConnectionConfig();
-    kafkaConnectionConfig.setBrokerConnect("localhost:123");
+    kafkaConnectionConfig.setBrokerConnect("localhost:9092");
     return kafkaConnectionConfig;
   }
 }
