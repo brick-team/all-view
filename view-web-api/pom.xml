@@ -27,6 +27,12 @@
             <groupId>org.tview.visualization</groupId>
             <artifactId>view-interface</artifactId>
             <version>xi-hu</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kafka-clients</artifactId>
+                    <groupId>org.apache.kafka</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.tview.visualization</groupId>

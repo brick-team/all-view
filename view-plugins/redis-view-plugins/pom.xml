@@ -38,6 +38,12 @@
             <artifactId>view-model</artifactId>
             <version>xi-hu</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kafka-clients</artifactId>
+                    <groupId>org.apache.kafka</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

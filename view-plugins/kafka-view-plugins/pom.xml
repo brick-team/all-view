@@ -59,6 +59,10 @@
           <artifactId>view-model</artifactId>
           <groupId>org.tview.visualization</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>kafka-clients</artifactId>
+          <groupId>org.apache.kafka</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
 
