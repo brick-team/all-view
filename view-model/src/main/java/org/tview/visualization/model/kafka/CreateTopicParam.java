@@ -1,23 +1,14 @@
 package org.tview.visualization.model.kafka;
 
 public class CreateTopicParam {
-  /**
-   * topic 名称
-   */
+  /** topic 名称 */
   private String name;
-  /**
-   * partitions 编号, 分区数量
-   * <b>default value = 0 </b>
-   */
+  /** partitions 编号, 分区数量 <b>default value = 0 </b> */
   private Integer partitionsNum = 0;
-  /**
-   * 副本数量
-   * <b>default value = 0 </b>
-   */
+  /** 副本数量 <b>default value = 0 </b> */
   private Short replicationFactor = 0;
 
-  public CreateTopicParam() {
-  }
+  public CreateTopicParam() {}
 
   public CreateTopicParam(String name, Integer partitionsNum, Short replicationFactor) {
     this.name = name;

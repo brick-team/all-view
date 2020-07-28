@@ -17,6 +17,7 @@
     <module>mysql-view-plugins</module>
     <module>redis-view-plugins</module>
     <module>rabbit-view</module>
+    <module>jvm-view-plugins</module>
   </modules>
 
 

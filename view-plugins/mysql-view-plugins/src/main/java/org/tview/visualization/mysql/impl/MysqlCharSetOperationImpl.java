@@ -16,9 +16,7 @@ public class MysqlCharSetOperationImpl implements MysqlCharSetOperation {
    */
   @Override
   public List<String> charSetList() {
-    return Arrays.stream(MysqlCharSet.values())
-        .map(MysqlCharSet::getName)
-        .collect(Collectors.toList());
+    return Arrays.stream(MysqlCharSet.values()).map(MysqlCharSet::getName).collect(Collectors.toList());
   }
 
   /**

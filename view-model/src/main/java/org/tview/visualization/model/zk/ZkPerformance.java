@@ -1,8 +1,6 @@
 package org.tview.visualization.model.zk;
 
-/***
- * zookeeper 指标
- */
+/** * zookeeper 指标 */
 public class ZkPerformance {
 
   private String zk_avg;

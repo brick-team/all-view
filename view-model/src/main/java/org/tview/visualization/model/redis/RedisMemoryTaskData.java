@@ -8,8 +8,7 @@ public class RedisMemoryTaskData {
   private long usedMemoryPeak = -1;
   private long usedMemoryLua = -1;
 
-  public RedisMemoryTaskData(
-      long usedMemory, long usedMemoryRss, long usedMemoryPeak, long usedMemoryLua) {
+  public RedisMemoryTaskData(long usedMemory, long usedMemoryRss, long usedMemoryPeak, long usedMemoryLua) {
     this.usedMemory = usedMemory;
     this.usedMemoryRss = usedMemoryRss;
     this.usedMemoryPeak = usedMemoryPeak;

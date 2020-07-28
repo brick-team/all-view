@@ -24,6 +24,16 @@ import javax.management.MalformedObjectNameException;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 
+import org.tview.visualization.model.jvm.JavaCpuEntity;
+import org.tview.visualization.model.jvm.JavaDeadlockCheck;
+import org.tview.visualization.model.jvm.JavaGcInfoEntity;
+import org.tview.visualization.model.jvm.JavaMemoryInfoEntity;
+import org.tview.visualization.model.jvm.JavaMonitorEntity;
+import org.tview.visualization.model.jvm.JavaThreadEntity;
+import org.tview.visualization.model.jvm.JavaThreadInfo;
+import org.tview.visualization.model.jvm.JavaUsageEntity;
+import org.tview.visualization.model.jvm.JavaUsageKvInfo;
+
 public class MonitorUtils {
     public static final String RUNTIMNAME = "java.lang:type=Runtime";
     public static final String THREAD_BEAN_NAME = "java.lang:type=Threading";

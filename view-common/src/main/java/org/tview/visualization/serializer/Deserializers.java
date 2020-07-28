@@ -17,6 +17,4 @@ public class Deserializers {
   public MessageDeserializer getValueDeserializer() {
     return valueDeserializer;
   }
-
-
 }

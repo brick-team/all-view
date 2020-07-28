@@ -41,10 +41,7 @@ public class MysqlExecute implements SqlExecute {
     ExecuteRes executeRes = new ExecuteRes();
     try {
       JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
-      if (sql.startsWith("select")
-          || sql.startsWith("SELECT")
-          || sql.startsWith("show")
-          || sql.startsWith("SHOW")) {
+      if (sql.startsWith("select") || sql.startsWith("SELECT") || sql.startsWith("show") || sql.startsWith("SHOW")) {
         List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
         convertExecuteRes(maps, executeRes);
 

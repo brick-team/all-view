@@ -6,7 +6,6 @@ import org.tview.visualization.serializer.MessageDeserializer;
 
 public class StringMessageDeserializer implements MessageDeserializer {
 
-
   /**
    * 读取 bytes
    *

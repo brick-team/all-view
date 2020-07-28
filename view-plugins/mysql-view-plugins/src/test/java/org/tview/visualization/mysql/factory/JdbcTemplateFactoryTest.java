@@ -26,12 +26,9 @@ class JdbcTemplateFactoryTest extends AbsMysqlConfig {
     //    dbConnectionConfig.setDbName("mysql");
     JdbcTemplate jdbcTemplate = jdbcFactory.create(dbConnectionConfig);
 
-    File file =
-        new File(
-            "E:\\github\\all-view\\mysql-view-plugins\\src\\main\\resources\\mysql_5_8_collection.txt");
+    File file = new File("E:\\github\\all-view\\mysql-view-plugins\\src\\main\\resources\\mysql_5_8_collection.txt");
 
-    InputStreamReader inputReader =
-        new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+    InputStreamReader inputReader = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
     BufferedReader bf = new BufferedReader(inputReader);
     // 按行读取字符串
     String str;
@@ -39,9 +36,7 @@ class JdbcTemplateFactoryTest extends AbsMysqlConfig {
     while ((str = bf.readLine()) != null) {
       String[] split = str.split(",");
 
-      String yes =
-          String.format(
-              "%s(\"%s\",\"%s\",%s),", split[0], split[0], split[1], split[3].equals("Yes"));
+      String yes = String.format("%s(\"%s\",\"%s\",%s),", split[0], split[0], split[1], split[3].equals("Yes"));
       System.out.println(yes);
     }
     bf.close();

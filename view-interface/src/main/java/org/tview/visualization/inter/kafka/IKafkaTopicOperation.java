@@ -13,8 +13,7 @@ public interface IKafkaTopicOperation {
    * @param createTopicParam 创建topic的请求参数
    * @return true 成功, false 失败
    */
-  boolean createTopic(CreateTopicParam createTopicParam,
-      KafkaConnectionConfig kafkaConnectionConfig);
+  boolean createTopic(CreateTopicParam createTopicParam, KafkaConnectionConfig kafkaConnectionConfig);
 
   /**
    * 删除 topic
@@ -38,5 +37,4 @@ public interface IKafkaTopicOperation {
    * @return topic 信息
    */
   TopicVO topicInfo(String topic, KafkaConnectionConfig kafkaConnectionConfig);
-
 }
