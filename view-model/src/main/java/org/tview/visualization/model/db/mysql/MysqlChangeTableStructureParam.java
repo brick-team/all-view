@@ -1,7 +1,8 @@
 package org.tview.visualization.model.db.mysql;
 
-import java.util.List;
 import org.tview.visualization.model.db.CreateRowParams;
+
+import java.util.List;
 
 /** 修改表结构的请求参数 */
 public class MysqlChangeTableStructureParam {

@@ -1,9 +1,10 @@
 package org.tview.visualization.inter.db;
 
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.MysqlSlaveStatus;
+
+import java.math.BigDecimal;
+import java.sql.SQLException;
 
 public interface IDBPerformanceOperation {
 

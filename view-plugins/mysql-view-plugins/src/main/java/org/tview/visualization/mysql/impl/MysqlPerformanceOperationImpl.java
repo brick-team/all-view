@@ -1,8 +1,5 @@
 package org.tview.visualization.mysql.impl;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.tview.visualization.inter.db.IDBPerformanceOperation;
@@ -13,6 +10,10 @@ import org.tview.visualization.mysql.MysqlConstantSql;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.SQLException;
 
 public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
 
@@ -27,10 +28,13 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   @Override
   public BigDecimal qps(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
-    ShowStatusEntity question = jdbcTemplate.queryForObject(MysqlConstantSql.Question, new ShowStatusEntityRowMapper());
-    ShowStatusEntity uptime = jdbcTemplate.queryForObject(MysqlConstantSql.uptime, new ShowStatusEntityRowMapper());
+    ShowStatusEntity question =
+        jdbcTemplate.queryForObject(MysqlConstantSql.Question, new ShowStatusEntityRowMapper());
+    ShowStatusEntity uptime =
+        jdbcTemplate.queryForObject(MysqlConstantSql.uptime, new ShowStatusEntityRowMapper());
 
-    return new BigDecimal(question.getValue()).divide(new BigDecimal(uptime.getValue()), 8, RoundingMode.DOWN);
+    return new BigDecimal(question.getValue())
+        .divide(new BigDecimal(uptime.getValue()), 8, RoundingMode.DOWN);
   }
 
   /**
@@ -42,10 +46,12 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   @Override
   public BigDecimal tps(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
-    ShowStatusEntity commit = jdbcTemplate.queryForObject(MysqlConstantSql.Com_commit, new ShowStatusEntityRowMapper());
+    ShowStatusEntity commit =
+        jdbcTemplate.queryForObject(MysqlConstantSql.Com_commit, new ShowStatusEntityRowMapper());
     ShowStatusEntity rollback =
         jdbcTemplate.queryForObject(MysqlConstantSql.Com_rollback, new ShowStatusEntityRowMapper());
-    ShowStatusEntity uptime = jdbcTemplate.queryForObject(MysqlConstantSql.uptime, new ShowStatusEntityRowMapper());
+    ShowStatusEntity uptime =
+        jdbcTemplate.queryForObject(MysqlConstantSql.uptime, new ShowStatusEntityRowMapper());
 
     return new BigDecimal(commit.getValue())
         .add(new BigDecimal(rollback.getValue()))
@@ -62,7 +68,8 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   public BigDecimal keyBufferRead(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
     ShowStatusEntity key_read_requests =
-        jdbcTemplate.queryForObject(MysqlConstantSql.key_read_requests, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.key_read_requests, new ShowStatusEntityRowMapper());
 
     ShowStatusEntity key_reads =
         jdbcTemplate.queryForObject(MysqlConstantSql.key_reads, new ShowStatusEntityRowMapper());
@@ -86,7 +93,8 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   public BigDecimal keyBufferWrite(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
     ShowStatusEntity key_write_requests =
-        jdbcTemplate.queryForObject(MysqlConstantSql.key_write_requests, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.key_write_requests, new ShowStatusEntityRowMapper());
 
     ShowStatusEntity key_writes =
         jdbcTemplate.queryForObject(MysqlConstantSql.key_writes, new ShowStatusEntityRowMapper());
@@ -110,17 +118,23 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   public BigDecimal innoDBBuffer(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
     ShowStatusEntity innodb_buffer_pool_reads =
-        jdbcTemplate.queryForObject(MysqlConstantSql.innodb_buffer_pool_reads, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.innodb_buffer_pool_reads, new ShowStatusEntityRowMapper());
 
     ShowStatusEntity innodb_buffer_pool_read_requests =
-        jdbcTemplate.queryForObject(MysqlConstantSql.innodb_buffer_pool_read_requests, new ShowStatusEntityRowMapper());
-    if (innodb_buffer_pool_reads.getValue().equals("0") || innodb_buffer_pool_read_requests.equals("0")) {
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.innodb_buffer_pool_read_requests, new ShowStatusEntityRowMapper());
+    if (innodb_buffer_pool_reads.getValue().equals("0")
+        || innodb_buffer_pool_read_requests.equals("0")) {
       return BigDecimal.ZERO;
     }
     return BigDecimal.ONE
         .subtract(
             new BigDecimal(innodb_buffer_pool_reads.getValue())
-                .divide(new BigDecimal(innodb_buffer_pool_read_requests.getValue()), 8, RoundingMode.DOWN))
+                .divide(
+                    new BigDecimal(innodb_buffer_pool_read_requests.getValue()),
+                    8,
+                    RoundingMode.DOWN))
         .multiply(new BigDecimal("100"));
   }
 
@@ -137,7 +151,8 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
         jdbcTemplate.queryForObject(MysqlConstantSql.Qcache_hits, new ShowStatusEntityRowMapper());
 
     ShowStatusEntity qcacheInserts =
-        jdbcTemplate.queryForObject(MysqlConstantSql.Qcache_inserts, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.Qcache_inserts, new ShowStatusEntityRowMapper());
 
     try {
       return new BigDecimal(qcacheHits.getValue())
@@ -171,7 +186,8 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   public BigDecimal threadCache(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
     ShowStatusEntity Threads_created =
-        jdbcTemplate.queryForObject(MysqlConstantSql.Threads_created, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.Threads_created, new ShowStatusEntityRowMapper());
 
     ShowStatusEntity connections =
         jdbcTemplate.queryForObject(MysqlConstantSql.connections, new ShowStatusEntityRowMapper());
@@ -212,10 +228,12 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
 
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
     ShowStatusEntity Created_tmp_disk_tables =
-        jdbcTemplate.queryForObject(MysqlConstantSql.Created_tmp_disk_tables, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.Created_tmp_disk_tables, new ShowStatusEntityRowMapper());
 
     ShowStatusEntity Created_tmp_tables =
-        jdbcTemplate.queryForObject(MysqlConstantSql.Created_tmp_tables, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.Created_tmp_tables, new ShowStatusEntityRowMapper());
     if (Created_tmp_disk_tables.getValue().equals("0") || Created_tmp_tables.equals("0")) {
       return BigDecimal.ZERO;
     }
@@ -249,7 +267,8 @@ public class MysqlPerformanceOperationImpl implements IDBPerformanceOperation {
   public BigDecimal innodbLogWaits(DBConnectionConfig config) throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(config);
     ShowStatusEntity Innodb_log_waits =
-        jdbcTemplate.queryForObject(MysqlConstantSql.Innodb_log_waits, new ShowStatusEntityRowMapper());
+        jdbcTemplate.queryForObject(
+            MysqlConstantSql.Innodb_log_waits, new ShowStatusEntityRowMapper());
     return new BigDecimal(Innodb_log_waits.getValue());
   }
 }

@@ -1,10 +1,11 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.Collection;
 import org.tview.visualization.inter.redis.RedisSetOperation;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.util.Collection;
 
 public class RedisSetOperationImpl implements RedisSetOperation {
 

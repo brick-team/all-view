@@ -1,10 +1,11 @@
 package org.tview.visualization.app.conf;
 
-import javax.servlet.Filter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+
+import javax.servlet.Filter;
 
 @Configuration
 public class WebConfig {

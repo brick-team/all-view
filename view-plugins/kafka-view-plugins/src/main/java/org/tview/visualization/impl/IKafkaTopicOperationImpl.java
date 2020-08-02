@@ -1,18 +1,6 @@
 package org.tview.visualization.impl;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
-import org.apache.kafka.clients.admin.AdminClient;
-import org.apache.kafka.clients.admin.CreateTopicsResult;
-import org.apache.kafka.clients.admin.DeleteTopicsOptions;
-import org.apache.kafka.clients.admin.DeleteTopicsResult;
-import org.apache.kafka.clients.admin.NewTopic;
+import org.apache.kafka.clients.admin.*;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.Node;
 import org.apache.kafka.common.PartitionInfo;
@@ -25,7 +13,10 @@ import org.tview.visualization.model.kafka.CreateTopicParam;
 import org.tview.visualization.model.kafka.KafkaConnectionConfig;
 import org.tview.visualization.model.kafka.topic.TopicPartitionVO;
 import org.tview.visualization.model.kafka.topic.TopicVO;
-import org.tview.visualization.singlet.KafkaSinglet;
+
+import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
 
@@ -35,16 +26,18 @@ public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
   /**
    * 创建topic
    *
-   * @param createTopicParam      创建topic的请求参数
+   * @param createTopicParam 创建topic的请求参数
    * @param kafkaConnectionConfig
    * @return true 成功, false 失败
    */
   @Override
-  public boolean createTopic(CreateTopicParam createTopicParam,
-      KafkaConnectionConfig kafkaConnectionConfig) {
-    NewTopic newTopic = new NewTopic(createTopicParam.getName(),
-        createTopicParam.getPartitionsNum(),
-        createTopicParam.getReplicationFactor());
+  public boolean createTopic(
+      CreateTopicParam createTopicParam, KafkaConnectionConfig kafkaConnectionConfig) {
+    NewTopic newTopic =
+        new NewTopic(
+            createTopicParam.getName(),
+            createTopicParam.getPartitionsNum(),
+            createTopicParam.getReplicationFactor());
     AdminClient adminClient = factory.factoryAdminClient(kafkaConnectionConfig);
     CreateTopicsResult topics = adminClient.createTopics(List.of(newTopic));
     boolean flg = false;
@@ -54,7 +47,7 @@ public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
       flg = true;
       LOG.info("Topic name=[{}] 创建成功.", newTopic.name());
     } catch (InterruptedException | ExecutionException e) {
-      LOG.error("Topic name=[{}] 创建失败, {}", newTopic.name(), e);
+      LOG.error("Topic name=[{}] 创建失败", newTopic.name(), e);
     }
 
     return flg;
@@ -63,7 +56,7 @@ public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
   /**
    * 删除 topic
    *
-   * @param topic                 topic 名称
+   * @param topic topic 名称
    * @param kafkaConnectionConfig
    * @return true 成功, false 失败
    */
@@ -72,16 +65,15 @@ public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
     DeleteTopicsOptions deleteTopicsOptions = new DeleteTopicsOptions();
     deleteTopicsOptions.timeoutMs(5000);
     AdminClient adminClient = factory.factoryAdminClient(kafkaConnectionConfig);
-    DeleteTopicsResult deleteTopicsResult = adminClient
-        .deleteTopics(List.of(topic), deleteTopicsOptions);
+    DeleteTopicsResult deleteTopicsResult =
+        adminClient.deleteTopics(List.of(topic), deleteTopicsOptions);
     boolean flg = false;
     try {
       deleteTopicsResult.all().get();
       LOG.info("Topic name=[{}] 删除成功.", topic);
       flg = true;
     } catch (InterruptedException | ExecutionException e) {
-      LOG.error("Topic name=[{}] 删除失败. {}", topic, e);
-
+      LOG.error("Topic name=[{}] 删除失败.", topic, e);
     }
     return flg;
   }
@@ -102,13 +94,12 @@ public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
       result.put(topic, topicInfo);
     }
     return result;
-
   }
 
   /**
    * 获取topic信息
    *
-   * @param topic                 topic名称
+   * @param topic topic名称
    * @param kafkaConnectionConfig
    * @return topic 信息
    */
@@ -126,26 +117,23 @@ public class IKafkaTopicOperationImpl implements IKafkaTopicOperation {
       TopicPartitionVO topicPartitionVO = new TopicPartitionVO();
       topicPartitionVO.setId(partition);
 
-      Set<Integer> inSyncReplicas = Arrays.stream(partitionInfo.inSyncReplicas())
-          .map(Node::id)
-          .collect(Collectors.toSet());
-      Set<Integer> offlineReplicas = Arrays.stream(partitionInfo.offlineReplicas())
-          .map(Node::id)
-          .collect(Collectors.toSet());
+      Set<Integer> inSyncReplicas =
+          Arrays.stream(partitionInfo.inSyncReplicas()).map(Node::id).collect(Collectors.toSet());
+      Set<Integer> offlineReplicas =
+          Arrays.stream(partitionInfo.offlineReplicas()).map(Node::id).collect(Collectors.toSet());
 
       for (Node replica : partitionInfo.replicas()) {
         boolean isInSync = inSyncReplicas.contains(replica.id());
         boolean isInOffline = offlineReplicas.contains(replica.id());
 
-        topicPartitionVO.addReplica(new TopicPartitionVO.PartitionReplica(
-            replica.id(), isInSync, false, isInOffline)
-        );
+        topicPartitionVO.addReplica(
+            new TopicPartitionVO.PartitionReplica(replica.id(), isInSync, false, isInOffline));
       }
 
       Node leader = partitionInfo.leader();
       if (leader != null) {
-        topicPartitionVO
-            .addReplica(new TopicPartitionVO.PartitionReplica(leader.id(), true, true, false));
+        topicPartitionVO.addReplica(
+            new TopicPartitionVO.PartitionReplica(leader.id(), true, true, false));
       }
       partitions.put(partitionInfo.partition(), topicPartitionVO);
     }

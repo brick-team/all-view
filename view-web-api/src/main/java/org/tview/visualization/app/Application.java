@@ -17,17 +17,15 @@ import org.tview.visualization.model.res.ResultVO;
 @RestController
 public class Application {
 
+  @Autowired private PerformanceConfiguration performanceConfiguration;
+  @Value("${performance.redis.cron}")
+  private String redisMemoryCron;
+  @Value("${performance.redis.size}")
+  private Integer redisMemorySize;
+
   public static void main(String[] args) {
     SpringApplication.run(Application.class);
   }
-
-  @Autowired private PerformanceConfiguration performanceConfiguration;
-
-  @Value("${performance.redis.cron}")
-  private String redisMemoryCron;
-
-  @Value("${performance.redis.size}")
-  private Integer redisMemorySize;
 
   @GetMapping("/health")
   public ResultVO dod() {

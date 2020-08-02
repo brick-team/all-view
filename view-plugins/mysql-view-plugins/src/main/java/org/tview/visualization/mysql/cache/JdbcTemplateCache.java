@@ -14,19 +14,4 @@ public class JdbcTemplateCache extends LruCache<DBConnectionConfig, JdbcTemplate
   public JdbcTemplateCache(int size) {
     super(size);
   }
-
-  @Override
-  public int size() {
-    return super.size();
-  }
-
-  @Override
-  public void put(DBConnectionConfig key, JdbcTemplate value) {
-    super.put(key, value);
-  }
-
-  @Override
-  public JdbcTemplate get(DBConnectionConfig key) {
-    return super.get(key);
-  }
 }

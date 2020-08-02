@@ -1,10 +1,5 @@
 package org.tview.visualization.app.listener;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ScheduledFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +12,12 @@ import org.tview.visualization.model.redis.RedisMemoryTaskData;
 import org.tview.visualization.model.redis.info.RedisCliInfoMemory;
 import org.tview.visualization.redis.cache.RedisMemoryCache;
 import org.tview.visualization.redis.impl.IRedisServiceInfoImpl;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ScheduledFuture;
 
 @Service
 public class RedisMemoryPerformanceListener {
@@ -33,7 +34,7 @@ public class RedisMemoryPerformanceListener {
   @Value("${performance.redis.size:50}")
   private Integer redisMemorySize;
 
-  public void createWork(String name, ConfigInterface config, IListenerWork work) {
+  public void createWork(String name, ConfigInterface config) {
     ScheduledFuture<?> schedule =
         threadPoolTaskScheduler.scheduleWithFixedDelay(
             () -> {
@@ -76,12 +77,10 @@ public class RedisMemoryPerformanceListener {
 
   public void remove(String name) {
     log.info("开始删除redis组级别缓存,name=[{}]", name);
-    if (!futureMap.isEmpty()) {
-      if (futureMap.containsKey(name)) {
-        ScheduledFuture<?> scheduledFuture = futureMap.get(name);
-        scheduledFuture.cancel(true);
-        futureMap.remove(name);
-      }
+    if (!futureMap.isEmpty() && futureMap.containsKey(name)) {
+      ScheduledFuture<?> scheduledFuture = futureMap.get(name);
+      scheduledFuture.cancel(true);
+      futureMap.remove(name);
     }
   }
 }

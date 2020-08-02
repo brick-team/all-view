@@ -1,15 +1,8 @@
 package org.tview.visualization.model.redis;
 
+import org.tview.visualization.model.redis.info.*;
+
 import java.util.List;
-import org.tview.visualization.model.redis.info.RedisCliInfoClients;
-import org.tview.visualization.model.redis.info.RedisCliInfoCluster;
-import org.tview.visualization.model.redis.info.RedisCliInfoCpu;
-import org.tview.visualization.model.redis.info.RedisCliInfoKeyspace;
-import org.tview.visualization.model.redis.info.RedisCliInfoMemory;
-import org.tview.visualization.model.redis.info.RedisCliInfoPersistence;
-import org.tview.visualization.model.redis.info.RedisCliInfoReplication;
-import org.tview.visualization.model.redis.info.RedisCliInfoServer;
-import org.tview.visualization.model.redis.info.RedisCliInfoStats;
 
 public class RedisInfo {
 

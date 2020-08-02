@@ -1,7 +1,8 @@
 package org.tview.visualization.model.kafka;
 
-import java.util.Collection;
 import org.apache.kafka.common.Node;
+
+import java.util.Collection;
 
 public class ClusterDescription {
 

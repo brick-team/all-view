@@ -1,13 +1,5 @@
 package org.tview.visualization.mysql.impl;
 
-import static org.tview.visualization.mysql.singlet.MysqlCacheSinglet.getSqlExecuteCache;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.inter.db.SqlExecute;
 import org.tview.visualization.model.db.DBConnectionConfig;
@@ -16,18 +8,26 @@ import org.tview.visualization.mysql.cache.SqlExecuteCache;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
+import static org.tview.visualization.mysql.singlet.MysqlCacheSinglet.getSqlExecuteCache;
+
 /** mysql 的sql执行器 */
 public class MysqlExecute implements SqlExecute {
 
+  private static final SqlExecuteCache sqlExecuteCache = getSqlExecuteCache();
   JdbcFactory jdbcFactory;
+  AtomicInteger atomicInteger = new AtomicInteger(0);
 
   @PostConstruct
   public void initJdbcFactory() {
     jdbcFactory = new JdbcTemplateFactory();
   }
-
-  private static final SqlExecuteCache sqlExecuteCache = getSqlExecuteCache();
-  AtomicInteger atomicInteger = new AtomicInteger(0);
 
   /**
    * 执行sql
@@ -41,7 +41,10 @@ public class MysqlExecute implements SqlExecute {
     ExecuteRes executeRes = new ExecuteRes();
     try {
       JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
-      if (sql.startsWith("select") || sql.startsWith("SELECT") || sql.startsWith("show") || sql.startsWith("SHOW")) {
+      if (sql.startsWith("select")
+          || sql.startsWith("SELECT")
+          || sql.startsWith("show")
+          || sql.startsWith("SHOW")) {
         List<Map<String, Object>> maps = jdbcTemplate.queryForList(sql);
         convertExecuteRes(maps, executeRes);
 

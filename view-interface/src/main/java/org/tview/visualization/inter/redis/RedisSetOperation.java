@@ -1,7 +1,8 @@
 package org.tview.visualization.inter.redis;
 
-import java.util.Collection;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
+
+import java.util.Collection;
 
 /** redis 的 set 数据类型操作 */
 public interface RedisSetOperation extends IRedisOperationLabel {

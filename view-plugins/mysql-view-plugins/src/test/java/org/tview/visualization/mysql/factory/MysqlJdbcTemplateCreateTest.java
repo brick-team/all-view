@@ -1,6 +1,5 @@
 package org.tview.visualization.mysql.factory;
 
-import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateCreate;
 import org.tview.visualization.mysql.factory.jdbc.MysqlJdbcTemplateCreate;
+
+import java.sql.SQLException;
 
 class MysqlJdbcTemplateCreateTest extends AbsMysqlConfig {
   private static final Logger LOG = LoggerFactory.getLogger(MysqlJdbcTemplateCreateTest.class);

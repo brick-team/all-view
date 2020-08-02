@@ -1,11 +1,12 @@
 package org.tview.visualization.common.impl;
 
-import java.sql.SQLException;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.ConfigLoginService;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.mysql.factory.AbsMysqlConfig;
+
+import java.sql.SQLException;
 
 class IDbLoginServiceImplTest extends AbsMysqlConfig {
 
@@ -16,10 +17,4 @@ class IDbLoginServiceImplTest extends AbsMysqlConfig {
     boolean connection = loginService.connection(this.getConf());
     Assert.assertTrue(connection);
   }
-
-  @Test
-  void login() {}
-
-  @Test
-  void get() {}
 }

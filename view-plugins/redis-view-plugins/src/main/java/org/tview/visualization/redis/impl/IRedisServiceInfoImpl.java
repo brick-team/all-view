@@ -1,25 +1,18 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.model.redis.RedisInfo;
-import org.tview.visualization.model.redis.info.RedisCliInfoClients;
-import org.tview.visualization.model.redis.info.RedisCliInfoCluster;
-import org.tview.visualization.model.redis.info.RedisCliInfoCpu;
-import org.tview.visualization.model.redis.info.RedisCliInfoKeyspace;
-import org.tview.visualization.model.redis.info.RedisCliInfoMemory;
-import org.tview.visualization.model.redis.info.RedisCliInfoPersistence;
-import org.tview.visualization.model.redis.info.RedisCliInfoReplication;
-import org.tview.visualization.model.redis.info.RedisCliInfoServer;
-import org.tview.visualization.model.redis.info.RedisCliInfoStats;
+import org.tview.visualization.model.redis.info.*;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
 
 public class IRedisServiceInfoImpl implements IRedisServerInfo {
   public static final String REDIS_VERSION = "redis_version";

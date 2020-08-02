@@ -1,15 +1,16 @@
 package org.tview.visualization.mysql.factory.jdbc;
 
-import static org.tview.visualization.mysql.singlet.MysqlCacheSinglet.getJdbcTemplateCache;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.mysql.cache.JdbcTemplateCache;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import static org.tview.visualization.mysql.singlet.MysqlCacheSinglet.getJdbcTemplateCache;
 
 public class MysqlJdbcTemplateCreate implements JdbcTemplateCreate {
 

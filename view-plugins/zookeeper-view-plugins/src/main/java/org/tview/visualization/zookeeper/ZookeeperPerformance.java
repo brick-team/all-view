@@ -1,9 +1,10 @@
 package org.tview.visualization.zookeeper;
 
-import java.util.Map;
 import org.tview.visualization.inter.zk.ZkPerformanceOperation;
 import org.tview.visualization.inter.zk.ZookeeperStateService;
 import org.tview.visualization.model.zk.ZkPerformance;
+
+import java.util.Map;
 
 public class ZookeeperPerformance implements ZkPerformanceOperation {
 

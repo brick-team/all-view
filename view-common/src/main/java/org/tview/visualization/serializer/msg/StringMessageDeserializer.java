@@ -1,8 +1,9 @@
 package org.tview.visualization.serializer.msg;
 
+import org.tview.visualization.serializer.MessageDeserializer;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import org.tview.visualization.serializer.MessageDeserializer;
 
 public class StringMessageDeserializer implements MessageDeserializer {
 

@@ -14,6 +14,14 @@ public class ResultVO {
     this.code = code;
   }
 
+  public static ResultVO error(Object data) {
+    return new ResultVO("error", data, 400);
+  }
+
+  public static ResultVO success(Object data) {
+    return new ResultVO("error", data, 200);
+  }
+
   public String getMsg() {
     return msg;
   }

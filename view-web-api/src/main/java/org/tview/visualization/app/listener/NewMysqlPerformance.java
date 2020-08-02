@@ -1,7 +1,5 @@
 package org.tview.visualization.app.listener;
 
-import java.sql.SQLException;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,9 @@ import org.tview.visualization.model.enums.PerformanceEnums;
 import org.tview.visualization.model.res.DbPerformance;
 import org.tview.visualization.mysql.cache.MysqlPerformanceCache;
 import org.tview.visualization.mysql.impl.MysqlPerformanceOperationImpl;
+
+import java.sql.SQLException;
+import java.util.Map;
 
 @Service
 public class NewMysqlPerformance extends AbsPerformanceListener implements IListenerWork {
@@ -46,14 +47,12 @@ public class NewMysqlPerformance extends AbsPerformanceListener implements IList
       DbPerformance performance = performance(config);
       Map<String, FifoCache> cache = this.getCache(PerformanceEnums.MYSQL);
       if (!cache.containsKey(name)) {
-        System.out.println("not key");
         log.info("开始记录 mysql 性能指标,time=[{}]", time);
         MysqlPerformanceCache mysqlPerformanceCache =
             new MysqlPerformanceCache(getPerformanceConfiguration().getMysql().getSize());
         mysqlPerformanceCache.put(time, performance);
         cache.put(name, mysqlPerformanceCache);
       } else {
-        System.out.println("has key");
         log.info("开始记录 mysql 性能指标,time=[{}]", time);
         cache.get(name).put(time, performance);
       }

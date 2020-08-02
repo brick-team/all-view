@@ -1,6 +1,5 @@
 package org.tview.visualization.cache;
 
-import java.util.Properties;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -8,16 +7,13 @@ import org.apache.kafka.common.cache.LRUCache;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.tview.visualization.model.kafka.KafkaConnectionConfig;
 
+import java.util.Properties;
+
 public class ViewKafkaConsumerCache
     extends LRUCache<KafkaConnectionConfig, KafkaConsumer<byte[], byte[]>> {
 
   public ViewKafkaConsumerCache(int maxSize) {
     super(maxSize);
-  }
-
-  @Override
-  public KafkaConsumer<byte[], byte[]> get(KafkaConnectionConfig key) {
-    return super.get(key);
   }
 
   @Override
@@ -28,16 +24,6 @@ public class ViewKafkaConsumerCache
     } else {
       super.put(key, value);
     }
-  }
-
-  @Override
-  public boolean remove(KafkaConnectionConfig key) {
-    return super.remove(key);
-  }
-
-  @Override
-  public long size() {
-    return super.size();
   }
 
   private Properties pro(KafkaConnectionConfig connectionConfig) {

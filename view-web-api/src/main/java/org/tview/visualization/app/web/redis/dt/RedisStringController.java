@@ -20,7 +20,7 @@ public class RedisStringController {
       stringOperation.add(config, k, v);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -30,7 +30,7 @@ public class RedisStringController {
       Object o = stringOperation.get(config, k);
       return new ResultVO("ok", o, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -40,7 +40,7 @@ public class RedisStringController {
       stringOperation.delete(config, k);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -50,7 +50,7 @@ public class RedisStringController {
       stringOperation.update(config, k, v);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 }

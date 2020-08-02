@@ -1,9 +1,10 @@
 package org.tview.visualization.inter.kafka;
 
-import java.util.Map;
 import org.tview.visualization.model.kafka.CreateTopicParam;
 import org.tview.visualization.model.kafka.KafkaConnectionConfig;
 import org.tview.visualization.model.kafka.topic.TopicVO;
+
+import java.util.Map;
 
 public interface IKafkaTopicOperation {
 
@@ -13,7 +14,8 @@ public interface IKafkaTopicOperation {
    * @param createTopicParam 创建topic的请求参数
    * @return true 成功, false 失败
    */
-  boolean createTopic(CreateTopicParam createTopicParam, KafkaConnectionConfig kafkaConnectionConfig);
+  boolean createTopic(
+      CreateTopicParam createTopicParam, KafkaConnectionConfig kafkaConnectionConfig);
 
   /**
    * 删除 topic

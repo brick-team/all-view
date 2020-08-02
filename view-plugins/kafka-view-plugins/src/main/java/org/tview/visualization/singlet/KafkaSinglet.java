@@ -5,10 +5,13 @@ import org.tview.visualization.cache.ViewKafkaConsumerCache;
 import org.tview.visualization.cache.ViewKafkaProducerCache;
 
 public class KafkaSinglet {
-
   private static ViewKafkaConsumerCache viewKafkaConsumerCache = null;
   private static ViewKafkaAdminClientCache viewKafkaAdminClientCache = null;
   private static ViewKafkaProducerCache viewKafkaProducerCache = null;
+
+  private KafkaSinglet() {
+    throw new IllegalStateException("Utility class");
+  }
 
   public static ViewKafkaProducerCache getViewKafkaProducerCache() {
     if (viewKafkaProducerCache == null) {

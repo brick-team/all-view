@@ -1,10 +1,5 @@
 package org.tview.visualization.app.listener;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ScheduledFuture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
@@ -14,12 +9,18 @@ import org.tview.visualization.app.conf.PerformanceConfiguration;
 import org.tview.visualization.cache.impl.FifoCache;
 import org.tview.visualization.model.enums.PerformanceEnums;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ScheduledFuture;
+
 @Service
 public abstract class AbsPerformanceListener implements IPerformanceListener {
 
   private final Map<String, ScheduledFuture<?>> futureMap = new HashMap<>();
-  private final Map<String, FifoCache> MYSQL = new HashMap<>();
-  private final Map<String, FifoCache> REDIS = new HashMap<>();
+  private final Map<String, FifoCache> mysqlCache = new HashMap<>();
+  private final Map<String, FifoCache> redisCache = new HashMap<>();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
   @Autowired private PerformanceConfiguration performanceConfiguration;
@@ -34,9 +35,9 @@ public abstract class AbsPerformanceListener implements IPerformanceListener {
 
   public Map<String, FifoCache> getCache(PerformanceEnums performanceEnums) {
     if (performanceEnums == PerformanceEnums.MYSQL) {
-      return MYSQL;
+      return mysqlCache;
     } else if (performanceEnums == PerformanceEnums.REDIS) {
-      return REDIS;
+      return redisCache;
     }
     return null;
   }
@@ -79,21 +80,19 @@ public abstract class AbsPerformanceListener implements IPerformanceListener {
   @Override
   public Object get(String name, PerformanceEnums performanceEnums) {
     if (performanceEnums == PerformanceEnums.MYSQL) {
-      return MYSQL.get(name);
+      return mysqlCache.get(name);
     } else if (performanceEnums == PerformanceEnums.REDIS) {
-      return REDIS.get(name);
+      return redisCache.get(name);
     }
     return null;
   }
 
   @Override
   public void remove(String name) {
-    if (!futureMap.isEmpty()) {
-      if (futureMap.containsKey(name)) {
-        ScheduledFuture<?> scheduledFuture = futureMap.get(name);
-        scheduledFuture.cancel(true);
-        futureMap.remove(name);
-      }
+    if (!futureMap.isEmpty() && futureMap.containsKey(name)) {
+      ScheduledFuture<?> scheduledFuture = futureMap.get(name);
+      scheduledFuture.cancel(true);
+      futureMap.remove(name);
     }
   }
 }

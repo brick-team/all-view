@@ -1,7 +1,8 @@
 package org.tview.visualization.model.db;
 
-import java.util.Objects;
 import org.tview.visualization.model.label.AbsConfig;
+
+import java.util.Objects;
 
 /** 数据库链接配置 */
 public class DBConnectionConfig extends AbsConfig {

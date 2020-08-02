@@ -1,7 +1,5 @@
 package org.tview.visualization.app.listener;
 
-import java.sql.SQLException;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,6 +11,9 @@ import org.tview.visualization.model.redis.RedisMemoryTaskData;
 import org.tview.visualization.model.redis.info.RedisCliInfoMemory;
 import org.tview.visualization.redis.cache.RedisMemoryCache;
 import org.tview.visualization.redis.impl.IRedisServiceInfoImpl;
+
+import java.sql.SQLException;
+import java.util.Map;
 
 @Service
 public class NewRedisPerformance extends AbsPerformanceListener implements IListenerWork {

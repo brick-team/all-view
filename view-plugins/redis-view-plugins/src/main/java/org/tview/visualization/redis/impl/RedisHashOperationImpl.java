@@ -1,10 +1,11 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.Map;
 import org.tview.visualization.inter.redis.RedisHashOperation;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.util.Map;
 
 public class RedisHashOperationImpl implements RedisHashOperation {
 

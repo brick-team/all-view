@@ -20,7 +20,7 @@ public class RedisHashController {
       hashOperation.add(config, k, field, v);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -30,7 +30,7 @@ public class RedisHashController {
       hashOperation.get(config, k);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -40,7 +40,7 @@ public class RedisHashController {
       hashOperation.del(config, k, field);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -50,7 +50,7 @@ public class RedisHashController {
       hashOperation.update(config, k, field, v);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 }

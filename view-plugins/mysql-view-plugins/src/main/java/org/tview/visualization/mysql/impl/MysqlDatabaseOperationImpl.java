@@ -1,19 +1,11 @@
 package org.tview.visualization.mysql.impl;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
 import org.tview.visualization.inter.db.DatabaseOperation;
-import org.tview.visualization.model.db.DBConnectionConfig;
-import org.tview.visualization.model.db.DBInfoEntity;
-import org.tview.visualization.model.db.DatabasesEntity;
-import org.tview.visualization.model.db.TableEntity;
-import org.tview.visualization.model.db.TableStatusEntity;
+import org.tview.visualization.model.db.*;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
@@ -21,6 +13,11 @@ import org.tview.visualization.mysql.row.DatabasesRowMapper;
 import org.tview.visualization.mysql.row.ShowStatusEntityRowMapper;
 import org.tview.visualization.mysql.row.TableNamesRowMapper;
 import org.tview.visualization.mysql.row.TableStatueRowMapper;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /** mysql 数据库操作 */
 public class MysqlDatabaseOperationImpl implements DatabaseOperation {
@@ -51,7 +48,8 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
    * @return 表名列表
    */
   @Override
-  public List<String> tableNames(DBConnectionConfig connectionConfig, String dbName) throws SQLException {
+  public List<String> tableNames(DBConnectionConfig connectionConfig, String dbName)
+      throws SQLException {
     if (StringUtils.isEmpty(connectionConfig.getDbName()) || StringUtils.isEmpty(dbName)) {
       throw new IllegalArgumentException("数据库表名异常");
     }
@@ -77,7 +75,8 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
    * @return
    */
   private List<String> showTables(String dbName, JdbcTemplate jdbcTemplate) {
-    List<TableEntity> showTables = jdbcTemplate.query("show tables", new TableNamesRowMapper("Tables_in_" + dbName));
+    List<TableEntity> showTables =
+        jdbcTemplate.query("show tables", new TableNamesRowMapper("Tables_in_" + dbName));
     return showTables.stream().map(TableEntity::getName).collect(Collectors.toList());
   }
 
@@ -110,14 +109,19 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
    */
   @Override
   public boolean createDatabase(
-      DBConnectionConfig connectionConfig, String createDbName, String charSet, String charCollection) {
+      DBConnectionConfig connectionConfig,
+      String createDbName,
+      String charSet,
+      String charCollection) {
 
     try {
 
       JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
       String sql =
           String.format(
-              " CREATE DATABASE IF NOT EXISTS %s" + " DEFAULT CHARACTER SET %s" + " DEFAULT COLLATE %s;",
+              " CREATE DATABASE IF NOT EXISTS %s"
+                  + " DEFAULT CHARACTER SET %s"
+                  + " DEFAULT COLLATE %s;",
               createDbName, charSet, charCollection);
       jdbcTemplate.execute(sql);
       return true;
@@ -147,9 +151,11 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
    * @return
    */
   @Override
-  public List<TableStatusEntity> tableInfos(DBConnectionConfig connectionConfig, String dbName) throws SQLException {
+  public List<TableStatusEntity> tableInfos(DBConnectionConfig connectionConfig, String dbName)
+      throws SQLException {
     JdbcTemplate jdbcTemplate = jdbcFactory.create(connectionConfig);
-    return jdbcTemplate.query(String.format("show table status from %s", dbName), new TableStatueRowMapper());
+    return jdbcTemplate.query(
+        String.format("show table status from %s", dbName), new TableStatueRowMapper());
   }
 
   /** 数据库信息对象,查询用 */
@@ -191,12 +197,21 @@ public class MysqlDatabaseOperationImpl implements DatabaseOperation {
     private void dataDir() {
       List<ShowStatusEntity> query =
           jdbcTemplate.query("show variables like '%datadir%'", new ShowStatusEntityRowMapper());
-      dataDir = Optional.of(query).orElseThrow(() -> new IllegalArgumentException("没有数据库文件存放地址地址")).get(0).getValue();
+      dataDir =
+          Optional.of(query)
+              .orElseThrow(() -> new IllegalArgumentException("没有数据库文件存放地址地址"))
+              .get(0)
+              .getValue();
     }
 
     private void upTime() {
-      List<ShowStatusEntity> query = jdbcTemplate.query("show status like 'uptime';", new ShowStatusEntityRowMapper());
-      upTime = Optional.of(query).orElseThrow(() -> new IllegalArgumentException("没有获取到数据库的已启动时间")).get(0).getValue();
+      List<ShowStatusEntity> query =
+          jdbcTemplate.query("show status like 'uptime';", new ShowStatusEntityRowMapper());
+      upTime =
+          Optional.of(query)
+              .orElseThrow(() -> new IllegalArgumentException("没有获取到数据库的已启动时间"))
+              .get(0)
+              .getValue();
     }
 
     private void charSet() {

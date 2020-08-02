@@ -1,11 +1,12 @@
 package org.tview.visualization.inter.db;
 
-import java.sql.SQLException;
-import java.util.List;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.DBInfoEntity;
 import org.tview.visualization.model.db.TableStatusEntity;
 import org.tview.visualization.model.db.mysql.ShowStatusEntity;
+
+import java.sql.SQLException;
+import java.util.List;
 
 /** mysql 数据库操作接口 */
 public interface DatabaseOperation {
@@ -41,7 +42,10 @@ public interface DatabaseOperation {
 
   /** 创建一个数据库 */
   boolean createDatabase(
-      DBConnectionConfig connectionConfig, String createDbName, String charSet, String charCollection);
+      DBConnectionConfig connectionConfig,
+      String createDbName,
+      String charSet,
+      String charCollection);
 
   /**
    * show table status from db_name 查看某个数据库的表状态
@@ -50,5 +54,6 @@ public interface DatabaseOperation {
    * @param dbName
    * @return
    */
-  List<TableStatusEntity> tableInfos(DBConnectionConfig connectionConfig, String dbName) throws SQLException;
+  List<TableStatusEntity> tableInfos(DBConnectionConfig connectionConfig, String dbName)
+      throws SQLException;
 }

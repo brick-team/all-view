@@ -1,6 +1,5 @@
 package org.tview.visualization.common.impl;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.tview.visualization.common.cache.DblLoginCache;
 import org.tview.visualization.inter.ConfigLoginService;
 import org.tview.visualization.model.db.DBConnectionConfig;
@@ -22,7 +21,7 @@ public class IDbLoginServiceImpl implements ConfigLoginService<DBConnectionConfi
   @Override
   public boolean connection(DBConnectionConfig config) {
     try {
-      JdbcTemplate jdbcTemplate = mysql.create(config);
+      mysql.create(config);
       return true;
     } catch (Exception e) {
       e.printStackTrace();

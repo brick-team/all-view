@@ -1,8 +1,9 @@
 package org.tview.visualization.model.db;
 
-import java.util.List;
 import org.tview.visualization.model.db.mysql.MysqlIndexMethod;
 import org.tview.visualization.model.db.mysql.MysqlIndexType;
+
+import java.util.List;
 
 /** 创建索引的参数 */
 public class CreateIndexParam {

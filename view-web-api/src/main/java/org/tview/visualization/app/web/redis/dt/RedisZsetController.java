@@ -20,7 +20,7 @@ public class RedisZsetController {
       zSetOperation.add(config, k, score, member);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -30,7 +30,7 @@ public class RedisZsetController {
       zSetOperation.del(config, key, member);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -39,7 +39,7 @@ public class RedisZsetController {
     try {
       return new ResultVO("ok", zSetOperation.get(config, key), 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -49,7 +49,7 @@ public class RedisZsetController {
       zSetOperation.update(config, k, score, member);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 }

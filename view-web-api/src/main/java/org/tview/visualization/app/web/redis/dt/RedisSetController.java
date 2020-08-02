@@ -18,18 +18,19 @@ public class RedisSetController {
   public ResultVO add(RedisConnectionConfig config, String k, String v) {
     try {
       setOperation.add(config, k, v);
-      return new ResultVO("ok", true, 200);
+      return ResultVO.success(true);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
   @PostMapping("/get")
   public ResultVO get(RedisConnectionConfig config, String k) {
     try {
-      return new ResultVO("ok", setOperation.get(config, k), 200);
+      return ResultVO.success(setOperation.get(config, k));
+
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -37,9 +38,9 @@ public class RedisSetController {
   public ResultVO update(RedisConnectionConfig config, String k, String ov, String nv) {
     try {
       setOperation.update(config, k, ov, nv);
-      return new ResultVO("ok", true, 200);
+      return ResultVO.success(true);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -47,9 +48,9 @@ public class RedisSetController {
   public ResultVO del(RedisConnectionConfig config, String k, String v) {
     try {
       setOperation.del(config, k, v);
-      return new ResultVO("ok", true, 200);
+      return ResultVO.success(true);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 }

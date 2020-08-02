@@ -1,12 +1,13 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.List;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.redis.factory.AbsRedisTemplate;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.util.List;
 
 class RedisListOperationImplTest extends AbsRedisTemplate {
 

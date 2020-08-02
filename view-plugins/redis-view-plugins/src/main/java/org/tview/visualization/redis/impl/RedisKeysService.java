@@ -1,12 +1,5 @@
 package org.tview.visualization.redis.impl;
 
-import static org.tview.visualization.redis.singlet.RedisSinglet.getRedisKeysInfoCache;
-
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.springframework.data.redis.connection.DataType;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisConnectionUtils;
@@ -19,6 +12,14 @@ import org.tview.visualization.model.redis.RedisKeyInfo;
 import org.tview.visualization.redis.cache.RedisKeysInfoCache;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.tview.visualization.redis.singlet.RedisSinglet.getRedisKeysInfoCache;
 
 public class RedisKeysService implements RedisKeysOperation {
 

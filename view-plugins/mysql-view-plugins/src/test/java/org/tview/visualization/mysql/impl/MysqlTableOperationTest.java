@@ -1,9 +1,5 @@
 package org.tview.visualization.mysql.impl;
 
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.db.TableOperation;
@@ -14,6 +10,11 @@ import org.tview.visualization.model.req.PageVO;
 import org.tview.visualization.mysql.factory.AbsMysqlConfig;
 import org.tview.visualization.mysql.factory.jdbc.JdbcFactory;
 import org.tview.visualization.mysql.factory.jdbc.JdbcTemplateFactory;
+
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 class MysqlTableOperationTest extends AbsMysqlConfig {
   JdbcFactory jdbcFactory;
@@ -34,12 +35,10 @@ class MysqlTableOperationTest extends AbsMysqlConfig {
 
   @Test
   void findAll() throws SQLException {
-    TableDataEntity t_project = tableOperation.findAll(dbConnectionConfig, "t_project", new PageVO(0, 2));
+    TableDataEntity t_project =
+        tableOperation.findAll(dbConnectionConfig, "t_project", new PageVO(0, 2));
     System.out.println();
   }
-
-  @Test
-  void tableInfo() {}
 
   @Test
   void deleteOnceData() throws SQLException {
@@ -54,12 +53,6 @@ class MysqlTableOperationTest extends AbsMysqlConfig {
     map.put("data", new Date());
     tableOperation.createOnceData(dbConnectionConfig, "t_project", map);
   }
-
-  @Test
-  void createTable() {}
-
-  @Test
-  void deleteTable() {}
 
   @Test
   void testChangeFiled() throws SQLException {

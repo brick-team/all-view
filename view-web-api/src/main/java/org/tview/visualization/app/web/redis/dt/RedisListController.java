@@ -20,7 +20,7 @@ public class RedisListController {
       redisListOperation.add(conf, k, v);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -29,7 +29,7 @@ public class RedisListController {
     try {
       return new ResultVO("ok", redisListOperation.get(conf, k), 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -39,7 +39,7 @@ public class RedisListController {
       redisListOperation.update(conf, k, ov, nv);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -49,7 +49,7 @@ public class RedisListController {
       redisListOperation.removeByRow(config, k, row);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 
@@ -59,7 +59,7 @@ public class RedisListController {
       redisListOperation.del(conf, k);
       return new ResultVO("ok", true, 200);
     } catch (Exception e) {
-      return new ResultVO("error", e.getMessage(), 400);
+      return ResultVO.error(e.getMessage());
     }
   }
 }

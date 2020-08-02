@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.tview.visualization.app.listener.ConfigInterface;
 import org.tview.visualization.app.listener.RedisMemoryPerformanceListener;
-import org.tview.visualization.model.label.AbsConfig;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 
 @RestController
@@ -24,15 +22,7 @@ public class RedisTimerController {
     config.setPort(32768);
     config.setPwd("");
     config.setDbIndex(1);
-    redisMemoryListener.createWork(
-        name,
-        new ConfigInterface() {
-          @Override
-          public AbsConfig get() {
-            return config;
-          }
-        },
-        null);
+    redisMemoryListener.createWork(name, () -> config);
   }
 
   @GetMapping("/stop/{name}")

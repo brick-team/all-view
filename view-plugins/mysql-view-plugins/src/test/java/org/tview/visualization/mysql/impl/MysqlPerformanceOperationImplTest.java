@@ -1,10 +1,11 @@
 package org.tview.visualization.mysql.impl;
 
-import java.math.BigDecimal;
-import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.db.IDBPerformanceOperation;
 import org.tview.visualization.mysql.factory.AbsMysqlConfig;
+
+import java.math.BigDecimal;
+import java.sql.SQLException;
 
 class MysqlPerformanceOperationImplTest extends AbsMysqlConfig {
 

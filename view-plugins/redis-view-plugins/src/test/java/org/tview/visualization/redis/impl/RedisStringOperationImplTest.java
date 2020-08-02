@@ -1,11 +1,11 @@
 package org.tview.visualization.redis.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.redis.RedisStringOperation;
 import org.tview.visualization.redis.factory.AbsRedisTemplate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class RedisStringOperationImplTest extends AbsRedisTemplate {
 

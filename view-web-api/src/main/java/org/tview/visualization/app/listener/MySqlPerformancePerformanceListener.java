@@ -1,11 +1,5 @@
 package org.tview.visualization.app.listener;
 
-import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ScheduledFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +11,13 @@ import org.tview.visualization.model.res.DbPerformance;
 import org.tview.visualization.mysql.cache.MysqlPerformanceCache;
 import org.tview.visualization.mysql.impl.MysqlPerformanceOperationImpl;
 
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ScheduledFuture;
+
 @Service
 public class MySqlPerformancePerformanceListener {
 
@@ -27,7 +28,7 @@ public class MySqlPerformancePerformanceListener {
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
   @Autowired private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-  public void createWork(String name, ConfigInterface config, IListenerWork work) {
+  public void createWork(String name, ConfigInterface config) {
 
     ScheduledFuture<?> scheduledFuture =
         this.threadPoolTaskScheduler.scheduleWithFixedDelay(
@@ -48,7 +49,7 @@ public class MySqlPerformancePerformanceListener {
                   dbPerformanceMap.put(name, mysqlPerformanceCache);
                 }
               } catch (Exception e) {
-                log.error("mysql 指标获取失败,{}", e);
+                log.error("mysql 指标获取失败", e);
                 e.printStackTrace();
               }
             },
@@ -78,12 +79,10 @@ public class MySqlPerformancePerformanceListener {
   }
 
   public void remove(String name) {
-    if (!futureMap.isEmpty()) {
-      if (futureMap.containsKey(name)) {
-        ScheduledFuture<?> scheduledFuture = futureMap.get(name);
-        scheduledFuture.cancel(true);
-        futureMap.remove(name);
-      }
+    if (!futureMap.isEmpty() && futureMap.containsKey(name)) {
+      ScheduledFuture<?> scheduledFuture = futureMap.get(name);
+      scheduledFuture.cancel(true);
+      futureMap.remove(name);
     }
   }
 }

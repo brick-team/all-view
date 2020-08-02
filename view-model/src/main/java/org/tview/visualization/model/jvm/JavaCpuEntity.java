@@ -1,13 +1,13 @@
 package org.tview.visualization.model.jvm;
 
 public class JavaCpuEntity {
-  public long totalSwapSpaceSize;
-  public long processCpuTime;
-  public long freePhysicalMemorySize;
-  public long freeMemorySize;
-  public long totalPhysicalMemorySize;
-  public double systemCpuLoad;
-  public double processCpuLoad;
+  private long totalSwapSpaceSize;
+  private long processCpuTime;
+  private long freePhysicalMemorySize;
+  private long freeMemorySize;
+  private long totalPhysicalMemorySize;
+  private double systemCpuLoad;
+  private double processCpuLoad;
   private long committedVirtualMemorySize;
 
   public long getTotalSwapSpaceSize() {

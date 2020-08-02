@@ -1,18 +1,7 @@
 package org.tview.visualization.app.web.zk;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.apache.zookeeper.common.X509Exception.SSLContextException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.tview.visualization.inter.zk.ZkNodeOperation;
 import org.tview.visualization.inter.zk.ZookeeperStateService;
 import org.tview.visualization.model.res.ResultVO;
@@ -20,6 +9,9 @@ import org.tview.visualization.model.res.VueTableEntity;
 import org.tview.visualization.model.zk.ZkNodeCreateParam;
 import org.tview.visualization.zookeeper.ZookeeperNodeOperationImpl;
 import org.tview.visualization.zookeeper.ZookeeperStateServiceImpl;
+
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @RequestMapping("/zk/node")
@@ -45,12 +37,11 @@ public class ZkController {
    * @param path 节点地址
    * @param hostPort zk 地址
    * @return 节点信息
-   * @throws Exception
    */
   @GetMapping("/get/info")
   public ResultVO info(
-      @RequestParam(value = "path") String path, @RequestParam(value = "host_port") String hostPort)
-      throws Exception {
+      @RequestParam(value = "path") String path,
+      @RequestParam(value = "host_port") String hostPort) {
     return new ResultVO("ok", zkNodeOperation.getNode(path, hostPort), 200);
   }
 

@@ -1,6 +1,5 @@
 package org.tview.visualization.redis.impl.login;
 
-import java.util.Properties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.tview.visualization.inter.ConfigLoginService;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
@@ -8,6 +7,8 @@ import org.tview.visualization.redis.cache.RedisNameConfigCache;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
 import org.tview.visualization.redis.singlet.RedisSinglet;
+
+import java.util.Properties;
 
 public class RedisLoginServiceImpl implements ConfigLoginService<RedisConnectionConfig> {
 

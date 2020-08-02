@@ -34,5 +34,7 @@ public class IKafkaLoginServiceImpl implements ConfigLoginService<KafkaConnectio
    * @param kafkaConnectionConfig 配置
    */
   @Override
-  public void login(String name, KafkaConnectionConfig kafkaConnectionConfig) {}
+  public void login(String name, KafkaConnectionConfig kafkaConnectionConfig) {
+    throw new RuntimeException("not method");
+  }
 }

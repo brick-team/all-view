@@ -1,11 +1,12 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.List;
 import org.springframework.data.redis.core.ListOperations;
 import org.tview.visualization.inter.redis.RedisListOperation;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.util.List;
 
 public class RedisListOperationImpl implements RedisListOperation {
 

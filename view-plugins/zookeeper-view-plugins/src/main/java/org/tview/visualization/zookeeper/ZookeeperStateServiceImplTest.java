@@ -1,21 +1,18 @@
 package org.tview.visualization.zookeeper;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.tview.visualization.inter.zk.ZookeeperStateService;
 
 import java.util.Map;
-import org.tview.visualization.inter.zk.ZookeeperStateService;
 
 class ZookeeperStateServiceImplTest {
 
   ZookeeperStateService zookeeperStateService = new ZookeeperStateServiceImpl();
 
   @org.junit.jupiter.api.Test
-  void envi() {
-  }
+  void envi() {}
 
   @org.junit.jupiter.api.Test
-  void conf() {
-  }
+  void conf() {}
 
   @org.junit.jupiter.api.Test
   void mntr() throws Exception {
@@ -23,11 +20,9 @@ class ZookeeperStateServiceImplTest {
     mntr.forEach(
         (k, v) -> {
           System.out.println(k + "\t" + v);
-        }
-    );
+        });
   }
 
   @org.junit.jupiter.api.Test
-  void srvr() {
-  }
+  void srvr() {}
 }

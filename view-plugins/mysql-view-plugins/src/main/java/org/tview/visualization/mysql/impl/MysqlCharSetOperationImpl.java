@@ -1,11 +1,13 @@
 package org.tview.visualization.mysql.impl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.tview.visualization.inter.db.mysql.MysqlCharSetOperation;
 import org.tview.visualization.model.db.mysql.MysqlCharSet;
 import org.tview.visualization.model.db.mysql.MysqlCharSetCollation;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /** mysql 字符集操作实现 */
 public class MysqlCharSetOperationImpl implements MysqlCharSetOperation {
@@ -16,7 +18,9 @@ public class MysqlCharSetOperationImpl implements MysqlCharSetOperation {
    */
   @Override
   public List<String> charSetList() {
-    return Arrays.stream(MysqlCharSet.values()).map(MysqlCharSet::getName).collect(Collectors.toList());
+    return Arrays.stream(MysqlCharSet.values())
+        .map(MysqlCharSet::getName)
+        .collect(Collectors.toList());
   }
 
   /**
@@ -28,7 +32,8 @@ public class MysqlCharSetOperationImpl implements MysqlCharSetOperation {
   @Override
   public String defaultCollection(String charSet) {
     return Arrays.stream(MysqlCharSetCollation.values())
-        .filter(s -> s.getCharSet().equals(charSet.toLowerCase()) && s.isDefaultCollection())
+        .filter(
+            s -> Objects.equals(s.getCharSet(), charSet.toLowerCase()) && s.isDefaultCollection())
         .map(MysqlCharSetCollation::getCollection)
         .findFirst()
         .orElseThrow(
@@ -46,7 +51,8 @@ public class MysqlCharSetOperationImpl implements MysqlCharSetOperation {
   @Override
   public List<String> collections(String charSet) {
     return Arrays.stream(MysqlCharSetCollation.values())
-        .filter(s -> s.getCharSet().equals(charSet.toLowerCase()) && s.isDefaultCollection())
+        .filter(
+            s -> Objects.equals(s.getCharSet(), charSet.toLowerCase()) && s.isDefaultCollection())
         .map(MysqlCharSetCollation::getCollection)
         .collect(Collectors.toList());
   }

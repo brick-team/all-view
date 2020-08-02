@@ -1,6 +1,5 @@
 package org.tview.visualization.redis.impl;
 
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +7,8 @@ import org.tview.visualization.inter.redis.RedisHashOperation;
 import org.tview.visualization.redis.factory.AbsRedisTemplate;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
+
+import java.util.Map;
 
 class RedisHashOperationImplTest extends AbsRedisTemplate {
 

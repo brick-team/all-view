@@ -1,16 +1,10 @@
 package org.tview.visualization.app.web.db.mysq;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.tview.visualization.app.listener.ConfigInterface;
+import org.springframework.web.bind.annotation.*;
 import org.tview.visualization.app.listener.MySqlPerformancePerformanceListener;
 import org.tview.visualization.model.db.DBConnectionConfig;
 import org.tview.visualization.model.db.mysql.ServerTimezone;
-import org.tview.visualization.model.label.AbsConfig;
 import org.tview.visualization.model.res.ResultVO;
 
 /** mysql 数据库登录 */
@@ -24,15 +18,7 @@ public class MysqlDbLoginController {
 
   @PostMapping("/start/{name}")
   public ResultVO start(@PathVariable(value = "name") String name) {
-    mySqlPerformanceListener.createWork(
-        name,
-        new ConfigInterface() {
-          @Override
-          public AbsConfig get() {
-            return config();
-          }
-        },
-        null);
+    mySqlPerformanceListener.createWork(name, () -> config());
     return new ResultVO("ok", "ok", 200);
   }
 

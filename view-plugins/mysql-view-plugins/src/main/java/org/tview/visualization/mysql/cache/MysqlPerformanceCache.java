@@ -1,8 +1,9 @@
 package org.tview.visualization.mysql.cache;
 
-import java.util.Map;
 import org.tview.visualization.cache.impl.FifoCache;
 import org.tview.visualization.model.res.DbPerformance;
+
+import java.util.Map;
 
 public class MysqlPerformanceCache extends FifoCache<String, DbPerformance> {
 

@@ -6,11 +6,6 @@ import java.util.Map;
 public class TopicVO {
 
   private String name;
-
-  public void setPartitionVOMap(Map<Integer, TopicPartitionVO> partitionVOMap) {
-    this.partitionVOMap = partitionVOMap;
-  }
-
   private Map<Integer, TopicPartitionVO> partitionVOMap = new LinkedHashMap<>();
 
   public String getName() {
@@ -23,5 +18,9 @@ public class TopicVO {
 
   public Map<Integer, TopicPartitionVO> getPartitionVOMap() {
     return partitionVOMap;
+  }
+
+  public void setPartitionVOMap(Map<Integer, TopicPartitionVO> partitionVOMap) {
+    this.partitionVOMap = partitionVOMap;
   }
 }

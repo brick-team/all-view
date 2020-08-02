@@ -1,10 +1,5 @@
 package org.tview.visualization.redis.task;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.stream.Collectors;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.model.redis.RedisMemoryTaskData;
@@ -13,6 +8,12 @@ import org.tview.visualization.redis.cache.RedisMemoryCache;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
 import org.tview.visualization.redis.impl.IRedisServiceInfoImpl;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 public class MemoryTask {
 
