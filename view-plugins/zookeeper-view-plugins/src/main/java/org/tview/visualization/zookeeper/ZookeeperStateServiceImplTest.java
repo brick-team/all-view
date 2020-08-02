@@ -9,12 +9,6 @@ class ZookeeperStateServiceImplTest {
   ZookeeperStateService zookeeperStateService = new ZookeeperStateServiceImpl();
 
   @org.junit.jupiter.api.Test
-  void envi() {}
-
-  @org.junit.jupiter.api.Test
-  void conf() {}
-
-  @org.junit.jupiter.api.Test
   void mntr() throws Exception {
     Map<String, String> mntr = zookeeperStateService.mntr("localhost", 2181);
     mntr.forEach(
@@ -23,6 +17,4 @@ class ZookeeperStateServiceImplTest {
         });
   }
 
-  @org.junit.jupiter.api.Test
-  void srvr() {}
 }

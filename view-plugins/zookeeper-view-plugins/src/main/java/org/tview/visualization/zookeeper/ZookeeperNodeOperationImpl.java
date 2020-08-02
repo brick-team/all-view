@@ -49,13 +49,10 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
   public boolean createNode(ZkNodeCreateParam createParam, String hostPort) {
     CuratorFramework curator = startCurator(hostPort);
 
-    switch (createParam.getType()) {
-      case "PERSISTENT":
-        // 持久化节点
-        return createPersistent(curator, createParam);
-      case "EPHEMERAL":
-        // 临时节点
-        return createEphemeral(curator, createParam);
+    if ("PERSISTENT".equals(createParam.getType())) {// 持久化节点
+      return createPersistent(curator, createParam);
+    } else if ("EPHEMERAL".equals(createParam.getType())) {// 临时节点
+      return createEphemeral(curator, createParam);
     }
 
     return false;
@@ -85,7 +82,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
         return false;
       }
     } catch (Exception e) {
-      log.error("创建临时节点失败,e={}", e);
+      log.error("创建临时节点失败", e);
       return false;
     }
   }
@@ -121,7 +118,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
         return false;
       }
     } catch (Exception e) {
-      log.info("创建持久化节点失败,e={}", e);
+      log.info("创建持久化节点失败", e);
       return false;
     }
   }
@@ -154,7 +151,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
     try {
       return curator.checkExists().forPath(path) != null;
     } catch (Exception e) {
-      log.error("判断是否存在节点失败,{}", e);
+      log.error("判断是否存在节点失败", e);
       return false;
     }
   }
@@ -197,7 +194,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
           data,
           nodeType(stat));
     } catch (Exception e) {
-      log.error("获取节点信息失败,e={}", e);
+      log.error("获取节点信息失败", e);
       return null;
     }
   }
@@ -260,7 +257,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
         curator.setData().forPath(updateNodeReq.getPath(), updateNodeReq.getData().getBytes());
         return true;
       } catch (Exception e) {
-        log.error("更新节点失败,e={}", e);
+        log.error("更新节点失败", e);
         return false;
       }
     } else {
@@ -283,7 +280,7 @@ public class ZookeeperNodeOperationImpl implements ZkNodeOperation {
         curator.delete().forPath(path);
         return true;
       } catch (Exception e) {
-        log.error("删除节点失败,e={}", e);
+        log.error("删除节点失败", e);
         return false;
       }
     }
