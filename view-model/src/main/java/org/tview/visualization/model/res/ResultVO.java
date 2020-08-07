@@ -24,11 +24,11 @@ public class ResultVO {
   }
 
   public static ResultVO success(Object data) {
-    return new ResultVO("error", data, 200);
+    return new ResultVO("success", data, 200);
   }
 
   public static ResultVO success() {
-    return new ResultVO("error", null, 200);
+    return new ResultVO("success", null, 200);
   }
 
   public String getMsg() {

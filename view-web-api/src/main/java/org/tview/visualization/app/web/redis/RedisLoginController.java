@@ -12,7 +12,7 @@ import org.tview.visualization.redis.impl.IRedisServiceInfoImpl;
 import org.tview.visualization.redis.impl.login.RedisLoginServiceImpl;
 
 @RestController
-@RequestMapping("/redis")
+@RequestMapping("/rog/redis")
 public class RedisLoginController {
 
   ConfigLoginService service = new RedisLoginServiceImpl();
@@ -27,6 +27,11 @@ public class RedisLoginController {
     return ResultVO.success(redisServerInfo.dataBaseList(config, name));
   }
 
-
+  @PostMapping("/acac")
+  public ResultVO acac(
+      @RequestBody Object o
+  ){
+    return ResultVO.success(o);
+  }
 
 }
