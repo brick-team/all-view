@@ -1,20 +1,31 @@
 package org.tview.visualization.redis.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
 import org.tview.visualization.model.redis.RedisConnectionConfig;
 import org.tview.visualization.model.redis.RedisInfo;
-import org.tview.visualization.model.redis.info.*;
+import org.tview.visualization.model.redis.info.RedisCliInfoClients;
+import org.tview.visualization.model.redis.info.RedisCliInfoCluster;
+import org.tview.visualization.model.redis.info.RedisCliInfoCpu;
+import org.tview.visualization.model.redis.info.RedisCliInfoKeyspace;
+import org.tview.visualization.model.redis.info.RedisCliInfoMemory;
+import org.tview.visualization.model.redis.info.RedisCliInfoPersistence;
+import org.tview.visualization.model.redis.info.RedisCliInfoReplication;
+import org.tview.visualization.model.redis.info.RedisCliInfoServer;
+import org.tview.visualization.model.redis.info.RedisCliInfoStats;
+import org.tview.visualization.model.res.redis.RedisTreeInfo;
+import org.tview.visualization.model.res.redis.RedisTreeInfo.ChildBeanX;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactory;
 import org.tview.visualization.redis.factory.RedisConnectionCacheFactoryImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
+import redis.clients.jedis.Jedis;
 
 public class IRedisServiceInfoImpl implements IRedisServerInfo {
+
   public static final String REDIS_VERSION = "redis_version";
   public static final String USED_MEMORY = "used_memory";
   public static final String CONNECTED_CLIENTS = "connected_clients";
@@ -346,4 +357,47 @@ public class IRedisServiceInfoImpl implements IRedisServerInfo {
 
     return redisInfo;
   }
+
+  @Override
+  public int databases(RedisConnectionConfig config) {
+    RedisTemplate factory = redisConnectionCacheFactory.factory(config);
+    RedisConnection connection = factory.getConnectionFactory().getConnection();
+    Jedis nativeConnection = (Jedis) connection.getNativeConnection();
+    List<String> databases1 = nativeConnection.configGet("databases");
+
+    int result = 0;
+    for (String s : databases1) {
+      try {
+
+        int i = Integer.parseInt(s);
+        result = i;
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+    }
+    return result;
+  }
+
+@Override
+  public RedisTreeInfo dataBaseList(RedisConnectionConfig config, String name) {
+    int databases = databases(config);
+
+    RedisTreeInfo redisTreeInfo = new RedisTreeInfo();
+
+    // 最外层
+    redisTreeInfo.setShowName(name);
+    redisTreeInfo.setType("host+port");
+    List<ChildBeanX> child = new ArrayList<>();
+
+    for (int i = 0; i < databases; i++) {
+      ChildBeanX childBeanX = new ChildBeanX();
+      childBeanX.setShowName("db" + i);
+      childBeanX.setType("db-index");
+      child.add(childBeanX);
+    }
+    redisTreeInfo.setChild(child);
+    return redisTreeInfo;
+  }
+
 }

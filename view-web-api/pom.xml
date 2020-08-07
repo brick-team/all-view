@@ -45,12 +45,6 @@
             <artifactId>redis-view-plugins</artifactId>
             <version>xi-hu</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-pool2</artifactId>
-                    <groupId>org.apache.commons</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.tview.visualization</groupId>

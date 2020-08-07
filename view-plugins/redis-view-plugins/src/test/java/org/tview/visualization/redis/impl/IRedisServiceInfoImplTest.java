@@ -2,6 +2,7 @@ package org.tview.visualization.redis.impl;
 
 import org.junit.jupiter.api.Test;
 import org.tview.visualization.inter.redis.IRedisServerInfo;
+import org.tview.visualization.model.res.redis.RedisTreeInfo;
 import org.tview.visualization.redis.factory.AbsRedisTemplate;
 
 class IRedisServiceInfoImplTest extends AbsRedisTemplate {
@@ -40,5 +41,11 @@ class IRedisServiceInfoImplTest extends AbsRedisTemplate {
   @Test
   void conf() {
     System.out.println(redisServerInfo.conf(this.config));
+  }
+
+  @Test
+  void dataTree(){
+    RedisTreeInfo asd = redisServerInfo.dataBaseList(this.config, "asd");
+    System.out.println();
   }
 }

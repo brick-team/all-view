@@ -10,6 +10,7 @@ import org.tview.visualization.redis.singlet.RedisSinglet;
 
 import java.util.Properties;
 
+
 public class RedisLoginServiceImpl implements ConfigLoginService<RedisConnectionConfig> {
 
   RedisNameConfigCache cache = RedisSinglet.getRedisNameConfigCache();

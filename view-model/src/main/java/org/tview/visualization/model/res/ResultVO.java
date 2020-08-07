@@ -6,7 +6,8 @@ public class ResultVO {
   private Object data;
   private Integer code;
 
-  public ResultVO() {}
+  public ResultVO() {
+  }
 
   public ResultVO(String msg, Object data, Integer code) {
     this.msg = msg;
@@ -18,8 +19,16 @@ public class ResultVO {
     return new ResultVO("error", data, 400);
   }
 
+  public static ResultVO error() {
+    return new ResultVO("error", null, 400);
+  }
+
   public static ResultVO success(Object data) {
     return new ResultVO("error", data, 200);
+  }
+
+  public static ResultVO success() {
+    return new ResultVO("error", null, 200);
   }
 
   public String getMsg() {
